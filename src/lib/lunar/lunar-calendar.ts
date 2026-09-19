@@ -89,9 +89,14 @@ function sunLongitude(jdn: number): number {
   return L;
 }
 
-// Tính kinh độ Mặt Trời tại nửa đêm của ngày (trả về cung 0-11)
+// Tính kinh độ Mặt Trời tại nửa đêm của ngày (trả về cung 0-11 cho 12 trung khí)
 export function getSunLongitude(dayNumber: number, timeZone: number): number {
   return Math.floor((sunLongitude(dayNumber - 0.5 - timeZone / 24) / PI) * 6);
+}
+
+// Tính phân cung 24 Tiết Khí (0-23, mỗi cung 15 độ)
+export function getSunLongitude24(dayNumber: number, timeZone: number): number {
+  return Math.floor((sunLongitude(dayNumber - 0.5 - timeZone / 24) / PI) * 12);
 }
 
 // Tìm ngày Sóc chứa tháng 11 âm lịch (Đông chí)

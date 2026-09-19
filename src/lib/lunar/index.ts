@@ -23,7 +23,7 @@ export function getDayInfo(day: number, month: number, year: number): DayInfo {
   
   const saoTot = getSaoTot(lunarDate.day, lunarDate.month);
   const saoXau = getSaoXau(lunarDate.day, lunarDate.month);
-  const truc = getTruc(lunarDate.day, lunarDate.month);
+  const truc = getTruc(jd, lunarDate.month);
   
   const viecNenLam = getViecNenLam(truc, saoTot);
   const viecKhongNenLam = getViecKhongNenLam(truc, saoXau);
