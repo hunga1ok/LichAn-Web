@@ -6,13 +6,15 @@
 
 ## 📊 TỔNG QUAN TIẾN ĐỘ HIỆN TẠI
 
-- **Bộ kiểm thử tự động (Unit Tests)**: `356/356 Tests PASS (100%)`.
+- **Bộ kiểm thử tự động (Unit Tests)**: `437/437 Tests PASS (100%)`.
   - Core Thuật toán Âm Dương Hồ Ngọc Đức: `64/64 PASS` (Kiểm định > 3.653 ngày).
   - Module Trạch Nhật (Xem Ngày Tốt Chuyên Sâu): `105/105 PASS`.
   - Module Kho Văn Khấn Cổ Truyền: `96/96 PASS`.
   - Module Phong Thủy (Tam Tai - Kim Lâu - Hoang Ốc): `73/73 PASS`.
   - REST API Backend Endpoints: `18/18 PASS`.
-- **Kiến trúc hệ thống**: Next.js 16 (App Router) + TypeScript Strict + Tailwind CSS 4 + SSG (Static Site Generation).
+  - Module Đồng Bộ Lịch (.ICS) & Đếm Ngược Tết: `33/33 PASS`.
+  - Module Tử Vi Cá Nhân Hóa & Cửu Diệu Niên Hạn: `48/48 PASS`.
+- **Kiến trúc hệ thống**: Next.js 16 (App Router) + TypeScript Strict + Tailwind CSS 4 + SSG (Static Site Generation 111 trang).
 - **Trạng thái Repo**: Đã đồng bộ lên GitHub `https://github.com/hunga1ok/LichAn-Web.git`.
 
 ---
@@ -34,13 +36,13 @@
 │ Sprint 3          │ REST API Backend (/api/v1/...)    │ ✅ Hoàn thành  │
 │                   │ chuẩn bị cho Mobile App           │                │
 ├───────────────────┼───────────────────────────────────┼────────────────┤
-│ Sprint 4          │ Đồng bộ Lịch (.ics) & Đếm ngược   │ ⏳ Ưu tiên số 1│
+│ Sprint 4          │ Đồng bộ Lịch (.ics) & Đếm ngược   │ ✅ Hoàn thành  │
 │                   │ Tết Nguyên Đán (Viral / Traffic)  │                │
 ├───────────────────┼───────────────────────────────────┼────────────────┤
-│ Sprint 5          │ Tử Vi Cá Nhân Hóa: Cửu Diệu Sao   │ ⏳ Nâng cao    │
+│ Sprint 5          │ Tử Vi Cá Nhân Hóa: Cửu Diệu Sao   │ ✅ Hoàn thành  │
 │                   │ Chiếu Mệnh & Bát Trạch Hướng Nhà  │                │
 ├───────────────────┼───────────────────────────────────┼────────────────┤
-│ Sprint 6          │ PWA Offline & Thông báo đẩy       │ ⏳ Mobile Web  │
+│ Sprint 6          │ PWA Offline & Thông báo đẩy       │ ⏳ Kế tiếp     │
 │                   │ nhắc nhở Mùng 1, Ngày Rằm         │                │
 └───────────────────┴───────────────────────────────────┴────────────────┘
 ```
