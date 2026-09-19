@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test": "tsx src/lib/lunar/__tests__/lunar.test.ts && tsx src/lib/lunar/__tests__/trach-nhat.test.ts"
+    "test": "tsx src/lib/lunar/__tests__/lunar.test.ts && tsx src/lib/lunar/__tests__/trach-nhat.test.ts && tsx src/lib/van-khan/__tests__/van-khan.test.ts"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",
