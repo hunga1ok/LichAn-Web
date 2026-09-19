@@ -1,8 +1,9 @@
 import type { MetadataRoute } from 'next';
+import { getAllBlogPosts } from '@/lib/blog';
 
 /**
  * Dynamic sitemap cho Lịch An
- * Sinh URL cho tất cả các trang tĩnh + 365 ngày × 2 năm
+ * Sinh URL cho tất cả các trang tĩnh + cẩm nang blog + 365 ngày × 3 năm
  */
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://lichan.com';
@@ -41,9 +42,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 0.85,
     },
+    {
+      url: `${baseUrl}/blog`,
+      lastModified: now,
+      changeFrequency: 'weekly',
+      priority: 0.9,
+    },
   ];
 
-  // Sinh URL cho /xem-ngay/DD-MM-YYYY — 2 năm
+  // Sinh URL cho các bài viết blog
+  const blogPosts = getAllBlogPosts();
+  const blogPages: MetadataRoute.Sitemap = blogPosts.map((post) => ({
+    url: `${baseUrl}/blog/${post.slug}`,
+    lastModified: now,
+    changeFrequency: 'monthly',
+    priority: 0.8,
+  }));
+
+  // Sinh URL cho /xem-ngay/DD-MM-YYYY — 3 năm
   const dayPages: MetadataRoute.Sitemap = [];
   for (const year of [currentYear - 1, currentYear, currentYear + 1]) {
     for (let month = 1; month <= 12; month++) {
@@ -61,5 +77,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }
   }
 
-  return [...staticPages, ...dayPages];
+  return [...staticPages, ...blogPages, ...dayPages];
 }

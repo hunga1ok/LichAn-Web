@@ -19,6 +19,7 @@ export default function Header() {
     { name: 'Đổi Ngày', href: '/doi-ngay-am-duong' },
     { name: 'Tử Vi 12 Con Giáp', href: '/tu-vi' },
     { name: 'Thần Số Học', href: '/than-so-hoc' },
+    { name: 'Cẩm Nang', href: '/blog' },
   ];
 
   return (
