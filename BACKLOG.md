@@ -150,23 +150,26 @@
 
 ---
 
-### 🔮 SPRINT 5: TỬ VI CÁ NHÂN HÓA THEO NĂM SINH & CỬU DIỆU NIÊN HẠN
+### 🔮 SPRINT 5: TỬ VI CÁ NHÂN HÓA THEO NĂM SINH & CỬU DIỆU NIÊN HẠN ✅ (HOÀN THÀNH)
 > **Mục tiêu**: Nâng cấp trang Tử vi từ 12 con giáp chung chung thành bảng luận giải cá nhân hóa chi tiết theo năm sinh.
 
 #### User Stories:
-- **Story 5.1 — Bảng Cửu Diệu Sao Chiếu Mệnh**:
-  - Thuật toán tính 9 sao theo tuổi mụ và giới tính:
-    - Nam: La Hầu, Thổ Tú, Thủy Diệu, Thái Bạch, Thái Dương, Vân Hớn, Kế Đô, Thái Âm, Mộc Đức.
-    - Nữ: Kế Đô, Vân Hớn, Mộc Đức, Thái Âm, Thổ Tú, La Hầu, Thái Dương, Thái Bạch, Thủy Diệu.
-  - Đánh giá Cát - Hung của từng sao và gợi ý bài văn khấn dâng sao giải hạn.
-- **Story 5.2 — Bảng Bát Hạn Niên Vận**:
+- **Story 5.1 — Bảng Cửu Diệu Sao Chiếu Mệnh**: ✅
+  - Thuật toán tính 9 sao theo tuổi mụ và giới tính (La Hầu, Thổ Tú, Thủy Diệu, Thái Bạch, Thái Dương, Vân Hớn, Kế Đô, Thái Âm, Mộc Đức).
+  - Đánh giá Cát/Hung, tháng kỵ/hợp, chi tiết nghi thức cúng dâng sao (ngày cúng, giờ cúng, hướng lạy, số đèn, bài vị) và link văn khấn cúng sao giải hạn.
+- **Story 5.2 — Bảng Bát Hạn Niên Vận**: ✅
   - Tính 8 niên hạn: Huỳnh Tuyền, Tam Kheo, Ngũ Mộ, Thiên Tinh, Tán Tận, Thiên La, Địa Võng, Diêm Vương.
-- **Story 5.3 — Cung Mệnh & Bát Trạch Hướng Nhà**:
-  - Tính Cung Phi (Càn, Khảm, Cấn, Chấn, Tốn, Ly, Khôn, Đoài).
+  - Phân định Đại hạn / Tiểu hạn, ý nghĩa và lời khuyên phòng tránh cụ thể.
+- **Story 5.3 — Cung Mệnh & Bát Trạch Hướng Nhà**: ✅
+  - Tính Cung Phi (Càn, Khảm, Cấn, Chấn, Tốn, Ly, Khôn, Đoài) chuẩn Lạc Thư cho cả thế kỷ 20 và 21.
   - Phân loại Đông Tứ Mệnh và Tây Tứ Mệnh.
-  - Bảng 4 hướng tốt (Sinh Khí, Thiên Y, Diên Niên, Phục Vị) và 4 hướng xấu (Tuyệt Mệnh, Ngũ Quỷ, Lục Sát, Họa Hại) khi mua đất, kê bàn thờ, đặt giường ngủ.
-- **Story 5.4 — Giao diện Dynamic `/tu-vi/[nam-sinh]`**:
-  - Tạo trang tĩnh cho 60 năm hoa giáp (ví dụ: Giáp Tý 1984, Ất Sửu 1985, Bính Dần 1986...) tối ưu SEO tuyệt đối.
+  - Bảng 4 hướng tốt (Sinh Khí, Thiên Y, Diên Niên, Phục Vị) và 4 hướng xấu (Tuyệt Mệnh, Ngũ Quỷ, Lục Sát, Họa Hại), màu sắc hợp/kỵ.
+- **Story 5.4 — Giao Diện & Dynamic Pages `/tu-vi/[slug]`**: ✅
+  - Trang `/tu-vi` cho phép chọn năm sinh, giới tính, năm xem niên hạn -> trả về báo cáo tử vi cá nhân hóa lập tức.
+  - Sinh tĩnh (SSG) 66 trang `/tu-vi/[slug]` cho 66 năm hoa giáp (1960 - 2025) tối ưu SEO tuyệt đối.
+  - Endpoint REST API `GET /api/v1/tu-vi` phục vụ Mobile App.
+- **Story 5.5 — Bộ Kiểm Thử (48 Unit Tests)**: ✅
+  - 48 test cases kiểm thử độc lập sao Cửu Diệu, Bát Hạn, Cung Phi Bát Trạch, Hoa Giáp nạp âm và báo cáo tổng hợp pass 100%.
 
 ---
 

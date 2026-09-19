@@ -183,3 +183,6 @@ export const TU_VI_12_CON_GIAP: Record<string, TuViConGiap> = {
     quyNhan: ['Mão', 'Mùi', 'Dần'],
   },
 };
+
+// Re-export toàn bộ module tử vi cá nhân hóa mới
+export * from './tu-vi/index';

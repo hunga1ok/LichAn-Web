@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test": "tsx src/lib/lunar/__tests__/lunar.test.ts && tsx src/lib/lunar/__tests__/trach-nhat.test.ts && tsx src/lib/van-khan/__tests__/van-khan.test.ts && tsx src/lib/feng-shui/__tests__/feng-shui.test.ts && tsx src/lib/api/__tests__/api.test.ts && tsx src/lib/calendar-sync/__tests__/ics.test.ts"
+    "test": "tsx src/lib/lunar/__tests__/lunar.test.ts && tsx src/lib/lunar/__tests__/trach-nhat.test.ts && tsx src/lib/van-khan/__tests__/van-khan.test.ts && tsx src/lib/feng-shui/__tests__/feng-shui.test.ts && tsx src/lib/api/__tests__/api.test.ts && tsx src/lib/calendar-sync/__tests__/ics.test.ts && tsx src/lib/tu-vi/__tests__/tu-vi.test.ts"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",

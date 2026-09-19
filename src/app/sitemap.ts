@@ -6,7 +6,7 @@ import { getAllVanKhan } from '@/lib/van-khan';
  * Dynamic sitemap cho Lịch An
  * Sinh URL cho tất cả các trang tĩnh + cẩm nang blog + văn khấn + 365 ngày × 3 năm
  */
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://lichan.com';
   const now = new Date();
   const currentYear = now.getFullYear();
@@ -135,6 +135,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.85,
   }));
 
+  // Sinh URL cho các tuổi Tử vi hoa giáp
+  const { getAllHoaGiapList } = await import('@/lib/tu-vi');
+  const hoaGiapItems = getAllHoaGiapList();
+  const hoaGiapPages: MetadataRoute.Sitemap = hoaGiapItems.map((item) => ({
+    url: `${baseUrl}/tu-vi/${item.slug}`,
+    lastModified: now,
+    changeFrequency: 'monthly',
+    priority: 0.85,
+  }));
+
   // Sinh URL cho /xem-ngay/DD-MM-YYYY — 3 năm
   const dayPages: MetadataRoute.Sitemap = [];
   for (const year of [currentYear - 1, currentYear, currentYear + 1]) {
@@ -153,5 +163,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }
   }
 
-  return [...staticPages, ...blogPages, ...vanKhanPages, ...dayPages];
+  return [...staticPages, ...blogPages, ...vanKhanPages, ...hoaGiapPages, ...dayPages];
 }

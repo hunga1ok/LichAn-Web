@@ -98,6 +98,30 @@ const API_ENDPOINTS: ApiEndpoint[] = [
       { name: 'targetYear', type: 'number', required: false, desc: 'Năm dự kiến khởi công (mặc định năm hiện tại).' },
     ],
   },
+  {
+    method: 'GET',
+    path: '/api/v1/tu-vi',
+    title: 'Tra cứu tử vi cá nhân hóa, sao chiếu mệnh & bát hạn',
+    description: 'Tính toán sao Cửu Diệu chiếu mệnh, Bát hạn niên vận, Cung Phi Bát Trạch hướng nhà, Tam Tai, Kim Lâu và Hoang Ốc theo năm sinh và giới tính.',
+    defaultQuery: 'birthYear=1993&year=2026&gender=nam',
+    parameters: [
+      { name: 'birthYear', type: 'number', required: true, desc: 'Năm sinh âm lịch (ví dụ: 1993).' },
+      { name: 'year', type: 'number', required: false, desc: 'Năm xem niên hạn (mặc định là năm hiện tại).' },
+      { name: 'gender', type: 'string', required: false, desc: '"nam" hoặc "nu" (mặc định là "nam").' },
+    ],
+  },
+  {
+    method: 'GET',
+    path: '/api/v1/calendar/subscribe.ics',
+    title: 'Đồng bộ lịch iCalendar (.ics) / Webcal',
+    description: 'Xuất file lịch chuẩn RFC 5545 chứa ngày Rằm (15 âm), Mùng 1 và các ngày lễ Tết cổ truyền kèm thông báo nhắc trước 20:00 tối hôm trước.',
+    defaultQuery: 'year=2026&type=all&reminder=1',
+    parameters: [
+      { name: 'year', type: 'number', required: false, desc: 'Năm đồng bộ (ví dụ: 2026).' },
+      { name: 'type', type: 'string', required: false, desc: '"all" (toàn bộ), "ram-mung-1", hoặc "le-tet".' },
+      { name: 'reminder', type: 'string', required: false, desc: '"1" (bật nhắc 20:00 tối trước) hoặc "0" (tắt).' },
+    ],
+  },
 ];
 
 export default function ApiDocsClient() {
