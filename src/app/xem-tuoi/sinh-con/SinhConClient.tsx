@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useRef } from 'react';
 import {
   Baby,
   Sparkles,
@@ -8,14 +8,35 @@ import {
   CheckCircle2,
   XCircle,
   Trophy,
+  Loader2,
+  Check,
+  ChevronDown,
+  ChevronUp,
 } from 'lucide-react';
 import { evaluateSinhCon, SinhConReport } from '@/lib/xem-tuoi';
 import { getAllHoaGiapList, HoaGiapData } from '@/lib/tu-vi/hoa-giap';
+
+const QUICK_PARENTS = [
+  { label: 'Bố Canh Ngọ (1990) — Mẹ Giáp Tuất (1994)', bo: 1990, me: 1994 },
+  { label: 'Bố Nhâm Thân (1992) — Mẹ Ất Hợi (1995)', bo: 1992, me: 1995 },
+  { label: 'Bố Kỷ Tỵ (1989) — Mẹ Quý Dậu (1993)', bo: 1989, me: 1993 },
+  { label: 'Bố Bính Dần (1986) — Mẹ Kỷ Tỵ (1989)', bo: 1986, me: 1989 },
+];
 
 export default function SinhConClient() {
   const [boYear, setBoYear] = useState<number>(1990);
   const [meYear, setMeYear] = useState<number>(1993);
   const [conYear, setConYear] = useState<number>(2026);
+  const [isCalculating, setIsCalculating] = useState<boolean>(false);
+  const [lastCalculatedTime, setLastCalculatedTime] = useState<string>('');
+  const [justCalculated, setJustCalculated] = useState<boolean>(false);
+  const [expandedCriteria, setExpandedCriteria] = useState<Record<string, boolean>>({
+    nguHanh: true,
+    thienCan: true,
+    diaChi: true,
+  });
+
+  const resultRef = useRef<HTMLElement>(null);
 
   const hoaGiapList: HoaGiapData[] = useMemo(() => {
     return getAllHoaGiapList();
@@ -27,25 +48,95 @@ export default function SinhConClient() {
 
   const { bo, me, selectedYear, recommendedYears } = report;
 
-  const resultRef = React.useRef<HTMLElement>(null);
+  const toggleCriterion = (key: string) => {
+    setExpandedCriteria((prev) => ({ ...prev, [key]: !prev[key] }));
+  };
 
   const handleSearch = () => {
-    resultRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    setIsCalculating(true);
+    setJustCalculated(false);
+    setTimeout(() => {
+      setIsCalculating(false);
+      setJustCalculated(true);
+      const now = new Date();
+      setLastCalculatedTime(
+        `${now.getHours().toString().padStart(2, '0')}:${now
+          .getMinutes()
+          .toString()
+          .padStart(2, '0')}:${now.getSeconds().toString().padStart(2, '0')}`
+      );
+      resultRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 350);
   };
 
   const handleSelectYear = (year: number) => {
     setConYear(year);
-    resultRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    setIsCalculating(true);
+    setJustCalculated(false);
+    setTimeout(() => {
+      setIsCalculating(false);
+      setJustCalculated(true);
+      const now = new Date();
+      setLastCalculatedTime(
+        `${now.getHours().toString().padStart(2, '0')}:${now
+          .getMinutes()
+          .toString()
+          .padStart(2, '0')}:${now.getSeconds().toString().padStart(2, '0')}`
+      );
+      resultRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 300);
+  };
+
+  const handleSelectQuickParents = (b: number, m: number) => {
+    setBoYear(b);
+    setMeYear(m);
+    setIsCalculating(true);
+    setJustCalculated(false);
+    setTimeout(() => {
+      setIsCalculating(false);
+      setJustCalculated(true);
+      const now = new Date();
+      setLastCalculatedTime(
+        `${now.getHours().toString().padStart(2, '0')}:${now
+          .getMinutes()
+          .toString()
+          .padStart(2, '0')}:${now.getSeconds().toString().padStart(2, '0')}`
+      );
+      resultRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 300);
   };
 
   return (
     <div className="space-y-10">
       {/* 1. Form Chọn Năm Sinh Bố - Mẹ - Con */}
-      <section className="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-amber-100">
-        <h2 className="text-xl font-bold text-amber-950 mb-6 flex items-center gap-2">
+      <section className="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-amber-100 space-y-6">
+        <h2 className="text-xl font-bold text-amber-950 flex items-center gap-2">
           <Baby className="w-6 h-6 text-emerald-600" />
           Nhập thông tin năm sinh của Bố, Mẹ và Con
         </h2>
+
+        {/* Quick presets */}
+        <div>
+          <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">
+            Gợi ý tra cứu nhanh các cặp tuổi bố mẹ:
+          </label>
+          <div className="flex flex-wrap gap-2">
+            {QUICK_PARENTS.map((qp, idx) => (
+              <button
+                key={idx}
+                type="button"
+                onClick={() => handleSelectQuickParents(qp.bo, qp.me)}
+                className={`px-3 py-1.5 rounded-lg text-xs font-semibold border transition-all cursor-pointer ${
+                  boYear === qp.bo && meYear === qp.me
+                    ? 'bg-emerald-100 border-emerald-400 text-emerald-900 font-bold shadow-xs'
+                    : 'bg-stone-50 border-stone-200 text-stone-700 hover:bg-emerald-50/70 hover:border-emerald-300'
+                }`}
+              >
+                {qp.label}
+              </button>
+            ))}
+          </div>
+        </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
           <div>
@@ -54,7 +145,10 @@ export default function SinhConClient() {
             </label>
             <select
               value={boYear}
-              onChange={(e) => setBoYear(Number(e.target.value))}
+              onChange={(e) => {
+                setBoYear(Number(e.target.value));
+                setJustCalculated(false);
+              }}
               aria-label="Năm sinh Bố"
               className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-emerald-50/30 text-gray-900 font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm"
             >
@@ -72,7 +166,10 @@ export default function SinhConClient() {
             </label>
             <select
               value={meYear}
-              onChange={(e) => setMeYear(Number(e.target.value))}
+              onChange={(e) => {
+                setMeYear(Number(e.target.value));
+                setJustCalculated(false);
+              }}
               aria-label="Năm sinh Mẹ"
               className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-emerald-50/30 text-gray-900 font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm"
             >
@@ -90,7 +187,10 @@ export default function SinhConClient() {
             </label>
             <select
               value={conYear}
-              onChange={(e) => setConYear(Number(e.target.value))}
+              onChange={(e) => {
+                setConYear(Number(e.target.value));
+                setJustCalculated(false);
+              }}
               aria-label="Năm dự kiến sinh Con"
               className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-emerald-50/30 text-gray-900 font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm"
             >
@@ -104,17 +204,36 @@ export default function SinhConClient() {
         </div>
 
         {/* Nút Tra Cứu */}
-        <div className="mt-6 flex flex-col sm:flex-row items-center justify-between gap-3 pt-4 border-t border-amber-100">
-          <p className="text-xs text-stone-500 italic">
-            * Kết quả tự động cập nhật ngay khi bạn thay đổi năm sinh.
-          </p>
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-amber-100">
+          <div className="text-xs text-stone-600 flex items-center gap-1.5">
+            {lastCalculatedTime ? (
+              <span className="inline-flex items-center gap-1 text-emerald-700 font-bold bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">
+                <Check className="w-3.5 h-3.5" /> Đã phân tích lúc {lastCalculatedTime}
+              </span>
+            ) : (
+              <span className="italic text-stone-500">
+                * Bấm nút bên dưới hoặc chọn năm từ bảng xếp hạng để xem luận giải
+              </span>
+            )}
+          </div>
+
           <button
             type="button"
             onClick={handleSearch}
-            className="w-full sm:w-auto px-6 py-3 rounded-xl bg-gradient-to-r from-emerald-700 to-teal-800 hover:from-emerald-800 hover:to-teal-900 text-white font-bold text-sm shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer"
+            disabled={isCalculating}
+            className="w-full sm:w-auto px-7 py-3 rounded-xl bg-gradient-to-r from-emerald-700 to-teal-800 hover:from-emerald-800 hover:to-teal-900 text-white font-bold text-sm shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-75"
           >
-            <Sparkles className="w-4 h-4 text-emerald-300" />
-            Tra Cứu Tuổi Sinh Con Ngay
+            {isCalculating ? (
+              <>
+                <Loader2 className="w-4 h-4 animate-spin text-emerald-300" />
+                Đang luận giải tương sinh...
+              </>
+            ) : (
+              <>
+                <Sparkles className="w-4 h-4 text-emerald-300" />
+                Tra Cứu Tuổi Sinh Con Ngay
+              </>
+            )}
           </button>
         </div>
       </section>
@@ -123,6 +242,8 @@ export default function SinhConClient() {
       <section
         ref={resultRef}
         className={`rounded-3xl p-6 sm:p-10 shadow-xl border text-white transition-all ${
+          justCalculated ? 'ring-4 ring-emerald-400/80' : ''
+        } ${
           selectedYear.level === 'DAI_CAT'
             ? 'bg-gradient-to-br from-emerald-900 via-teal-950 to-stone-900 border-emerald-400/40'
             : selectedYear.level === 'CAT'
@@ -134,9 +255,16 @@ export default function SinhConClient() {
       >
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-6 border-b border-white/20">
           <div>
-            <span className="text-xs font-bold uppercase tracking-wider text-emerald-300">
-              Kết Quả Xem Tuổi Sinh Con Năm {conYear}
-            </span>
+            <div className="flex items-center gap-2">
+              <span className="text-xs font-bold uppercase tracking-wider text-emerald-300">
+                Kết Quả Xem Tuổi Sinh Con Năm {conYear}
+              </span>
+              {justCalculated && (
+                <span className="text-[10px] bg-emerald-400 text-emerald-950 font-black px-2 py-0.5 rounded-full animate-bounce">
+                  Vừa cập nhật
+                </span>
+              )}
+            </div>
             <h3 className="text-2xl sm:text-3xl font-extrabold font-serif text-white mt-1">
               Bố {bo.hoaGiap.canChi} + Mẹ {me.hoaGiap.canChi} → Con {selectedYear.conHoaGiap.canChi}
             </h3>
@@ -171,19 +299,19 @@ export default function SinhConClient() {
             Bảng Xếp Hạng Các Năm Sinh Con Đẹp Nhất Cho Bố Mẹ
           </h3>
           <p className="text-xs text-gray-500 mt-1">
-            Gợi ý các năm sắp tới để bố mẹ chủ động lên kế hoạch đón em bé thuận hòa nhất
+            Bấm vào bất kỳ năm nào để xem luận giải chi tiết và đối chiếu tương sinh tương khắc
           </p>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {recommendedYears.map((ry, idx) => (
+          {recommendedYears.map((ry) => (
             <div
               key={ry.conYear}
               onClick={() => handleSelectYear(ry.conYear)}
               className={`p-4 rounded-xl border cursor-pointer transition-all ${
                 conYear === ry.conYear
-                  ? 'bg-emerald-50 border-emerald-500 ring-2 ring-emerald-400 shadow-xs'
-                  : 'bg-white border-amber-100 hover:bg-amber-50/50'
+                  ? 'bg-emerald-50 border-emerald-500 ring-2 ring-emerald-400 shadow-xs scale-[1.02]'
+                  : 'bg-white border-amber-100 hover:bg-amber-50/50 hover:border-amber-300'
               }`}
             >
               <div className="flex items-center justify-between mb-2">
@@ -197,19 +325,159 @@ export default function SinhConClient() {
               <div className="text-xs text-gray-600 mb-2">
                 Mệnh: {ry.conHoaGiap.menh.split('(')[0]}
               </div>
-              <span
-                className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
-                  ry.level === 'DAI_CAT'
-                    ? 'bg-emerald-100 text-emerald-800'
-                    : ry.level === 'CAT'
-                    ? 'bg-blue-100 text-blue-800'
-                    : 'bg-stone-100 text-stone-700'
-                }`}
-              >
-                {ry.levelLabel}
-              </span>
+              <div className="flex items-center justify-between">
+                <span
+                  className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
+                    ry.level === 'DAI_CAT'
+                      ? 'bg-emerald-100 text-emerald-800'
+                      : ry.level === 'CAT'
+                      ? 'bg-blue-100 text-blue-800'
+                      : 'bg-stone-100 text-stone-700'
+                  }`}
+                >
+                  {ry.levelLabel}
+                </span>
+                <span className="text-[11px] text-emerald-700 font-semibold hover:underline">
+                  Bấm xem →
+                </span>
+              </div>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* 4. Chi Tiết Phân Tích 3 Tiêu Chí Hợp Bố Mẹ */}
+      <section className="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-amber-100 space-y-6">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+          <h3 className="text-xl font-bold text-amber-950 flex items-center gap-2">
+            <Sparkles className="w-6 h-6 text-emerald-600" />
+            Phân Tích Chi Tiết 3 Chiều Tương Sinh
+          </h3>
+          <span className="text-xs text-stone-500">
+            (Bấm vào từng tiêu chí để mở rộng phân tích)
+          </span>
+        </div>
+
+        <div className="space-y-4">
+          {/* Ngũ Hành */}
+          <div className="rounded-xl border border-amber-200 overflow-hidden bg-white shadow-2xs">
+            <div
+              onClick={() => toggleCriterion('nguHanh')}
+              className="p-4 bg-emerald-50/30 hover:bg-emerald-50/60 cursor-pointer flex items-center justify-between gap-3 transition-colors"
+            >
+              <div className="flex items-center gap-3">
+                {selectedYear.nguHanhBoCon.isGood || selectedYear.nguHanhMeCon.isGood ? (
+                  <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
+                ) : (
+                  <XCircle className="w-5 h-5 text-rose-600 shrink-0" />
+                )}
+                <div>
+                  <h4 className="font-bold text-gray-900 text-sm flex items-center gap-2">
+                    1. Ngũ Hành Bản Mệnh (Bố: {selectedYear.nguHanhBoCon.relation} • Mẹ: {selectedYear.nguHanhMeCon.relation})
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">
+                      {selectedYear.nguHanhBoCon.score + selectedYear.nguHanhMeCon.score}/4 điểm
+                    </span>
+                  </h4>
+                  <p className="text-xs text-gray-500 mt-0.5">
+                    Bố: {bo.hoaGiap.hanh} • Mẹ: {me.hoaGiap.hanh} • Con: {selectedYear.conHoaGiap.hanh}
+                  </p>
+                </div>
+              </div>
+              <div className="text-stone-400">
+                {expandedCriteria.nguHanh ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
+              </div>
+            </div>
+
+            {expandedCriteria.nguHanh && (
+              <div className="p-4 pt-2 text-xs text-gray-700 bg-white border-t border-amber-100 space-y-2">
+                <p className="leading-relaxed"><strong>Với Bố:</strong> {selectedYear.nguHanhBoCon.description}</p>
+                <p className="leading-relaxed"><strong>Với Mẹ:</strong> {selectedYear.nguHanhMeCon.description}</p>
+                <div className="p-3 rounded-lg bg-stone-50 border border-stone-200 text-stone-600 space-y-1">
+                  <strong>Quy tắc cổ điển:</strong> Ngũ hành bản mệnh của con tương sinh cho cha mẹ (hoặc cha mẹ sinh cho con) giúp gia đình thuận hòa, cha mẹ làm ăn phát đạt, con cái hay ăn chóng lớn, khỏe mạnh.
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Thiên Can */}
+          <div className="rounded-xl border border-amber-200 overflow-hidden bg-white shadow-2xs">
+            <div
+              onClick={() => toggleCriterion('thienCan')}
+              className="p-4 bg-emerald-50/30 hover:bg-emerald-50/60 cursor-pointer flex items-center justify-between gap-3 transition-colors"
+            >
+              <div className="flex items-center gap-3">
+                {selectedYear.thienCanBoCon.isGood || selectedYear.thienCanMeCon.isGood ? (
+                  <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
+                ) : (
+                  <XCircle className="w-5 h-5 text-rose-600 shrink-0" />
+                )}
+                <div>
+                  <h4 className="font-bold text-gray-900 text-sm flex items-center gap-2">
+                    2. Thiên Can (Bố: {selectedYear.thienCanBoCon.relation} • Mẹ: {selectedYear.thienCanMeCon.relation})
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">
+                      {selectedYear.thienCanBoCon.score + selectedYear.thienCanMeCon.score}/3 điểm
+                    </span>
+                  </h4>
+                  <p className="text-xs text-gray-500 mt-0.5">
+                    Bố: {bo.hoaGiap.canChi.split(' ')[0]} • Mẹ: {me.hoaGiap.canChi.split(' ')[0]} • Con: {selectedYear.conHoaGiap.canChi.split(' ')[0]}
+                  </p>
+                </div>
+              </div>
+              <div className="text-stone-400">
+                {expandedCriteria.thienCan ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
+              </div>
+            </div>
+
+            {expandedCriteria.thienCan && (
+              <div className="p-4 pt-2 text-xs text-gray-700 bg-white border-t border-amber-100 space-y-2">
+                <p className="leading-relaxed"><strong>Với Bố:</strong> {selectedYear.thienCanBoCon.description}</p>
+                <p className="leading-relaxed"><strong>Với Mẹ:</strong> {selectedYear.thienCanMeCon.description}</p>
+                <div className="p-3 rounded-lg bg-stone-50 border border-stone-200 text-stone-600 space-y-1">
+                  <strong>Ý nghĩa:</strong> Can của con tương sinh tương hợp với can cha mẹ giúp tạo phúc khí, con cái hiếu thuận và nghe lời khuyên răn của đấng sinh thành.
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Địa Chi */}
+          <div className="rounded-xl border border-amber-200 overflow-hidden bg-white shadow-2xs">
+            <div
+              onClick={() => toggleCriterion('diaChi')}
+              className="p-4 bg-emerald-50/30 hover:bg-emerald-50/60 cursor-pointer flex items-center justify-between gap-3 transition-colors"
+            >
+              <div className="flex items-center gap-3">
+                {selectedYear.diaChiBoCon.isGood || selectedYear.diaChiMeCon.isGood ? (
+                  <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
+                ) : (
+                  <XCircle className="w-5 h-5 text-rose-600 shrink-0" />
+                )}
+                <div>
+                  <h4 className="font-bold text-gray-900 text-sm flex items-center gap-2">
+                    3. Địa Chi (Bố: {selectedYear.diaChiBoCon.relation} • Mẹ: {selectedYear.diaChiMeCon.relation})
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">
+                      {selectedYear.diaChiBoCon.score + selectedYear.diaChiMeCon.score}/3 điểm
+                    </span>
+                  </h4>
+                  <p className="text-xs text-gray-500 mt-0.5">
+                    Bố: {bo.hoaGiap.conGiap} • Mẹ: {me.hoaGiap.conGiap} • Con: {selectedYear.conHoaGiap.conGiap}
+                  </p>
+                </div>
+              </div>
+              <div className="text-stone-400">
+                {expandedCriteria.diaChi ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
+              </div>
+            </div>
+
+            {expandedCriteria.diaChi && (
+              <div className="p-4 pt-2 text-xs text-gray-700 bg-white border-t border-amber-100 space-y-2">
+                <p className="leading-relaxed"><strong>Với Bố:</strong> {selectedYear.diaChiBoCon.description}</p>
+                <p className="leading-relaxed"><strong>Với Mẹ:</strong> {selectedYear.diaChiMeCon.description}</p>
+                <div className="p-3 rounded-lg bg-stone-50 border border-stone-200 text-stone-600 space-y-1">
+                  <strong>Ý nghĩa:</strong> Chi con hợp chi cha mẹ (Tam hợp, Lục hợp) tránh được xung sát và mang lại nhiều tiếng cười, sinh khí trong tổ ấm.
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </section>
     </div>
