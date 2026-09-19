@@ -1,6 +1,6 @@
 /**
- * Bảng việc nên làm / không nên làm theo 12 Trực
- * Mỗi trực có danh sách việc phù hợp và không phù hợp
+ * @internal
+ * KHÓA MÃ NGUỒN: Tra cứu Việc Nên Làm / Kiêng Kỵ theo 12 Trực
  */
 
 const VIEC_THEO_TRUC: Record<string, { nenLam: string[]; khongNenLam: string[] }> = {

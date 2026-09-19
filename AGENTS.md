@@ -83,17 +83,17 @@ Strong success criteria let you loop independently. Weak criteria ("make it work
 - `src/types/lunar.ts` — TypeScript interfaces for all lunar data
 
 ### Key Rules
+- **LÕI LỊCH ÂM ĐÃ ĐƯỢC KHÓA (LOCKED)**: Tuyệt đối KHÔNG sửa đổi các file trong `src/lib/lunar/core/`. Mọi tính toán, truy vấn âm lịch từ bên ngoài (UI, Components, Pages) bắt buộc phải thông qua interface `ILunarService` hoặc singleton `lunarService` từ `@/lib/lunar`.
 - **Server Components by default.** Only use `'use client'` when client interactivity is needed (forms, state, event handlers).
-- **Use `getDayInfo(day, month, year)`** from `@/lib/lunar` to get all lunar data for a given solar date.
 - **All UI text must be in Vietnamese.**
 - **Comments in code should be in Vietnamese.**
 - **Color theme**: Primary `#8B6914` (vàng nâu), Background `#FEF7E6`, Accent `#D4A017`, Danger `#DC240E`.
 - **Responsive mobile-first design.** Always test on mobile viewport.
 - **SEO matters.** Every page needs proper metadata, Schema.org JSON-LD when relevant.
-- **Do NOT modify `src/lib/lunar/lunar-calendar.ts`** without understanding the Hồ Ngọc Đức algorithm. This is mathematically precise code.
 
 ### Build & Verify
 ```bash
+npm test         # Bộ kiểm thử 64/64 unit tests toán học âm lịch phải PASS 100%
 npm run build    # Must pass with 0 errors
 npx tsc --noEmit # TypeScript check
 npm run dev      # Dev server at localhost:3000

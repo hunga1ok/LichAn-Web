@@ -1,5 +1,9 @@
-import { GioHoangDao } from '../../types/lunar';
-import { DIA_CHI } from '../constants';
+/**
+ * @internal
+ * KHÓA MÃ NGUỒN: Tính 12 Giờ Hoàng Đạo / Hắc Đạo
+ */
+import { GioHoangDao } from '../../../types/lunar';
+import { DIA_CHI } from '../../constants';
 
 /**
  * Bảng giờ Hoàng Đạo theo Chi của ngày

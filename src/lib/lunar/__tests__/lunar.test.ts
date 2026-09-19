@@ -10,19 +10,28 @@
  */
 
 import { 
-  solarToLunar, 
-  lunarToSolar, 
+  lunarService,
+  getDayInfo,
+  solarToLunar,
+  lunarToSolar,
+  getMonthCalendar
+} from '../index';
+
+import { 
   solarToJd, 
   jdToSolar,
+} from '../core/lunar-calendar';
+
+import {
   getCanChiYear,
   getCanChiMonth,
   getCanChiDay,
   getNguHanh,
-  getGioHoangDao,
-  getTietKhi,
-  getTruc,
-  getDayInfo
-} from '../index';
+} from '../core/can-chi';
+
+import { getGioHoangDao } from '../core/hoang-dao';
+import { getTietKhi } from '../core/tiet-khi';
+import { getTruc } from '../core/truc-nhat';
 
 let passedTests = 0;
 let failedTests = 0;
@@ -232,8 +241,17 @@ function runTestSuite() {
   assert(dayInfo.viecNenLam.length > 0 && dayInfo.viecKhongNenLam.length > 0, 'Có danh sách việc nên làm và kiêng kỵ');
 
   // ============================================================================
-  // TỔNG KẾT
+  // SUITE 8: Kiểm tra LunarService Facade (getMonthCalendar, singleton)
   // ============================================================================
+  console.log('\n📌 SUITE 8: Kiểm tra LunarService Facade & getMonthCalendar');
+  const monthData = lunarService.getMonthCalendar(9, 2026);
+  assert(monthData.solarMonth === 9 && monthData.solarYear === 2026, 'MonthData đúng tháng 9/2026');
+  assert(monthData.daysInMonth === 30, 'Tháng 9 có 30 ngày');
+  assert(monthData.days.length === 30, 'Tạo đủ 30 phần tử ngày');
+  
+  const day19 = monthData.days[18]; // Index 18 = ngày 19
+  assert(day19.solarDay === 19 && day19.lunarDay === 9 && day19.lunarMonth === 8, 'Ngày 19/9/2026 có ngày âm 9/8');
+  assert(day19.canChiDay === 'Bính Thân', 'Ngày 19/9/2026 Can Chi Bính Thân');
   console.log('\n================================================================');
   console.log(`  KẾT THÚC KIỂM THỬ: ${passedTests} ĐẠT, ${failedTests} THẤT BẠI`);
   console.log(`  TỔNG SỐ NGÀY KIỂM ĐỊNH CHI TIẾT: > ${sampleCount} NGÀY`);

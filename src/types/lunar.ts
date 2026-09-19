@@ -46,3 +46,49 @@ export interface DayInfo {
   ngayLe: string[];
   nguHanhDay: string;
 }
+
+export interface CalendarDaySummary {
+  solarDay: number;
+  solarMonth: number;
+  solarYear: number;
+  lunarDay: number;
+  lunarMonth: number;
+  lunarYear: number;
+  isLeap: boolean;
+  isToday: boolean;
+  isSunday: boolean;
+  holiday?: string;
+  canChiDay: string;
+}
+
+export interface CalendarMonthData {
+  solarMonth: number;
+  solarYear: number;
+  daysInMonth: number;
+  firstDayOfWeek: number; // 0 = Thứ 2, 6 = Chủ nhật
+  days: CalendarDaySummary[];
+}
+
+/**
+ * Interface chuẩn cho dịch vụ Lịch Âm Dương Lịch An
+ * Mọi component và usecase giao tiếp qua interface này.
+ */
+export interface ILunarService {
+  /** Lấy toàn bộ thông tin phong thủy, tử vi, chi tiết của 1 ngày */
+  getDayInfo(day: number, month: number, year: number): DayInfo;
+
+  /** Chuyển đổi Dương lịch -> Âm lịch */
+  solarToLunar(day: number, month: number, year: number): LunarDate;
+
+  /** Chuyển đổi Âm lịch -> Dương lịch */
+  lunarToSolar(lunarDay: number, lunarMonth: number, lunarYear: number, isLeap?: number): SolarDate;
+
+  /** Lấy dữ liệu trọn vẹn 1 tháng cho Lịch Vạn Niên */
+  getMonthCalendar(month: number, year: number): CalendarMonthData;
+
+  /** Tính Can Chi cho năm âm lịch */
+  getCanChiYear(lunarYear: number): CanChi;
+
+  /** Tính 12 giờ Hoàng Đạo / Hắc Đạo của ngày */
+  getGioHoangDao(jd: number): GioHoangDao[];
+}

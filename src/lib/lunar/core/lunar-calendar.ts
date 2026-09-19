@@ -1,4 +1,12 @@
-import { LunarDate, SolarDate } from '../../types/lunar';
+/**
+ * @internal
+ * ============================================================================
+ * KHÓA MÃ NGUỒN (CODE LOCKED): KHÔNG CHỈNH SỬA FILE NÀY
+ * Thuật toán thiên văn chuyển đổi âm dương lịch chuẩn TS. Hồ Ngọc Đức (ĐH Leipzig)
+ * Mọi truy cập bắt buộc phải thông qua LunarService (`src/lib/lunar/service.ts`)
+ * ============================================================================
+ */
+import { LunarDate, SolarDate } from '../../../types/lunar';
 
 const PI = Math.PI;
 

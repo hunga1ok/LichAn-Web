@@ -1,6 +1,6 @@
 /**
- * Tính sao tốt trong ngày dựa trên ngày và tháng âm lịch
- * Đây là phiên bản đơn giản hóa, dùng pattern theo ngày âm lịch
+ * @internal
+ * KHÓA MÃ NGUỒN: Tra cứu Sao Tốt & Sao Xấu
  */
 
 const SAO_TOT_LIST = [

@@ -1,4 +1,8 @@
-import { TRUC } from '../constants';
+/**
+ * @internal
+ * KHÓA MÃ NGUỒN: Tính 12 Trực cổ truyền
+ */
+import { TRUC } from '../../constants';
 
 /**
  * Tính 12 Trực (Kiến, Trừ, Mãn, Bình, Định, Chấp, Phá, Nguy, Thành, Thâu, Khai, Bế)

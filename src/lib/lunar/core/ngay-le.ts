@@ -1,4 +1,8 @@
-import { NGAY_LE_AM_LICH, NGAY_LE_DUONG_LICH } from '../constants';
+/**
+ * @internal
+ * KHÓA MÃ NGUỒN: Tra cứu ngày lễ
+ */
+import { NGAY_LE_AM_LICH, NGAY_LE_DUONG_LICH } from '../../constants';
 
 export function getNgayLe(solarDay: number, solarMonth: number, lunarDay: number, lunarMonth: number): string[] {
   const le = [];

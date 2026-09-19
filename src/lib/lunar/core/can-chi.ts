@@ -1,4 +1,8 @@
-import { THIEN_CAN, DIA_CHI, NGU_HANH, CON_GIAP } from '../constants';
+/**
+ * @internal
+ * KHÓA MÃ NGUỒN: Tính Can Chi & Ngũ Hành Nạp Âm Lục Thập Hoa Giáp
+ */
+import { THIEN_CAN, DIA_CHI, NGU_HANH, CON_GIAP } from '../../constants';
 
 export function getCanChiYear(lunarYear: number): { can: string; chi: string; fullName: string } {
   const can = THIEN_CAN[(lunarYear + 6) % 10];

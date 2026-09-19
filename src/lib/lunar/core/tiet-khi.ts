@@ -1,5 +1,9 @@
+/**
+ * @internal
+ * KHÓA MÃ NGUỒN: Tính 24 Tiết Khí thiên văn học
+ */
 import { getSunLongitude24 } from './lunar-calendar';
-import { TIET_KHI_NAMES } from '../constants';
+import { TIET_KHI_NAMES } from '../../constants';
 
 /**
  * Tính tiết khí hiện tại dựa trên kinh độ Mặt Trời (24 tiết khí, mỗi tiết 15 độ)
