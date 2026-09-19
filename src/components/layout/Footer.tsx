@@ -13,7 +13,10 @@ export default function Footer() {
           <ul className="space-y-2 text-gray-400">
             <li><Link href="/" className="hover:text-primary-light">Trang chủ</Link></li>
             <li><Link href="/lich-van-nien" className="hover:text-primary-light">Lịch Vạn Niên</Link></li>
-            <li><Link href="/doi-ngay-am-duong" className="hover:text-primary-light">Đổi Ngày</Link></li>
+            <li><Link href="/xem-ngay-tot" className="hover:text-primary-light">Xem Ngày Tốt</Link></li>
+            <li><Link href="/van-khan" className="hover:text-primary-light">Kho Văn Khấn</Link></li>
+            <li><Link href="/phong-thuy" className="hover:text-primary-light">Phong Thủy</Link></li>
+            <li><Link href="/api-docs" className="hover:text-primary-light">REST API (Mobile App)</Link></li>
           </ul>
         </div>
         <div>
