@@ -126,21 +126,27 @@
 
 ---
 
-### 📅 SPRINT 4: ĐỒNG BỘ LỊCH (.ICS) & TIỆN ÍCH ĐẾM NGƯỢC TẾT (GROWTH / VIRAL)
+### 📅 SPRINT 4: ĐỒNG BỘ LỊCH (.ICS) & TIỆN ÍCH ĐẾM NGƯỢC TẾT (GROWTH / VIRAL) ✅ (HOÀN THÀNH)
 > **Mục tiêu**: Giúp người dùng gắn bó lâu dài thông qua nhắc lịch trên điện thoại và hút lượng truy cập lớn dịp cuối năm.
 
 #### User Stories:
-- **Story 4.1 — Xuất File iCalendar (.ics)**:
-  - Sinh file `.ics` chuẩn tương thích 100% với Apple Calendar, Google Calendar, Outlook.
+- **Story 4.1 — Xuất File iCalendar (.ics)**: ✅
+  - Sinh file `.ics` chuẩn RFC 5545 tương thích 100% với Apple Calendar, Google Calendar, Outlook.
   - Tùy chọn xuất:
     - Lịch Ngày Rằm & Mùng 1 trong năm (có thông báo nhắc trước 1 ngày lúc 20:00).
     - Lịch các ngày lễ truyền thống (Tết Nguyên Đán, Giỗ Tổ, Vu Lan, Trung Thu, Táo Quân...).
-- **Story 4.2 — Đăng Ký Lịch Trực Tiếp (Webcal One-click Subscribe)**:
-  - Đường dẫn `webcal://lichan.com/api/calendar/subscribe.ics` giúp người dùng iPhone/Mac/Android bấm một nút là tự động thêm lịch vào máy mà không cần tải file thủ công.
-- **Story 4.3 — Trang Đếm Ngược Tết Nguyên Đán (`/dem-nguoc-tet`)**:
-  - Đồng hồ đếm ngược thời gian thực (Ngày : Giờ : Phút : Giây) đến 00:00 đêm Giao Thừa.
+- **Story 4.2 — Đăng Ký Lịch Trực Tiếp (Webcal One-click Subscribe)**: ✅
+  - Đường dẫn `webcal://lichan.com/api/v1/calendar/subscribe.ics` giúp người dùng iPhone/Mac/Android bấm một nút là tự động thêm lịch vào máy mà không cần tải file thủ công.
+- **Story 4.3 — Trang Giao Diện Đồng Bộ Lịch (`/dong-bo-lich`)**: ✅
+  - Bộ điều khiển tương tác chọn nội dung (Rằm/Mùng 1/Lễ Tết), chọn năm, bật/tắt nhắc nhở.
+  - Nút đồng bộ Apple Calendar 1-click, Google Calendar import, Tải file .ics, và Copy URL.
+  - Danh sách xem trước sự kiện mẫu và hướng dẫn từng bước cho iOS, Android, Outlook.
+- **Story 4.4 — Trang Đếm Ngược Tết Nguyên Đán (`/dem-nguoc-tet`)**: ✅
+  - Đồng hồ đếm ngược thời gian thực (Ngày : Giờ : Phút : Giây) đến 00:00 đêm Giao Thừa dựa trên thuật toán thiên văn.
   - Thông tin con giáp năm mới, phong tục đón xuân, danh sách các việc cần chuẩn bị từ 23 tháng Chạp đến mùng 1 Tết.
-  - Nút chia sẻ lên Facebook, Zalo tạo hiệu ứng lan truyền (viral).
+  - Nút chia sẻ lên Facebook, Zalo, sao chép link và sao chép lời chúc Tết tạo hiệu ứng lan truyền (viral).
+- **Story 4.5 — Bộ Kiểm Thử (33 Unit Tests)**: ✅
+  - 33 test cases kiểm thử định dạng RFC 5545, VEVENT, VALARM, ngày Rằm/Mùng 1 và đếm ngược Tết pass 100%.
 
 ---
 

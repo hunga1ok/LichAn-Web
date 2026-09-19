@@ -19,10 +19,8 @@ export default function Header() {
     { name: 'Xem Ngày Tốt', href: '/xem-ngay-tot' },
     { name: 'Văn Khấn', href: '/van-khan' },
     { name: 'Phong Thủy', href: '/phong-thuy' },
-    { name: 'Đổi Ngày', href: '/doi-ngay-am-duong' },
-    { name: 'Tử Vi 12 Con Giáp', href: '/tu-vi' },
-    { name: 'Thần Số Học', href: '/than-so-hoc' },
-    { name: 'Cẩm Nang', href: '/blog' },
+    { name: 'Đồng Bộ Lịch', href: '/dong-bo-lich' },
+    { name: 'Đếm Ngược Tết', href: '/dem-nguoc-tet' },
   ];
 
   return (

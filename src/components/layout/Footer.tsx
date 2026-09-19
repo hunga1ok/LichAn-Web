@@ -16,6 +16,8 @@ export default function Footer() {
             <li><Link href="/xem-ngay-tot" className="hover:text-primary-light">Xem Ngày Tốt</Link></li>
             <li><Link href="/van-khan" className="hover:text-primary-light">Kho Văn Khấn</Link></li>
             <li><Link href="/phong-thuy" className="hover:text-primary-light">Phong Thủy</Link></li>
+            <li><Link href="/dong-bo-lich" className="hover:text-primary-light">Đồng Bộ Lịch (.ICS)</Link></li>
+            <li><Link href="/dem-nguoc-tet" className="hover:text-primary-light">Đếm Ngược Tết</Link></li>
             <li><Link href="/api-docs" className="hover:text-primary-light">REST API (Mobile App)</Link></li>
           </ul>
         </div>
