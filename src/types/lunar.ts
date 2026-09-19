@@ -69,6 +69,38 @@ export interface CalendarMonthData {
   days: CalendarDaySummary[];
 }
 
+export type AuspiciousPurpose = 'cuoi-hoi' | 'khai-truong' | 'dong-tho' | 'xuat-hanh';
+
+export interface AuspiciousDayResult {
+  solarDay: number;
+  solarMonth: number;
+  solarYear: number;
+  lunarDay: number;
+  lunarMonth: number;
+  lunarYear: number;
+  isLeap: boolean;
+  dayOfWeek: string;
+  canChiDay: string;
+  truc: string;
+  score: number; // Thang điểm 0 - 100
+  isAuspicious: boolean; // true = Ngày tốt
+  reasons: string[]; // Các lý do tốt (Bất Tương, Trực Thành, Sao Thiên Hỷ...)
+  warnings: string[]; // Các điểm kiêng kỵ (nếu có)
+  hoangDaoHours: string[]; // Giờ hoàng đạo tốt nhất trong ngày
+}
+
+export interface XuatHanhInfo {
+  hyThan: string; // Hướng đón Hỷ Thần
+  taiThan: string; // Hướng đón Tài Thần
+  gioLyThuanPhong: {
+    canhGio: string;
+    timeRange: string;
+    tenGio: string;
+    isGood: boolean;
+    yNghia: string;
+  }[];
+}
+
 /**
  * Interface chuẩn cho dịch vụ Lịch Âm Dương Lịch An
  * Mọi component và usecase giao tiếp qua interface này.
@@ -91,4 +123,10 @@ export interface ILunarService {
 
   /** Tính 12 giờ Hoàng Đạo / Hắc Đạo của ngày */
   getGioHoangDao(jd: number): GioHoangDao[];
+
+  /** Lọc danh sách ngày tốt theo mục đích cụ thể (cưới hỏi, khai trương, động thổ...) */
+  getAuspiciousDays(purpose: AuspiciousPurpose, month: number, year: number): AuspiciousDayResult[];
+
+  /** Tra cứu hướng và giờ xuất hành Lý Thuần Phong */
+  getXuatHanhInfo(day: number, month: number, year: number): XuatHanhInfo;
 }

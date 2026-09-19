@@ -17,7 +17,10 @@ import {
   CalendarMonthData, 
   CalendarDaySummary,
   CanChi,
-  GioHoangDao 
+  GioHoangDao,
+  AuspiciousPurpose,
+  AuspiciousDayResult,
+  XuatHanhInfo 
 } from '@/types/lunar';
 
 import { 
@@ -42,6 +45,16 @@ import { getSaoTot, getSaoXau } from './core/sao-tot-xau';
 import { getTruc } from './core/truc-nhat';
 import { getViecNenLam, getViecKhongNenLam } from './core/viec-nen-lam';
 import { getNgayLe } from './core/ngay-le';
+import {
+  isTamNuong,
+  isNguyetKy,
+  isSatChu,
+  isThuTu,
+  isNguyetPha,
+  isBatTuong,
+  getPhuongViXuatHanh,
+  getGioLyThuanPhong,
+} from './core/trach-nhat';
 import { THU_TRONG_TUAN } from '../constants';
 
 export class LunarService implements ILunarService {
@@ -167,6 +180,215 @@ export class LunarService implements ILunarService {
 
   public getGioHoangDao(jd: number): GioHoangDao[] {
     return coreGetGioHoangDao(jd);
+  }
+
+  /**
+   * Lọc danh sách ngày tốt theo mục đích cụ thể (cưới hỏi, khai trương, động thổ, xuất hành...)
+   * Căn cứ theo Hiệp Kỷ Biện Phương Thư và Ngọc Hạp Thông Thư
+   */
+  public getAuspiciousDays(purpose: AuspiciousPurpose, month: number, year: number): AuspiciousDayResult[] {
+    const daysInMonth = new Date(year, month, 0).getDate();
+    const results: AuspiciousDayResult[] = [];
+
+    for (let d = 1; d <= daysInMonth; d++) {
+      const dayInfo = this.getDayInfo(d, month, year);
+      const { lunarDate, canChiDay, truc, saoTot, saoXau, gioHoangDao, dayOfWeek } = dayInfo;
+
+      const reasons: string[] = [];
+      const warnings: string[] = [];
+      let score = 50;
+
+      // 1. Kiểm tra các ngày đại hung trăm sự đều kỵ (Tier 1: Hard Taboos)
+      const tamNuong = isTamNuong(lunarDate.day);
+      const nguyetKy = isNguyetKy(lunarDate.day);
+      const satChu = isSatChu(lunarDate.month, canChiDay.chi);
+      const thuTu = isThuTu(lunarDate.month, canChiDay.chi);
+      const nguyetPha = isNguyetPha(lunarDate.month, canChiDay.chi);
+
+      if (tamNuong) {
+        score -= 35;
+        warnings.push('Phạm ngày Tam Nương (trăm sự đều kỵ)');
+      }
+      if (nguyetKy) {
+        score -= 30;
+        warnings.push('Phạm ngày Nguyệt Kỵ (nửa đời nửa đoạn)');
+      }
+      if (satChu) {
+        score -= 40;
+        warnings.push('Phạm ngày Sát Chủ tháng (đại kỵ xây dựng, cưới hỏi)');
+      }
+      if (thuTu) {
+        score -= 40;
+        warnings.push('Phạm ngày Thụ Tử (trăm sự bất lợi)');
+      }
+      if (nguyetPha) {
+        score -= 35;
+        warnings.push('Phạm ngày Nguyệt Phá (chi ngày xung chi tháng)');
+      }
+
+      // 2. Kiểm tra theo từng mục đích chuyên biệt (Tier 2: Purpose-specific Rules)
+      switch (purpose) {
+        case 'cuoi-hoi': {
+          if (isBatTuong(lunarDate.month, canChiDay.fullName)) {
+            score += 30;
+            reasons.push('Ngày Âm Dương Bất Tương (Đại cát cho lương duyên hòa hợp, trăm năm hạnh phúc)');
+          }
+          if (['Định', 'Thành', 'Mãn'].includes(truc)) {
+            score += 15;
+            reasons.push(`Trực ${truc} tốt cho đính hôn, vu quy`);
+          } else if (['Phá', 'Bế', 'Nguy', 'Chấp'].includes(truc)) {
+            score -= 20;
+            warnings.push(`Trực ${truc} bất lợi cho việc thành gia lập thất`);
+          }
+
+          const goodWeddingStars = ['Thiên Hỷ', 'Hỷ Thần', 'Nguyệt Ân', 'Tam Hợp', 'Lục Hợp'];
+          for (const s of goodWeddingStars) {
+            if (saoTot.includes(s)) {
+              score += 10;
+              reasons.push(`Sao tốt ${s} chiếu mệnh gia đạo`);
+            }
+          }
+
+          const badWeddingStars = ['Cô Thần', 'Quả Tú', 'Ly Sàng', 'Không Phòng', 'Cô Quả'];
+          for (const s of badWeddingStars) {
+            if (saoXau.includes(s)) {
+              score -= 20;
+              warnings.push(`Phạm sao xấu ${s} hại tình duyên`);
+            }
+          }
+          break;
+        }
+
+        case 'khai-truong': {
+          if (['Khai', 'Mãn', 'Thành'].includes(truc)) {
+            score += 25;
+            reasons.push(`Trực ${truc} mở rộng hanh thông, buôn bán phát đạt`);
+          } else if (['Bế', 'Phá', 'Nguy', 'Chấp'].includes(truc)) {
+            score -= 20;
+            warnings.push(`Trực ${truc} tắc nghẽn, bất lợi cho mở hàng buôn bán`);
+          }
+
+          const goodBusinessStars = ['Thiên Tài', 'Nguyệt Tài', 'Lộc Mã', 'Địa Tài', 'Phúc Sinh'];
+          for (const s of goodBusinessStars) {
+            if (saoTot.includes(s)) {
+              score += 10;
+              reasons.push(`Sao tốt ${s} mang lại cung tài lộc thịnh vượng`);
+            }
+          }
+
+          const badBusinessStars = ['Đại Hao', 'Tiểu Hao', 'Kiếp Sát', 'Thiên Tặc'];
+          for (const s of badBusinessStars) {
+            if (saoXau.includes(s)) {
+              score -= 15;
+              warnings.push(`Phạm sao ${s} hao tổn tài của`);
+            }
+          }
+          break;
+        }
+
+        case 'dong-tho': {
+          if (['Kiến', 'Định', 'Bình', 'Khai'].includes(truc)) {
+            score += 25;
+            reasons.push(`Trực ${truc} vượng khí, nền móng vững chắc`);
+          } else if (['Phá', 'Bế', 'Nguy'].includes(truc)) {
+            score -= 25;
+            warnings.push(`Trực ${truc} xung khắc, kiêng cữ động thổ xây cất`);
+          }
+
+          const goodBuildStars = ['Sinh Khí', 'Thiên Phúc', 'Nguyệt Đức', 'Thiên Đức'];
+          for (const s of goodBuildStars) {
+            if (saoTot.includes(s)) {
+              score += 15;
+              reasons.push(`Sao tốt ${s} đại cát khởi tạo xây dựng`);
+            }
+          }
+
+          const badBuildStars = ['Thổ Phủ', 'Địa Phá', 'Thổ Cấm', 'Hoang Vu', 'Vãng Vong'];
+          for (const s of badBuildStars) {
+            if (saoXau.includes(s)) {
+              score -= 20;
+              warnings.push(`Phạm sao sát ${s} kỵ đào đất làm móng`);
+            }
+          }
+          break;
+        }
+
+        case 'xuat-hanh': {
+          if (['Khai', 'Thành', 'Mãn', 'Định'].includes(truc)) {
+            score += 20;
+            reasons.push(`Trực ${truc} bình an thuận buồm xuôi gió`);
+          } else if (['Phá', 'Bế', 'Nguy'].includes(truc)) {
+            score -= 20;
+            warnings.push(`Trực ${truc} hiểm trở, dễ gặp trắc trở trên đường`);
+          }
+
+          const goodTravelStars = ['Dịch Mã', 'Thiên Mã', 'Phúc Sinh', 'Thiên Đức'];
+          for (const s of goodTravelStars) {
+            if (saoTot.includes(s)) {
+              score += 15;
+              reasons.push(`Sao ${s} phò trợ hanh thông di chuyển`);
+            }
+          }
+
+          const badTravelStars = ['Bạch Hổ', 'Vãng Vong', 'Thiên Cẩu'];
+          for (const s of badTravelStars) {
+            if (saoXau.includes(s)) {
+              score -= 15;
+              warnings.push(`Phạm sao sát ${s} dễ gặp sự cố bất trắc`);
+            }
+          }
+          break;
+        }
+      }
+
+      // Giờ hoàng đạo
+      const hoangDaoHours = gioHoangDao
+        .filter((g) => g.isHoangDao)
+        .map((g) => `${g.name} (${g.time})`);
+
+      // Tiêu chuẩn ngày tốt:
+      // Không vướng đại hung (Tam nương, Nguyệt kỵ, Sát chủ, Thụ tử, Nguyệt phá)
+      // Điểm >= 65 và có lý do cát lợi
+      const hasHardTaboo = tamNuong || nguyetKy || satChu || thuTu || nguyetPha;
+      const finalScore = Math.max(0, Math.min(100, score));
+      const isAuspicious = !hasHardTaboo && finalScore >= 65 && reasons.length > 0;
+
+      results.push({
+        solarDay: d,
+        solarMonth: month,
+        solarYear: year,
+        lunarDay: lunarDate.day,
+        lunarMonth: lunarDate.month,
+        lunarYear: lunarDate.year,
+        isLeap: lunarDate.leap === 1,
+        dayOfWeek,
+        canChiDay: canChiDay.fullName,
+        truc,
+        score: finalScore,
+        isAuspicious,
+        reasons,
+        warnings,
+        hoangDaoHours,
+      });
+    }
+
+    return results;
+  }
+
+  /**
+   * Tra cứu hướng Hỷ Thần, Tài Thần và 6 giờ Lý Thuần Phong theo ngày
+   */
+  public getXuatHanhInfo(day: number, month: number, year: number): XuatHanhInfo {
+    const lunarDate = coreSolarToLunar(day, month, year);
+    const canChiDay = getCanChiDay(lunarDate.jd);
+    const { hyThan, taiThan } = getPhuongViXuatHanh(canChiDay.can);
+    const gioLyThuanPhong = getGioLyThuanPhong(lunarDate.day, lunarDate.month);
+
+    return {
+      hyThan,
+      taiThan,
+      gioLyThuanPhong,
+    };
   }
 }
 

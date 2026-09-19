@@ -28,3 +28,9 @@ export const lunarToSolar = (lunarDay: number, lunarMonth: number, lunarYear: nu
 
 export const getMonthCalendar = (month: number, year: number): CalendarMonthData =>
   lunarService.getMonthCalendar(month, year);
+
+export const getAuspiciousDays = (purpose: import('@/types/lunar').AuspiciousPurpose, month: number, year: number) =>
+  lunarService.getAuspiciousDays(purpose, month, year);
+
+export const getXuatHanhInfo = (day: number, month: number, year: number) =>
+  lunarService.getXuatHanhInfo(day, month, year);

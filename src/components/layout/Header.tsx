@@ -16,6 +16,7 @@ export default function Header() {
   const navLinks = [
     { name: 'Trang chủ', href: '/' },
     { name: 'Lịch Vạn Niên', href: '/lich-van-nien' },
+    { name: 'Xem Ngày Tốt', href: '/xem-ngay-tot' },
     { name: 'Đổi Ngày', href: '/doi-ngay-am-duong' },
     { name: 'Tử Vi 12 Con Giáp', href: '/tu-vi' },
     { name: 'Thần Số Học', href: '/than-so-hoc' },
