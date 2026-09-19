@@ -27,6 +27,17 @@ export default function SinhConClient() {
 
   const { bo, me, selectedYear, recommendedYears } = report;
 
+  const resultRef = React.useRef<HTMLElement>(null);
+
+  const handleSearch = () => {
+    resultRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  const handleSelectYear = (year: number) => {
+    setConYear(year);
+    resultRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
   return (
     <div className="space-y-10">
       {/* 1. Form Chọn Năm Sinh Bố - Mẹ - Con */}
@@ -91,10 +102,26 @@ export default function SinhConClient() {
             </select>
           </div>
         </div>
+
+        {/* Nút Tra Cứu */}
+        <div className="mt-6 flex flex-col sm:flex-row items-center justify-between gap-3 pt-4 border-t border-amber-100">
+          <p className="text-xs text-stone-500 italic">
+            * Kết quả tự động cập nhật ngay khi bạn thay đổi năm sinh.
+          </p>
+          <button
+            type="button"
+            onClick={handleSearch}
+            className="w-full sm:w-auto px-6 py-3 rounded-xl bg-gradient-to-r from-emerald-700 to-teal-800 hover:from-emerald-800 hover:to-teal-900 text-white font-bold text-sm shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer"
+          >
+            <Sparkles className="w-4 h-4 text-emerald-300" />
+            Tra Cứu Tuổi Sinh Con Ngay
+          </button>
+        </div>
       </section>
 
       {/* 2. Banner Đánh Giá Năm Đã Chọn */}
       <section
+        ref={resultRef}
         className={`rounded-3xl p-6 sm:p-10 shadow-xl border text-white transition-all ${
           selectedYear.level === 'DAI_CAT'
             ? 'bg-gradient-to-br from-emerald-900 via-teal-950 to-stone-900 border-emerald-400/40'
@@ -152,7 +179,7 @@ export default function SinhConClient() {
           {recommendedYears.map((ry, idx) => (
             <div
               key={ry.conYear}
-              onClick={() => setConYear(ry.conYear)}
+              onClick={() => handleSelectYear(ry.conYear)}
               className={`p-4 rounded-xl border cursor-pointer transition-all ${
                 conYear === ry.conYear
                   ? 'bg-emerald-50 border-emerald-500 ring-2 ring-emerald-400 shadow-xs'

@@ -26,6 +26,12 @@ export default function XongDatClient() {
 
   const { giaChu, targetYearHoaGiap, topCandidates } = report;
 
+  const resultRef = React.useRef<HTMLElement>(null);
+
+  const handleSearch = () => {
+    resultRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
   return (
     <div className="space-y-10">
       {/* 1. Form Chọn Năm */}
@@ -71,10 +77,28 @@ export default function XongDatClient() {
             </select>
           </div>
         </div>
+
+        {/* Nút Tra Cứu */}
+        <div className="mt-6 flex flex-col sm:flex-row items-center justify-between gap-3 pt-4 border-t border-amber-100">
+          <p className="text-xs text-stone-500 italic">
+            * Kết quả tự động cập nhật ngay khi bạn thay đổi năm sinh.
+          </p>
+          <button
+            type="button"
+            onClick={handleSearch}
+            className="w-full sm:w-auto px-6 py-3 rounded-xl bg-gradient-to-r from-amber-700 to-amber-800 hover:from-amber-800 hover:to-amber-900 text-white font-bold text-sm shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer"
+          >
+            <Sparkles className="w-4 h-4 text-amber-300" />
+            Tra Cứu Tuổi Xông Đất Ngay
+          </button>
+        </div>
       </section>
 
       {/* 2. Banner Giới Thiệu */}
-      <section className="bg-gradient-to-br from-amber-900 via-stone-900 to-amber-950 text-white rounded-3xl p-6 sm:p-10 shadow-xl border border-amber-400/40">
+      <section
+        ref={resultRef}
+        className="bg-gradient-to-br from-amber-900 via-stone-900 to-amber-950 text-white rounded-3xl p-6 sm:p-10 shadow-xl border border-amber-400/40"
+      >
         <span className="text-xs font-bold uppercase tracking-wider text-amber-300">
           Danh Sách Tuổi Đại Cát Xông Nhà
         </span>

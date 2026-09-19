@@ -27,10 +27,30 @@ export default function XemTuoiClient() {
   const [targetYear, setTargetYear] = useState<number>(currentYear);
   const [result, setResult] = useState<XemTuoiLamNhaResult>(() => xemTuoiLamNha(1990, currentYear));
 
+  const updateCalculation = (bYear: number, tYear: number) => {
+    const res = xemTuoiLamNha(bYear, tYear);
+    setResult(res);
+  };
+
+  const handleBirthYearChange = (year: number) => {
+    setBirthYear(year);
+    updateCalculation(year, targetYear);
+  };
+
+  const handleTargetYearChange = (year: number) => {
+    setTargetYear(year);
+    updateCalculation(birthYear, year);
+  };
+
   const handleCalculate = (e: React.FormEvent) => {
     e.preventDefault();
-    const res = xemTuoiLamNha(birthYear, targetYear);
-    setResult(res);
+    updateCalculation(birthYear, targetYear);
+  };
+
+  const handleSelectSuggestedAge = (suggestedYear: number) => {
+    setBirthYear(suggestedYear);
+    updateCalculation(suggestedYear, targetYear);
+    window.scrollTo({ top: 200, behavior: 'smooth' });
   };
 
   const getVerdictStyle = (canBuild: boolean, score: number) => {
@@ -80,7 +100,7 @@ export default function XemTuoiClient() {
               </label>
               <select
                 value={birthYear}
-                onChange={(e) => setBirthYear(parseInt(e.target.value, 10))}
+                onChange={(e) => handleBirthYearChange(parseInt(e.target.value, 10))}
                 className="w-full px-3.5 py-2.5 rounded-lg border border-stone-300 bg-white text-stone-800 text-sm font-medium focus:ring-2 focus:ring-amber-700/30 focus:outline-none"
               >
                 {Array.from({ length: 71 }, (_, i) => 2010 - i).map((y) => (
@@ -98,7 +118,7 @@ export default function XemTuoiClient() {
               </label>
               <select
                 value={targetYear}
-                onChange={(e) => setTargetYear(parseInt(e.target.value, 10))}
+                onChange={(e) => handleTargetYearChange(parseInt(e.target.value, 10))}
                 className="w-full px-3.5 py-2.5 rounded-lg border border-stone-300 bg-white text-stone-800 text-sm font-medium focus:ring-2 focus:ring-amber-700/30 focus:outline-none"
               >
                 {Array.from({ length: 15 }, (_, i) => 2024 + i).map((y) => (
@@ -246,11 +266,17 @@ export default function XemTuoiClient() {
                     <th className="py-2.5 px-3">Tuổi mụ</th>
                     <th className="py-2.5 px-3">Cung Hoang Ốc</th>
                     <th className="py-2.5 px-3">Đánh giá</th>
+                    <th className="py-2.5 px-3 text-right">Thao tác</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-stone-100">
                   {result.suggestedAges.slice(0, 8).map((tuoi, idx) => (
-                    <tr key={idx} className="hover:bg-amber-50/50 transition-colors">
+                    <tr 
+                      key={idx} 
+                      onClick={() => handleSelectSuggestedAge(tuoi.birthYear)}
+                      className="hover:bg-amber-50/70 transition-colors cursor-pointer"
+                      title="Bấm để kiểm tra chi tiết tuổi này"
+                    >
                       <td className="py-3 px-3 font-bold text-amber-900">{tuoi.birthYear}</td>
                       <td className="py-3 px-3 font-medium text-stone-800">{tuoi.canChi}</td>
                       <td className="py-3 px-3 text-stone-600">{tuoi.tuoiMu} tuổi</td>
@@ -259,6 +285,18 @@ export default function XemTuoiClient() {
                         <span className="inline-flex items-center gap-1 text-emerald-700 font-bold text-xs bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
                           <CheckCircle2 className="w-3 h-3" /> Đại Cát
                         </span>
+                      </td>
+                      <td className="py-3 px-3 text-right">
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleSelectSuggestedAge(tuoi.birthYear);
+                          }}
+                          className="text-xs font-bold text-amber-800 hover:text-amber-950 bg-amber-100/80 hover:bg-amber-200 px-2.5 py-1 rounded transition-colors"
+                        >
+                          Kiểm tra tuổi này →
+                        </button>
                       </td>
                     </tr>
                   ))}

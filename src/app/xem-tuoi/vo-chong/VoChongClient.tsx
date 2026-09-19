@@ -29,6 +29,12 @@ export default function VoChongClient() {
 
   const { chong, vo, scores, conclusion } = report;
 
+  const resultRef = React.useRef<HTMLElement>(null);
+
+  const handleSearch = () => {
+    resultRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
   return (
     <div className="space-y-10">
       {/* 1. Form Chọn Năm Sinh */}
@@ -77,10 +83,26 @@ export default function VoChongClient() {
             </select>
           </div>
         </div>
+
+        {/* Nút Tra Cứu */}
+        <div className="mt-6 flex flex-col sm:flex-row items-center justify-between gap-3 pt-4 border-t border-amber-100">
+          <p className="text-xs text-stone-500 italic">
+            * Kết quả tự động cập nhật ngay khi bạn thay đổi năm sinh.
+          </p>
+          <button
+            type="button"
+            onClick={handleSearch}
+            className="w-full sm:w-auto px-6 py-3 rounded-xl bg-gradient-to-r from-amber-700 to-amber-800 hover:from-amber-800 hover:to-amber-900 text-white font-bold text-sm shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer"
+          >
+            <Sparkles className="w-4 h-4 text-amber-300" />
+            Tra Cứu Hợp Khắc Ngay
+          </button>
+        </div>
       </section>
 
       {/* 2. Banner Kết Quả Tổng Hợp */}
       <section
+        ref={resultRef}
         className={`rounded-3xl p-6 sm:p-10 shadow-xl border text-white transition-all ${
           conclusion.level === 'DAI_CAT'
             ? 'bg-gradient-to-br from-emerald-800 via-emerald-900 to-stone-900 border-emerald-400/40'

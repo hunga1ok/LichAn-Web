@@ -28,6 +28,12 @@ export default function LamAnClient() {
 
   const { chuSu, doiTac, scores, conclusion } = report;
 
+  const resultRef = React.useRef<HTMLElement>(null);
+
+  const handleSearch = () => {
+    resultRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
   return (
     <div className="space-y-10">
       {/* 1. Form Chọn Năm Sinh */}
@@ -116,10 +122,26 @@ export default function LamAnClient() {
             </div>
           </div>
         </div>
+
+        {/* Nút Tra Cứu */}
+        <div className="mt-6 flex flex-col sm:flex-row items-center justify-between gap-3 pt-4 border-t border-amber-100">
+          <p className="text-xs text-stone-500 italic">
+            * Kết quả tự động cập nhật ngay khi bạn thay đổi năm sinh hoặc giới tính.
+          </p>
+          <button
+            type="button"
+            onClick={handleSearch}
+            className="w-full sm:w-auto px-6 py-3 rounded-xl bg-gradient-to-r from-blue-700 to-indigo-800 hover:from-blue-800 hover:to-indigo-900 text-white font-bold text-sm shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer"
+          >
+            <Sparkles className="w-4 h-4 text-blue-200" />
+            Tra Cứu Tuổi Làm Ăn Ngay
+          </button>
+        </div>
       </section>
 
       {/* 2. Banner Kết Quả Hợp Tác */}
       <section
+        ref={resultRef}
         className={`rounded-3xl p-6 sm:p-10 shadow-xl border text-white transition-all ${
           conclusion.level === 'DAI_CAT'
             ? 'bg-gradient-to-br from-blue-900 via-indigo-950 to-stone-900 border-blue-400/40'
