@@ -122,6 +122,53 @@ const API_ENDPOINTS: ApiEndpoint[] = [
       { name: 'reminder', type: 'string', required: false, desc: '"1" (bật nhắc 20:00 tối trước) hoặc "0" (tắt).' },
     ],
   },
+  {
+    method: 'GET',
+    path: '/api/v1/xem-tuoi/vo-chong',
+    title: 'Đánh giá hợp khắc tuổi vợ chồng (hôn nhân)',
+    description: 'Phân tích tương hợp hôn nhân qua 5 trụ cột cổ truyền: Ngũ Hành nạp âm, Thiên Can, Địa Chi, Cung Phi Bát Trạch, Niên Mệnh Cung Phi. Thang điểm 10/10 kèm lời khuyên và giải pháp hóa giải.',
+    defaultQuery: 'chongYear=1990&voYear=1994',
+    parameters: [
+      { name: 'chongYear', type: 'number', required: true, desc: 'Năm sinh người chồng (Dương lịch).' },
+      { name: 'voYear', type: 'number', required: true, desc: 'Năm sinh người vợ (Dương lịch).' },
+    ],
+  },
+  {
+    method: 'GET',
+    path: '/api/v1/xem-tuoi/lam-an',
+    title: 'Xem tuổi hợp tác làm ăn & kinh doanh',
+    description: 'Đánh giá độ tương hợp kinh doanh, phân bổ vai trò chiến lược (đối ngoại thị trường vs quản trị nội bộ) và đối sách tương sinh tài lộc.',
+    defaultQuery: 'chuSuYear=1990&doiTacYear=1992&chuSuGender=nam&doiTacGender=nam',
+    parameters: [
+      { name: 'chuSuYear', type: 'number', required: true, desc: 'Năm sinh chủ sự / người đứng đầu.' },
+      { name: 'doiTacYear', type: 'number', required: true, desc: 'Năm sinh đối tác / cộng sự.' },
+      { name: 'chuSuGender', type: 'string', required: false, desc: '"nam" hoặc "nu" (mặc định "nam").' },
+      { name: 'doiTacGender', type: 'string', required: false, desc: '"nam" hoặc "nu" (mặc định "nam").' },
+    ],
+  },
+  {
+    method: 'GET',
+    path: '/api/v1/xem-tuoi/sinh-con',
+    title: 'Xem tuổi sinh con hợp tuổi bố mẹ',
+    description: 'Đánh giá chỉ số tương hợp giữa Bố - Mẹ - Con trong năm dự kiến sinh và tự động quét đánh giá 5 năm liên tiếp để tìm năm đại cát.',
+    defaultQuery: 'boYear=1990&meYear=1994&conYear=2026',
+    parameters: [
+      { name: 'boYear', type: 'number', required: true, desc: 'Năm sinh của người bố.' },
+      { name: 'meYear', type: 'number', required: true, desc: 'Năm sinh của người mẹ.' },
+      { name: 'conYear', type: 'number', required: false, desc: 'Năm dự kiến sinh con (mặc định năm kế tiếp).' },
+    ],
+  },
+  {
+    method: 'GET',
+    path: '/api/v1/xem-tuoi/xong-dat',
+    title: 'Xem tuổi xông đất & mở hàng đầu năm',
+    description: 'Thuật toán phối hợp 3 chiều: Gia Chủ - Năm Mới - Người Xông Đất. Xếp hạng Top tuổi đẹp nhất để xông nhà, mở hàng khai xuân nghênh tài đón lộc.',
+    defaultQuery: 'giaChuYear=1990&targetYear=2026',
+    parameters: [
+      { name: 'giaChuYear', type: 'number', required: true, desc: 'Năm sinh của gia chủ / chủ doanh nghiệp.' },
+      { name: 'targetYear', type: 'number', required: false, desc: 'Năm Tết cần đón người xông đất (mặc định năm hiện tại).' },
+    ],
+  },
 ];
 
 export default function ApiDocsClient() {

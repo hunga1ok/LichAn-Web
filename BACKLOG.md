@@ -6,7 +6,7 @@
 
 ## 📊 TỔNG QUAN TIẾN ĐỘ HIỆN TẠI
 
-- **Bộ kiểm thử tự động (Unit Tests)**: `437/437 Tests PASS (100%)`.
+- **Bộ kiểm thử tự động (Unit Tests)**: `468/468 Tests PASS (100%)`.
   - Core Thuật toán Âm Dương Hồ Ngọc Đức: `64/64 PASS` (Kiểm định > 3.653 ngày).
   - Module Trạch Nhật (Xem Ngày Tốt Chuyên Sâu): `105/105 PASS`.
   - Module Kho Văn Khấn Cổ Truyền: `96/96 PASS`.
@@ -14,7 +14,8 @@
   - REST API Backend Endpoints: `18/18 PASS`.
   - Module Đồng Bộ Lịch (.ICS) & Đếm Ngược Tết: `33/33 PASS`.
   - Module Tử Vi Cá Nhân Hóa & Cửu Diệu Niên Hạn: `48/48 PASS`.
-- **Kiến trúc hệ thống**: Next.js 16 (App Router) + TypeScript Strict + Tailwind CSS 4 + SSG (Static Site Generation 111 trang).
+  - Phân Hệ Xem Tuổi Toàn Diện (Vợ Chồng, Làm Ăn, Sinh Con, Xông Đất): `31/31 PASS`.
+- **Kiến trúc hệ thống**: Next.js 16 (App Router) + TypeScript Strict + Tailwind CSS 4 + SSG (Static Site Generation 116 trang).
 - **Trạng thái Repo**: Đã đồng bộ lên GitHub `https://github.com/hunga1ok/LichAn-Web.git`.
 
 ---
@@ -42,7 +43,10 @@
 │ Sprint 5          │ Tử Vi Cá Nhân Hóa: Cửu Diệu Sao   │ ✅ Hoàn thành  │
 │                   │ Chiếu Mệnh & Bát Trạch Hướng Nhà  │                │
 ├───────────────────┼───────────────────────────────────┼────────────────┤
-│ Sprint 6          │ PWA Offline & Thông báo đẩy       │ ⏳ Kế tiếp     │
+│ Sprint 6          │ Phân Hệ Xem Tuổi Toàn Diện:       │ ✅ Hoàn thành  │
+│                   │ Vợ Chồng, Làm Ăn, Sinh Con, Xông  │                │
+├───────────────────┼───────────────────────────────────┼────────────────┤
+│ Sprint 7          │ PWA Offline & Thông báo đẩy       │ ⏳ Kế tiếp     │
 │                   │ nhắc nhở Mùng 1, Ngày Rằm         │                │
 └───────────────────┴───────────────────────────────────┴────────────────┘
 ```
@@ -175,15 +179,43 @@
 
 ---
 
-### 📱 SPRINT 6: PWA HOÀN CHỈNH & MOBILE WEB TIỆN DỤNG
+### 🎎 SPRINT 6: PHÂN HỆ XEM TUỔI TOÀN DIỆN (HÔN NHÂN, LÀM ĂN, SINH CON, XÔNG ĐẤT) ✅ (HOÀN THÀNH)
+> **Mục tiêu**: Xây dựng phân hệ Xem Tuổi chuyên sâu, chuẩn xác theo các thư tịch cổ điển Việt Nam (Hiệp Kỷ Biện Phương Thư, Ngọc Hạp Thông Thư, Lạc Thư Bát Trạch), giải quyết toàn diện nhu cầu xem tuổi của người Việt.
+
+#### User Stories:
+- **Story 6.1 — Xem Tuổi Vợ Chồng (Hôn Nhân)**: ✅
+  - Phân tích tương hợp qua 5 trụ cột: Ngũ Hành nạp âm (2đ), Thiên Can (2đ), Địa Chi (2đ), Cung Phi Bát Trạch (2đ), Niên Mệnh Cung Phi (2đ).
+  - Thang điểm chuẩn hóa 10/10, kết luận Cát/Bình hòa/Hung, lời khuyên thiết thực và phương pháp hóa giải tương khắc (chọn năm sinh con, hướng nhà, cách ứng xử).
+  - Giao diện trực quan tại `/xem-tuoi/vo-chong` & REST API `GET /api/v1/xem-tuoi/vo-chong`.
+- **Story 6.2 — Xem Tuổi Làm Ăn (Kinh Doanh & Khởi Nghiệp)**: ✅
+  - Đánh giá tương sinh tài lộc, phối ngẫu cung phi Bát San làm ăn (Sinh Khí, Diên Niên, v.v.).
+  - Tự động gợi ý phân bổ vai trò chiến lược: ai nên phụ trách đối ngoại / mở rộng thị trường, ai nên quản trị dòng tiền / vận hành nội bộ.
+  - Giao diện tại `/xem-tuoi/lam-an` & REST API `GET /api/v1/xem-tuoi/lam-an`.
+- **Story 6.3 — Xem Tuổi Sinh Con (Hợp Bố Mẹ)**: ✅
+  - Phân tích tương hợp 3 chiều: Bố - Con, Mẹ - Con, và Con - Bố Mẹ (Ngũ Hành, Thiên Can, Địa Chi).
+  - Tự động quét và xếp hạng 5 năm kế tiếp giúp các cặp vợ chồng dễ dàng lên kế hoạch sinh con đại cát.
+  - Giao diện tại `/xem-tuoi/sinh-con` & REST API `GET /api/v1/xem-tuoi/sinh-con`.
+- **Story 6.4 — Xem Tuổi Xông Đất & Mở Hàng Đầu Năm**: ✅
+  - Thuật toán phối hợp 3 chiều: Gia Chủ - Năm Mới - Người Xông Đất (Ngũ hành, Thiên can, Địa chi).
+  - Xếp hạng Top 10 tuổi đẹp nhất kèm danh sách tuổi đại kỵ tuyệt đối tránh xông nhà.
+  - Giao diện tại `/xem-tuoi/xong-dat` & REST API `GET /api/v1/xem-tuoi/xong-dat`.
+- **Story 6.5 — Hub Trung Tâm & Cập Nhật Điều Hướng Toàn Trang**: ✅
+  - Trang Hub `/xem-tuoi` tổng hợp đầy đủ 6 công cụ xem tuổi (Vợ chồng, Làm ăn, Sinh con, Xông đất, Làm nhà, Tử vi).
+  - Cập nhật Header, Footer, Sitemap XML và tài liệu API Docs `/api-docs`.
+- **Story 6.6 — Bộ Kiểm Thử (31 Unit Tests)**: ✅
+  - 31 test cases kiểm thử độc lập các thuật toán quy tắc ngũ hành, thiên can, địa chi, cung phi, vợ chồng, làm ăn, sinh con, xông đất pass 100%.
+
+---
+
+### 📱 SPRINT 7: PWA HOÀN CHỈNH & MOBILE WEB TIỆN DỤNG
 > **Mục tiêu**: Trải nghiệm mượt mà như một ứng dụng gốc trên điện thoại không cần cài từ App Store.
 
 #### User Stories:
-- **Story 6.1 — Offline Caching**:
+- **Story 7.1 — Offline Caching**:
   - Service Worker lưu cache toàn bộ thuật toán âm lịch và các bài văn khấn, vào những nơi không có sóng/3G (nhà chùa, nghĩa trang, vùng sâu) vẫn mở ra xem được bình thường.
-- **Story 6.2 — Add to Home Screen (A2HS)**:
+- **Story 7.2 — Add to Home Screen (A2HS)**:
   - Banner hướng dẫn cài đặt Lịch An vào màn hình chính điện thoại với 1 chạm.
-- **Story 6.3 — Web Push Notification (Thông báo đẩy)**:
+- **Story 7.3 — Web Push Notification (Thông báo đẩy)**:
   - Cho phép người dùng đăng ký nhận thông báo nhắc nhở vào 19:00 tối hôm trước ngày Mùng 1 và ngày Rằm.
 
 ---
