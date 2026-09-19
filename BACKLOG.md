@@ -6,10 +6,11 @@
 
 ## 📊 TỔNG QUAN TIẾN ĐỘ HIỆN TẠI
 
-- **Bộ kiểm thử tự động (Unit Tests)**: `265/265 Tests PASS (100%)`.
+- **Bộ kiểm thử tự động (Unit Tests)**: `338/338 Tests PASS (100%)`.
   - Core Thuật toán Âm Dương Hồ Ngọc Đức: `64/64 PASS` (Kiểm định > 3.653 ngày).
   - Module Trạch Nhật (Xem Ngày Tốt Chuyên Sâu): `105/105 PASS`.
   - Module Kho Văn Khấn Cổ Truyền: `96/96 PASS`.
+  - Module Phong Thủy (Tam Tai - Kim Lâu - Hoang Ốc): `73/73 PASS`.
 - **Kiến trúc hệ thống**: Next.js 16 (App Router) + TypeScript Strict + Tailwind CSS 4 + SSG (Static Site Generation).
 - **Trạng thái Repo**: Đã đồng bộ lên GitHub `https://github.com/hunga1ok/LichAn-Web.git`.
 
@@ -26,10 +27,10 @@
 │ Sprint 1          │ Core Lịch Âm, Xem Ngày Tốt,       │ ✅ Hoàn thành  │
 │                   │ Văn Khấn Cổ Truyền                │                │
 ├───────────────────┼───────────────────────────────────┼────────────────┤
-│ Sprint 2          │ Bộ công cụ Phong Thủy: Tam Tai,   │ ⏳ Ưu tiên số 1│
+│ Sprint 2          │ Bộ công cụ Phong Thủy: Tam Tai,   │ ✅ Hoàn thành  │
 │                   │ Kim Lâu, Hoang Ốc & Mượn Tuổi     │                │
 ├───────────────────┼───────────────────────────────────┼────────────────┤
-│ Sprint 3          │ REST API Backend (/api/v1/...)    │ ⏳ Sẵn sàng    │
+│ Sprint 3          │ REST API Backend (/api/v1/...)    │ ⏳ Ưu tiên số 1│
 │                   │ chuẩn bị cho Mobile App           │                │
 ├───────────────────┼───────────────────────────────────┼────────────────┤
 │ Sprint 4          │ Đồng bộ Lịch (.ics) & Đếm ngược   │ ⏳ Tăng trưởng  │
