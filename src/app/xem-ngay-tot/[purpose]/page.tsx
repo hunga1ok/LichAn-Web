@@ -122,6 +122,56 @@ const PURPOSE_CONFIG: Record<
       },
     ],
   },
+  'cat-toc': {
+    purpose: 'cat-toc',
+    title: 'Xem Ngày Tốt Cắt Tóc & Gội Đầu',
+    description:
+      'Tra cứu ngày lành cắt tóc, gội đầu theo phong thủy cổ truyền. Chọn đúng ngày giúp đón vận may, tinh thần sảng khoái, tóc mọc dày khỏe.',
+    badgeText: 'Đón Vận Hanh Thông',
+    seoTitle: 'Xem Ngày Tốt Cắt Tóc - Ngày Lành Cắt Tóc Gội Đầu Theo Phong Thủy | Lịch An',
+    seoDesc:
+      'Tra cứu ngày tốt cắt tóc, gội đầu chuẩn phong thủy. Chọn ngày Trực Trừ, sao Thiên Đức, tránh Tam Nương, Bạch Hổ. Cắt tóc đúng ngày đón vận may, tóc dày khỏe.',
+    guideTitle: 'Kinh nghiệm chọn ngày cắt tóc theo phong thủy cổ truyền',
+    guideContent: [
+      {
+        heading: '1. Trực Trừ — Ngày vàng cắt tóc',
+        text: 'Trong 12 Trực, Trực Trừ mang ý nghĩa "trừ bỏ cũ, đón nhận mới". Cắt tóc ngày Trực Trừ giúp loại bỏ vận xui, đón sinh khí mới, tinh thần sảng khoái, vận trình hanh thông.',
+      },
+      {
+        heading: '2. Sao tốt chiếu mệnh ngày cắt tóc',
+        text: 'Ngày có sao Thiên Đức, Nguyệt Đức chiếu mệnh đặc biệt tốt cho việc chỉnh trang dung mạo. Sao Tam Hợp, Lục Hợp mang lại hòa khí, giúp tóc mọc dày khỏe, dung mạo tươi tắn.',
+      },
+      {
+        heading: '3. Những ngày tuyệt đối kiêng cắt tóc',
+        text: 'Tránh cắt tóc vào ngày Tam Nương (3, 7, 13, 18, 22, 27 âm), Nguyệt Kỵ (5, 14, 23 âm), và ngày phạm sao Bạch Hổ, Thiên Hình — dễ hao tổn sinh khí, vận xui kéo dài.',
+      },
+    ],
+  },
+  'cat-noc': {
+    purpose: 'cat-noc',
+    title: 'Xem Ngày Tốt Cất Nóc & Đổ Mái',
+    description:
+      'Tra cứu ngày lành cất nóc, đổ mái, thượng lương hoàn thiện phần trên công trình. Khác với động thổ (đào móng), cất nóc tập trung vào sự ổn định, vững bền của mái nhà.',
+    badgeText: 'Thượng Lương Đại Cát',
+    seoTitle: 'Xem Ngày Tốt Cất Nóc Đổ Mái - Chọn Ngày Thượng Lương Chuẩn Phong Thủy | Lịch An',
+    seoDesc:
+      'Tra cứu ngày tốt cất nóc, đổ mái, thượng lương chuẩn Ngọc Hạp Thông Thư. Chọn ngày Trực Thành, Trực Định, sao Sinh Khí, tránh Thổ Phủ, Đại Hao.',
+    guideTitle: 'Quy tắc phong thủy cất nóc thượng lương — mái nhà vững bền',
+    guideContent: [
+      {
+        heading: '1. Cất nóc khác động thổ ở điểm nào?',
+        text: 'Động thổ (đào móng) liên quan đến phần âm (đất), cần Trực Kiến, Trực Bình. Cất nóc (thượng lương) liên quan đến phần dương (trời, mái), cần Trực Thành (thành tựu viên mãn), Trực Định (ổn định bền vững).',
+      },
+      {
+        heading: '2. Cát tinh phù trợ cất nóc',
+        text: 'Sao Sinh Khí mang lại sức sống cho ngôi nhà mới; Thiên Phúc đem phúc lộc lâu dài; Nguyệt Đức, Thiên Đức bảo hộ gia chủ an khang; Thiên Quý mang quý nhân phù trợ.',
+      },
+      {
+        heading: '3. Hung tinh đặc biệt kiêng kỵ khi cất nóc',
+        text: 'Tuyệt đối tránh ngày phạm Thổ Phủ, Địa Phá (xâm phạm thổ thần), Đại Hao (hao tổn tài của), Vãng Vong (công trình dang dở). Các ngày Sát Chủ, Thụ Tử cũng kiêng kỵ tối đa.',
+      },
+    ],
+  },
 };
 
 export async function generateStaticParams() {
@@ -130,6 +180,8 @@ export async function generateStaticParams() {
     { purpose: 'khai-truong' },
     { purpose: 'dong-tho' },
     { purpose: 'xuat-hanh' },
+    { purpose: 'cat-toc' },
+    { purpose: 'cat-noc' },
   ];
 }
 

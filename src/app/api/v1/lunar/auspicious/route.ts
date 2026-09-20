@@ -7,7 +7,7 @@ export async function OPTIONS() {
   return handleOptions();
 }
 
-const VALID_PURPOSES: AuspiciousPurpose[] = ['cuoi-hoi', 'khai-truong', 'dong-tho', 'xuat-hanh'];
+const VALID_PURPOSES: AuspiciousPurpose[] = ['cuoi-hoi', 'khai-truong', 'dong-tho', 'xuat-hanh', 'cat-toc', 'cat-noc'];
 
 export async function GET(request: NextRequest) {
   try {

@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Heart, Building2, Hammer, Compass, ShieldCheck, BookOpen, CheckCircle, ArrowRight, Sparkles } from 'lucide-react';
+import { Heart, Building2, Hammer, Compass, ShieldCheck, BookOpen, CheckCircle, ArrowRight, Sparkles, Scissors, HardHat } from 'lucide-react';
 import { lunarService } from '@/lib/lunar';
 
 export const metadata: Metadata = {
@@ -27,6 +27,8 @@ export default function XemNgayTotHubPage() {
   const businessDays = lunarService.getAuspiciousDays('khai-truong', currentMonth, currentYear).filter(d => d.isAuspicious);
   const buildDays = lunarService.getAuspiciousDays('dong-tho', currentMonth, currentYear).filter(d => d.isAuspicious);
   const travelDays = lunarService.getAuspiciousDays('xuat-hanh', currentMonth, currentYear).filter(d => d.isAuspicious);
+  const haircutDays = lunarService.getAuspiciousDays('cat-toc', currentMonth, currentYear).filter(d => d.isAuspicious);
+  const roofDays = lunarService.getAuspiciousDays('cat-noc', currentMonth, currentYear).filter(d => d.isAuspicious);
 
   const categories = [
     {
@@ -72,12 +74,29 @@ export default function XemNgayTotHubPage() {
       badge: 'Khởi Tạo Vững Bền',
       badgeColor: 'bg-emerald-100 text-emerald-800 border-emerald-200',
       goodCount: buildDays.length,
-      description: 'Chọn ngày khởi công xây dựng, cất nóc, đào móng tạo nền móng vững chắc, bình an trường cửu.',
+      description: 'Chọn ngày khởi công xây dựng, đào móng, đặt đá tạo nền móng vững chắc, bình an trường cửu.',
       criteria: [
         'Ưu tiên Trực Kiến, Trực Định, Trực Bình, Trực Khai',
         'Cát tinh: Sinh Khí, Thiên Phúc, Nguyệt Đức, Thiên Đức',
         'Tuyệt đối kiêng: Thụ Tử, Sát Chủ, Tam Nương, Nguyệt Kỵ',
         'Tránh sao kỵ đất: Thổ Phủ, Địa Phá, Hoang Vu, Vãng Vong',
+      ],
+    },
+    {
+      id: 'cat-noc',
+      title: 'Xem Ngày Cất Nóc',
+      slug: 'cat-noc',
+      icon: HardHat,
+      color: 'text-teal-700 bg-teal-50 border-teal-200',
+      badge: 'Thượng Lương Đại Cát',
+      badgeColor: 'bg-teal-100 text-teal-800 border-teal-200',
+      goodCount: roofDays.length,
+      description: 'Chọn ngày cất nóc, đổ mái, thượng lương hoàn thiện phần mái. Khác động thổ ở phần trên công trình.',
+      criteria: [
+        'Ưu tiên Trực Thành (thành tựu), Trực Định (ổn định), Trực Khai',
+        'Cát tinh: Sinh Khí, Thiên Phúc, Nguyệt Đức, Thiên Quý',
+        'Kiêng kỵ: Sát Chủ, Thụ Tử, Tam Nương, Nguyệt Kỵ',
+        'Tránh sao kỵ: Thổ Phủ, Địa Phá, Đại Hao, Vãng Vong',
       ],
     },
     {
@@ -95,6 +114,23 @@ export default function XemNgayTotHubPage() {
         '6 giờ Lý Thuần Phong: Đại An, Tốc Hỷ, Tiểu Cát',
         'Ưu tiên Trực Khai, Trực Thành, sao Dịch Mã, Thiên Mã',
         'Tránh giờ Xích Khẩu, Lưu Niên, Không Vong và sao Bạch Hổ',
+      ],
+    },
+    {
+      id: 'cat-toc',
+      title: 'Xem Ngày Cắt Tóc',
+      slug: 'cat-toc',
+      icon: Scissors,
+      color: 'text-violet-600 bg-violet-50 border-violet-200',
+      badge: 'Đón Vận Hanh Thông',
+      badgeColor: 'bg-violet-100 text-violet-800 border-violet-200',
+      goodCount: haircutDays.length,
+      description: 'Chọn ngày tốt cắt tóc, gội đầu theo phong thủy giúp đón vận may, tinh thần sảng khoái.',
+      criteria: [
+        'Đặc biệt tốt: Trực Trừ (trừ bỏ xui xẻo, đón cái mới)',
+        'Hợp Trực Mãn, Trực Thành, Trực Khai',
+        'Cát tinh: Thiên Đức, Nguyệt Đức, Thiên Hỷ, Tam Hợp',
+        'Kiêng kỵ: Bạch Hổ, Thiên Hình, Kiếp Sát, ngày Tam Nương',
       ],
     },
   ];
@@ -118,7 +154,7 @@ export default function XemNgayTotHubPage() {
       </div>
 
       {/* 4 Cards Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {categories.map((cat) => {
           const Icon = cat.icon;
           return (

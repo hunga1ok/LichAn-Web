@@ -17,11 +17,12 @@ export default function Header() {
     { name: 'Trang chủ', href: '/' },
     { name: 'Lịch Vạn Niên', href: '/lich-van-nien' },
     { name: 'Xem Ngày Tốt', href: '/xem-ngay-tot' },
+    { name: 'Xuất Hành', href: '/xuat-hanh' },
     { name: 'Xem Tuổi', href: '/xem-tuoi' },
     { name: 'Văn Khấn', href: '/van-khan' },
     { name: 'Phong Thủy', href: '/phong-thuy' },
     { name: 'Tử Vi', href: '/tu-vi' },
-    { name: 'Đồng Bộ Lịch', href: '/dong-bo-lich' },
+    { name: 'Thần Số Học', href: '/than-so-hoc' },
   ];
 
   return (

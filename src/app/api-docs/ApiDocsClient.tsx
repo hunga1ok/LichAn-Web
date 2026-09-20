@@ -70,7 +70,7 @@ const API_ENDPOINTS: ApiEndpoint[] = [
     description: 'Lọc ngày tốt cho 4 mục đích: Cưới hỏi, Khai trương, Động thổ, Xuất hành theo chuẩn Hiệp Kỷ Biện Phương Thư.',
     defaultQuery: 'purpose=cuoi-hoi&month=10&year=2026&onlyGood=true',
     parameters: [
-      { name: 'purpose', type: 'string', required: true, desc: '"cuoi-hoi" | "khai-truong" | "dong-tho" | "xuat-hanh".' },
+      { name: 'purpose', type: 'string', required: true, desc: '"cuoi-hoi" | "khai-truong" | "dong-tho" | "xuat-hanh" | "cat-toc" | "cat-noc".' },
       { name: 'month', type: 'number', required: true, desc: 'Tháng dương lịch (1 - 12).' },
       { name: 'year', type: 'number', required: true, desc: 'Năm dương lịch (1900 - 2100).' },
       { name: 'onlyGood', type: 'boolean', required: false, desc: 'true (chỉ lấy ngày tốt) hoặc false (lấy toàn bộ ngày).' },

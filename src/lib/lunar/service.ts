@@ -339,6 +339,68 @@ export class LunarService implements ILunarService {
           }
           break;
         }
+
+        case 'cat-toc': {
+          // Trực Trừ đặc biệt tốt cho cắt tóc (đã có trong viecNenLam của Trực Trừ)
+          if (truc === 'Trừ') {
+            score += 25;
+            reasons.push('Trực Trừ đại cát cho cắt tóc, tẩy uế, khử trừ xui xẻo');
+          } else if (['Mãn', 'Thành', 'Khai'].includes(truc)) {
+            score += 15;
+            reasons.push(`Trực ${truc} hợp cho cắt tóc, chỉnh trang dung mạo`);
+          } else if (['Phá', 'Bế', 'Nguy'].includes(truc)) {
+            score -= 20;
+            warnings.push(`Trực ${truc} kỵ cắt tóc, dễ hao tổn sinh khí`);
+          }
+
+          const goodHaircutStars = ['Thiên Đức', 'Nguyệt Đức', 'Thiên Hỷ', 'Tam Hợp', 'Lục Hợp'];
+          for (const s of goodHaircutStars) {
+            if (saoTot.includes(s)) {
+              score += 10;
+              reasons.push(`Sao ${s} chiếu mệnh, cắt tóc đón vận may`);
+            }
+          }
+
+          const badHaircutStars = ['Bạch Hổ', 'Thiên Hình', 'Kiếp Sát', 'Ngũ Quỷ'];
+          for (const s of badHaircutStars) {
+            if (saoXau.includes(s)) {
+              score -= 15;
+              warnings.push(`Phạm sao ${s} kỵ cắt tóc, hao tổn vận khí`);
+            }
+          }
+          break;
+        }
+
+        case 'cat-noc': {
+          // Cất nóc (thượng lương) ưu tiên Trực Thành, Định — khác Động Thổ (đào móng)
+          if (['Thành', 'Định', 'Khai'].includes(truc)) {
+            score += 25;
+            reasons.push(`Trực ${truc} đại cát cho cất nóc thượng lương, mái nhà vững bền`);
+          } else if (['Kiến', 'Bình'].includes(truc)) {
+            score += 15;
+            reasons.push(`Trực ${truc} tốt cho xây cất, công trình hanh thông`);
+          } else if (['Phá', 'Bế', 'Nguy'].includes(truc)) {
+            score -= 25;
+            warnings.push(`Trực ${truc} đại kỵ cất nóc, dễ sập đổ, tai nạn`);
+          }
+
+          const goodRoofStars = ['Sinh Khí', 'Thiên Phúc', 'Nguyệt Đức', 'Thiên Đức', 'Thiên Quý'];
+          for (const s of goodRoofStars) {
+            if (saoTot.includes(s)) {
+              score += 12;
+              reasons.push(`Sao ${s} vượng khí, cất nóc bình an trường cửu`);
+            }
+          }
+
+          const badRoofStars = ['Thổ Phủ', 'Địa Phá', 'Thổ Cấm', 'Đại Hao', 'Vãng Vong'];
+          for (const s of badRoofStars) {
+            if (saoXau.includes(s)) {
+              score -= 18;
+              warnings.push(`Phạm sao ${s} kỵ cất nóc đổ mái, dễ hao tổn`);
+            }
+          }
+          break;
+        }
       }
 
       // Giờ hoàng đạo

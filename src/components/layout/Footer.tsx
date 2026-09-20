@@ -14,12 +14,15 @@ export default function Footer() {
             <li><Link href="/" className="hover:text-primary-light">Trang chủ</Link></li>
             <li><Link href="/lich-van-nien" className="hover:text-primary-light">Lịch Vạn Niên</Link></li>
             <li><Link href="/xem-ngay-tot" className="hover:text-primary-light">Xem Ngày Tốt</Link></li>
+            <li><Link href="/xuat-hanh" className="hover:text-primary-light">Hướng Xuất Hành</Link></li>
             <li><Link href="/xem-tuoi" className="hover:text-primary-light">Xem Tuổi Cổ Truyền</Link></li>
             <li><Link href="/van-khan" className="hover:text-primary-light">Kho Văn Khấn</Link></li>
             <li><Link href="/phong-thuy" className="hover:text-primary-light">Phong Thủy</Link></li>
             <li><Link href="/tu-vi" className="hover:text-primary-light">Tử Vi Cá Nhân Hóa</Link></li>
+            <li><Link href="/than-so-hoc" className="hover:text-primary-light">Thần Số Học</Link></li>
             <li><Link href="/dong-bo-lich" className="hover:text-primary-light">Đồng Bộ Lịch (.ICS)</Link></li>
             <li><Link href="/dem-nguoc-tet" className="hover:text-primary-light">Đếm Ngược Tết</Link></li>
+            <li><Link href="/blog" className="hover:text-primary-light">Cẩm Nang Văn Hóa</Link></li>
             <li><Link href="/api-docs" className="hover:text-primary-light">REST API (Mobile App)</Link></li>
           </ul>
         </div>

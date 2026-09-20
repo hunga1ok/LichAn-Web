@@ -69,7 +69,7 @@ export interface CalendarMonthData {
   days: CalendarDaySummary[];
 }
 
-export type AuspiciousPurpose = 'cuoi-hoi' | 'khai-truong' | 'dong-tho' | 'xuat-hanh';
+export type AuspiciousPurpose = 'cuoi-hoi' | 'khai-truong' | 'dong-tho' | 'xuat-hanh' | 'cat-toc' | 'cat-noc';
 
 export interface AuspiciousDayResult {
   solarDay: number;
