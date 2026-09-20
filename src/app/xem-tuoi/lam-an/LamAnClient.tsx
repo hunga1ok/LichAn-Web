@@ -254,6 +254,7 @@ export default function LamAnClient() {
             <button
               type="button"
               onClick={handleCopyLink}
+              aria-label="Sao chép liên kết kết quả xem tuổi làm ăn"
               className="inline-flex items-center gap-1 text-xs font-medium text-blue-800 hover:text-blue-950 bg-blue-50 hover:bg-blue-100/80 px-2.5 py-1 rounded-full border border-blue-200 transition-colors cursor-pointer"
               title="Sao chép liên kết có chứa kết quả này"
             >
@@ -319,7 +320,7 @@ export default function LamAnClient() {
 
           <div className="flex items-center gap-3 bg-black/30 backdrop-blur px-5 py-3 rounded-2xl border border-white/20">
             <div className="text-right">
-              <div className="text-[11px] uppercase tracking-wider font-bold text-blue-300">Điểm Tương Hợp</div>
+              <div className="text-xs uppercase tracking-wider font-bold text-blue-300">Điểm Tương Hợp</div>
               <div className="text-xs font-semibold text-stone-200">{conclusion.levelLabel}</div>
             </div>
             <div className="text-4xl font-black text-amber-400 font-mono">

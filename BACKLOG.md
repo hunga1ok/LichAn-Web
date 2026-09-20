@@ -58,10 +58,10 @@
 │ Sprint 10         │ UX Deep Linking & Polish: URL      │ ✅ Hoàn thành  │
 │                   │ State Sync & Tương tác nhất quán   │                │
 ├───────────────────┼───────────────────────────────────┼────────────────┤
-│ Sprint 11         │ Accessibility & Micro-Polish:      │ ⏳ Kế tiếp     │
+│ Sprint 11         │ Accessibility & Micro-Polish:      │ ✅ Hoàn thành  │
 │                   │ Contrast, Font Size, ARIA Labels   │                │
 ├───────────────────┼───────────────────────────────────┼────────────────┤
-│ Sprint 12         │ PWA Offline & Thông báo đẩy       │ 📋 Backlog     │
+│ Sprint 12         │ PWA Offline & Thông báo đẩy       │ ⏳ Kế tiếp     │
 │                   │ nhắc nhở Mùng 1, Ngày Rằm         │                │
 └───────────────────┴───────────────────────────────────┴────────────────┘
 ```
@@ -180,23 +180,24 @@
 
 ---
 
-### ♿ SPRINT 11: ACCESSIBILITY & MICRO-POLISH (A11Y)
+### ✅ SPRINT 11: ACCESSIBILITY & MICRO-POLISH (A11Y) (ĐÃ XONG 100%)
 > **Mục tiêu**: Nâng chuẩn trải nghiệm cho đối tượng người lớn tuổi (40-65+) — đối tượng chính của Lịch An — và tuân thủ WCAG AA.
 
 #### User Stories:
-- **Story 11.1 — Nâng Cỡ Chữ Tối Thiểu & Tăng Contrast**:
-  - Nâng `text-[11px]` → `text-xs` (12px) cho nội dung người dùng cần đọc (giờ hoàng đạo, sắm lễ, mô tả) trên ~14 file.
-  - Giữ nguyên `text-[11px]` cho label kỹ thuật API docs (chấp nhận được vì đối tượng là developer).
-  - Nâng chữ phụ `text-stone-400`/`text-stone-500` → `text-stone-600` trên nền sáng để đạt contrast ratio ≥ 4.5:1.
+- [x] **Story 11.1 — Nâng Cỡ Chữ Tối Thiểu & Tăng Contrast**:
+  - Nâng `text-[11px]` → `text-xs` (12px) cho nội dung người dùng đọc (giờ hoàng đạo, sắm lễ, mô tả) trên toàn bộ codebase (~14 file).
+  - Giữ nguyên `text-[11px]` cho label kỹ thuật API docs (theo chuẩn developer).
+  - Tăng chữ phụ `text-stone-400`/`text-stone-500` → `text-stone-600` trên nền sáng để đạt contrast ratio ≥ 4.5:1.
 
-- **Story 11.2 — Bổ Sung ARIA Labels & Focus Management**:
-  - Thêm `aria-label` cho icon button (hamburger menu, nút chuyển tháng/năm, nút chuyển ngày).
-  - Focus trap cho mobile menu drawer.
-  - Đảm bảo tab focus tuần tự hợp lý trên Tabs, Select, Input mới.
+- [x] **Story 11.2 — Bổ Sung ARIA Labels & Focus Management**:
+  - Thêm `aria-label` cho toàn bộ icon button (hamburger menu, nút chuyển tháng/năm, nút chuyển ngày, nút copy/chia sẻ, nút đóng menu).
+  - Thêm `aria-expanded`, `aria-haspopup`, `role="dialog"` cho mobile menu drawer và dropdown tiện ích.
+  - Thêm `aria-pressed` cho các nút toggle chế độ xem, bộ lọc ngày tốt, chọn giới tính và tab điều hướng.
+  - Khai báo `aria-label` chi tiết cho từng ô ngày trên lưới Lịch Vạn Niên (ngày dương, ngày âm, ngày lễ, hôm nay).
 
-- **Story 11.3 — Responsive Fine-Tuning Cho Màn Hình Nhỏ (360px)**:
-  - Kiểm tra form 3 cột trên viewport 360px, sửa chữ bị ép sát viền.
-  - Trên màn hình < 375px: chuyển form Ngày-Tháng-Năm thành `grid-cols-1` hoặc `grid-cols-2 + 1`.
+- [x] **Story 11.3 — Responsive Fine-Tuning Cho Màn Hình Nhỏ (360px)**:
+  - Tinh chỉnh form Ngày-Tháng-Năm tại `DoiNgayClient.tsx` thành `grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-3.5` không bị co cụm trên viewport 360px.
+  - Tối ưu hiển thị chấm đỏ ngày lễ mobile và padding trên Lịch Vạn Niên.
 
 ---
 

@@ -138,7 +138,7 @@ export default function XemTuoiHubPage() {
                     <div className={`p-3 rounded-xl bg-white shadow-2xs ${item.iconColor}`}>
                       <Icon className="w-6 h-6" />
                     </div>
-                    <span className={`text-[11px] font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider ${item.badgeColor}`}>
+                    <span className={`text-xs font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider ${item.badgeColor}`}>
                       {item.badge}
                     </span>
                   </div>

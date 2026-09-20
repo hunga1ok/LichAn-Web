@@ -116,6 +116,7 @@ export default function TuViClient() {
           <button
             type="button"
             onClick={() => setActiveTab('canhan')}
+            aria-pressed={activeTab === 'canhan'}
             className={`flex items-center gap-2 px-5 py-2.5 rounded-xl font-bold text-sm transition-all ${
               activeTab === 'canhan'
                 ? 'bg-white text-amber-900 shadow-xs'
@@ -128,6 +129,7 @@ export default function TuViClient() {
           <button
             type="button"
             onClick={() => setActiveTab('congiap')}
+            aria-pressed={activeTab === 'congiap'}
             className={`flex items-center gap-2 px-5 py-2.5 rounded-xl font-bold text-sm transition-all ${
               activeTab === 'congiap'
                 ? 'bg-white text-amber-900 shadow-xs'
@@ -178,6 +180,8 @@ export default function TuViClient() {
                   <button
                     type="button"
                     onClick={() => setGender('nam')}
+                    aria-pressed={gender === 'nam'}
+                    aria-label="Chọn phái Nam"
                     className={`py-3 rounded-xl font-bold text-sm transition-all border ${
                       gender === 'nam'
                         ? 'bg-amber-600 border-amber-600 text-white shadow-xs'
@@ -189,6 +193,8 @@ export default function TuViClient() {
                   <button
                     type="button"
                     onClick={() => setGender('nu')}
+                    aria-pressed={gender === 'nu'}
+                    aria-label="Chọn phái Nữ"
                     className={`py-3 rounded-xl font-bold text-sm transition-all border ${
                       gender === 'nu'
                         ? 'bg-amber-600 border-amber-600 text-white shadow-xs'
@@ -230,13 +236,13 @@ export default function TuViClient() {
                 <button
                   type="button"
                   onClick={handleCopyLink}
-                  className="inline-flex items-center gap-1 text-xs font-medium text-amber-800 hover:text-amber-950 bg-amber-50 hover:bg-amber-100/80 px-2.5 py-1 rounded-full border border-amber-200 transition-colors cursor-pointer"
-                  title="Sao chép liên kết lá số này"
+                  aria-label="Sao chép liên kết lá số tử vi"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-4 py-3 rounded-xl border border-amber-300 bg-amber-50 hover:bg-amber-100 text-amber-900 font-semibold text-xs transition-colors cursor-pointer"
                 >
                   {copied ? (
                     <>
-                      <Check className="w-3.5 h-3.5 text-emerald-600" />
-                      <span className="text-emerald-700 font-semibold">Đã chép link!</span>
+                      <Check className="w-3.5 h-3.5 text-emerald-700" />
+                      <span className="text-emerald-800 font-bold">Đã sao chép link!</span>
                     </>
                   ) : (
                     <>
@@ -280,6 +286,7 @@ export default function TuViClient() {
                 <button
                   type="button"
                   onClick={handleCopyLink}
+                  aria-label="Sao chép liên kết lá số tử vi"
                   className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-amber-950/70 hover:bg-amber-900 text-amber-200 border border-amber-500/30 text-xs font-bold transition-all cursor-pointer"
                 >
                   <Share2 className="w-3.5 h-3.5" />
@@ -350,7 +357,7 @@ export default function TuViClient() {
                 <div className="text-xs text-amber-200 mt-1 font-medium">
                   {report.cungPhi.nhomMenh}
                 </div>
-                <div className="text-[11px] text-stone-300 mt-1">
+                <div className="text-xs text-stone-200 mt-1">
                   Sinh Khí: {report.cungPhi.chiTietHuong.find(h => h.loai === 'Sinh Khí')?.huong}
                 </div>
               </div>

@@ -79,6 +79,7 @@ export default function LichVanNienClient() {
                   <button
                     type="button"
                     onClick={handleCopyLink}
+                    aria-label="Sao chép liên kết tháng này"
                     className="inline-flex items-center gap-1 text-xs font-medium text-amber-800 hover:text-amber-950 bg-amber-100/80 hover:bg-amber-200 px-2 py-0.5 rounded-full border border-amber-300 transition-colors cursor-pointer"
                     title="Sao chép liên kết tháng này"
                   >
@@ -132,7 +133,7 @@ export default function LichVanNienClient() {
               </div>
 
               <div className="flex items-center gap-1.5">
-                <Button variant="outline" size="sm" onClick={prevMonth} className="h-9 gap-1 bg-white text-xs">
+                <Button variant="outline" size="sm" onClick={prevMonth} aria-label="Xem tháng trước" className="h-9 gap-1 bg-white text-xs">
                   <ChevronLeft className="w-3.5 h-3.5" /> <span className="hidden sm:inline">Tháng</span> trước
                 </Button>
                 <Button
@@ -142,11 +143,12 @@ export default function LichVanNienClient() {
                     setYear(today.getFullYear());
                     setMonth(today.getMonth() + 1);
                   }}
+                  aria-label="Trở về tháng hiện tại"
                   className="h-9 bg-white text-xs font-semibold text-primary"
                 >
                   Hôm nay
                 </Button>
-                <Button size="sm" onClick={nextMonth} className="h-9 gap-1 bg-primary hover:bg-primary-dark text-white text-xs">
+                <Button size="sm" onClick={nextMonth} aria-label="Xem tháng sau" className="h-9 gap-1 bg-primary hover:bg-primary-dark text-white text-xs">
                   <span className="hidden sm:inline">Tháng</span> sau <ChevronRight className="w-3.5 h-3.5" />
                 </Button>
               </div>
@@ -160,7 +162,9 @@ export default function LichVanNienClient() {
             {weekDays.map((d, idx) => (
               <div
                 key={d}
-                className={`py-2 rounded-lg bg-stone-50 ${idx === 6 ? 'text-red-600 font-extrabold' : ''}`}
+                className={`py-2 rounded-lg ${
+                  idx === 6 ? 'text-danger bg-red-50/50' : 'bg-stone-100/60 text-stone-700'
+                }`}
               >
                 {d}
               </div>
@@ -171,7 +175,10 @@ export default function LichVanNienClient() {
           <div className="grid grid-cols-7 gap-1 sm:gap-2">
             {/* Các ô trống trước ngày mùng 1 */}
             {Array.from({ length: monthData.firstDayOfWeek }).map((_, idx) => (
-              <div key={`empty-${idx}`} className="min-h-[72px] sm:min-h-[90px] rounded-xl bg-stone-50/50" />
+              <div
+                key={`empty-${idx}`}
+                className="min-h-[72px] sm:min-h-[90px] rounded-xl border border-dashed border-stone-200/50 bg-stone-50/30"
+              />
             ))}
 
             {/* Các ngày trong tháng */}
@@ -183,6 +190,7 @@ export default function LichVanNienClient() {
                 <Link
                   key={day.solarDay}
                   href={`/xem-ngay/${urlDate}`}
+                  aria-label={`Ngày ${day.solarDay} tháng ${month} năm ${year}, âm lịch ngày ${day.lunarDay} tháng ${day.lunarMonth}${day.holiday ? ', ' + day.holiday : ''}${day.isToday ? ', hôm nay' : ''}`}
                   className={`group relative flex flex-col p-1.5 sm:p-2.5 rounded-xl border transition-all hover:border-primary hover:shadow-md active:scale-95 min-h-[72px] sm:min-h-[90px] cursor-pointer touch-manipulation select-none ${
                     day.isToday
                       ? 'border-2 border-primary bg-amber-50/70 shadow-xs ring-2 ring-primary/20'
@@ -216,12 +224,12 @@ export default function LichVanNienClient() {
 
                   {/* Ngày âm & tháng âm */}
                   <div className="mt-auto flex items-baseline justify-between text-right">
-                    <span className="text-[10px] text-stone-400 hidden sm:inline truncate">
+                    <span className="text-[10px] text-stone-500 hidden sm:inline truncate">
                       {day.canChiDay.split(' ')[1]}
                     </span>
                     <span
                       className={`text-xs sm:text-sm font-bold ${
-                        isRamOrSoc ? 'text-primary font-black' : 'text-stone-500'
+                        isRamOrSoc ? 'text-primary font-black' : 'text-stone-600'
                       }`}
                     >
                       {day.lunarDay === 1 ? `${day.lunarDay}/${day.lunarMonth}` : day.lunarDay}

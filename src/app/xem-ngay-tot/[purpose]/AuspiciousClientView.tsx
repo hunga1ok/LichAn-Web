@@ -152,7 +152,10 @@ export default function AuspiciousClientView({
               Tìm thấy <strong className="text-emerald-700 font-bold">{auspiciousCount}</strong> ngày hoàng đạo
             </span>
             <button
+              type="button"
               onClick={() => setOnlyAuspicious(!onlyAuspicious)}
+              aria-pressed={onlyAuspicious}
+              aria-label={onlyAuspicious ? 'Đang lọc chỉ hiện ngày tốt, nhấn để hiện tất cả' : 'Đang hiện tất cả, nhấn để chỉ hiện ngày tốt'}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer border ${
                 onlyAuspicious
                   ? 'bg-amber-800 text-white border-amber-900 shadow-xs'
@@ -167,14 +170,17 @@ export default function AuspiciousClientView({
 
         {/* Quick Month Quick-pick chips */}
         <div className="px-4 py-2.5 bg-stone-50/70 text-xs flex items-center gap-2 overflow-x-auto">
-          <span className="text-stone-500 shrink-0 font-medium">Chọn nhanh:</span>
+          <span className="text-stone-600 shrink-0 font-medium">Chọn nhanh:</span>
           {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((m) => (
             <button
               key={m}
+              type="button"
               onClick={() => {
                 setSelectedMonth(m);
                 setExpandedXuatHanhDay(null);
               }}
+              aria-label={`Xem tháng ${m}`}
+              aria-pressed={selectedMonth === m}
               className={`px-2.5 py-1 rounded text-xs font-medium shrink-0 cursor-pointer transition-colors ${
                 selectedMonth === m
                   ? 'bg-amber-800 text-white'
@@ -345,7 +351,9 @@ export default function AuspiciousClientView({
                           </span>
                         </div>
                         <button
+                          type="button"
                           onClick={() => setExpandedXuatHanhDay(isExpanded ? null : day.solarDay)}
+                          aria-expanded={isExpanded}
                           className="text-xs font-semibold text-blue-700 hover:text-blue-900 underline cursor-pointer self-start sm:self-auto"
                         >
                           {isExpanded ? 'Ẩn 6 giờ Lý Thuần Phong ▲' : 'Xem 6 giờ Lý Thuần Phong ▼'}
@@ -372,7 +380,7 @@ export default function AuspiciousClientView({
                                   {g.tenGio} ({g.isGood ? 'Cát' : 'Hung'})
                                 </span>
                               </div>
-                              <p className="text-[11px] leading-snug opacity-90">{g.yNghia}</p>
+                              <p className="text-xs leading-snug opacity-90">{g.yNghia}</p>
                             </div>
                           ))}
                         </div>

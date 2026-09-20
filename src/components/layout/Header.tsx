@@ -120,6 +120,9 @@ export default function Header() {
               <button
                 type="button"
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                aria-expanded={isDropdownOpen}
+                aria-haspopup="true"
+                aria-label="Mở menu tiện ích tra cứu"
                 className={`flex items-center gap-1 px-3 py-1.5 rounded-lg transition-colors duration-150 cursor-pointer ${
                   isUtilityActive || isDropdownOpen
                     ? 'text-primary bg-amber-50/80 font-bold'
@@ -133,7 +136,7 @@ export default function Header() {
               {/* Dropdown Menu Box */}
               {isDropdownOpen && (
                 <div className="absolute right-0 mt-2 w-72 bg-white rounded-2xl shadow-xl border border-amber-900/10 p-2 z-50 animate-in fade-in-50 slide-in-from-top-2 duration-150">
-                  <div className="text-[10px] font-bold uppercase tracking-wider text-stone-400 px-3 py-1.5">
+                  <div className="text-xs font-bold uppercase tracking-wider text-stone-500 px-3 py-1.5">
                     Công Cụ Tra Cứu
                   </div>
                   <div className="space-y-1">
@@ -156,7 +159,7 @@ export default function Header() {
                           </div>
                           <div>
                             <div className="text-xs font-bold leading-tight">{item.name}</div>
-                            <div className="text-[11px] text-stone-400 leading-normal mt-0.5">{item.desc}</div>
+                            <div className="text-xs text-stone-500 leading-normal mt-0.5">{item.desc}</div>
                           </div>
                         </Link>
                       );
@@ -169,9 +172,11 @@ export default function Header() {
 
           {/* Mobile Menu Toggle Button */}
           <button
+            type="button"
             className="lg:hidden p-2 text-stone-700 hover:text-primary rounded-lg transition-colors cursor-pointer"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            aria-label={isMobileMenuOpen ? 'Đóng menu' : 'Mở menu'}
+            aria-expanded={isMobileMenuOpen}
+            aria-label={isMobileMenuOpen ? 'Đóng menu điều hướng' : 'Mở menu điều hướng'}
           >
             {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
@@ -185,13 +190,18 @@ export default function Header() {
           <div
             className="fixed inset-0 top-16 bg-black/40 backdrop-blur-xs z-40 lg:hidden animate-in fade-in duration-200"
             onClick={() => setIsMobileMenuOpen(false)}
+            aria-hidden="true"
           />
 
           {/* Mobile Drawer Panel */}
-          <nav className="fixed inset-x-0 top-16 max-h-[calc(100vh-4rem)] overflow-y-auto bg-white border-b border-stone-200 shadow-2xl p-5 z-50 lg:hidden space-y-6 animate-in slide-in-from-top duration-200">
+          <nav
+            role="dialog"
+            aria-label="Menu điều hướng di động"
+            className="fixed inset-x-0 top-16 max-h-[calc(100vh-4rem)] overflow-y-auto bg-white border-b border-stone-200 shadow-2xl p-5 z-50 lg:hidden space-y-6 animate-in slide-in-from-top duration-200"
+          >
             {/* Nhóm mục chính */}
             <div className="space-y-1">
-              <div className="text-[11px] font-bold uppercase tracking-wider text-amber-900/60 px-3 pb-1">
+              <div className="text-xs font-bold uppercase tracking-wider text-stone-600 px-3 pb-1">
                 Chuyên Mục Chính
               </div>
               <Link
@@ -224,7 +234,7 @@ export default function Header() {
 
             {/* Nhóm tiện ích mở rộng */}
             <div className="space-y-1 pt-4 border-t border-stone-100">
-              <div className="text-[11px] font-bold uppercase tracking-wider text-amber-900/60 px-3 pb-1">
+              <div className="text-xs font-bold uppercase tracking-wider text-stone-600 px-3 pb-1">
                 Tiện Ích & Tra Cứu
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">

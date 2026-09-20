@@ -188,6 +188,7 @@ export default function XongDatClient() {
             <button
               type="button"
               onClick={handleCopyLink}
+              aria-label="Sao chép liên kết kết quả xem tuổi xông đất"
               className="inline-flex items-center gap-1 text-xs font-medium text-amber-800 hover:text-amber-950 bg-amber-50 hover:bg-amber-100/80 px-2.5 py-1 rounded-full border border-amber-200 transition-colors cursor-pointer"
               title="Sao chép liên kết có chứa kết quả này"
             >

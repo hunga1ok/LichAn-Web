@@ -232,9 +232,9 @@ export default function XuatHanhClient() {
                   </span>
                 </div>
                 <div className="font-bold text-sm text-stone-800">{gio.canhGio}</div>
-                <div className="text-[11px] text-stone-500 mt-0.5">{gio.timeRange}</div>
+                <div className="text-xs text-stone-600 mt-0.5">{gio.timeRange}</div>
                 <div
-                  className={`text-[10px] mt-1.5 leading-snug ${gio.isGood ? 'text-emerald-600' : 'text-stone-400'}`}
+                  className={`text-[10px] mt-1.5 leading-snug ${gio.isGood ? 'text-emerald-600' : 'text-stone-500'}`}
                 >
                   {gio.yNghia}
                 </div>
@@ -259,14 +259,14 @@ export default function XuatHanhClient() {
                 className={`p-2.5 rounded-xl text-center border transition-all ${
                   gio.isHoangDao
                     ? 'bg-emerald-50/80 border-emerald-200 text-emerald-900 shadow-xs'
-                    : 'bg-stone-50 border-stone-100 text-stone-400'
+                    : 'bg-stone-50 border-stone-100 text-stone-600'
                 }`}
               >
                 <div className="flex items-center justify-center gap-1 font-semibold text-sm">
                   {gio.name}
                   {gio.isHoangDao && <span className="text-xs">✨</span>}
                 </div>
-                <div className="text-[11px] opacity-80 mt-0.5">{gio.time}</div>
+                <div className="text-xs font-medium opacity-90 mt-0.5">{gio.time}</div>
               </div>
             ))}
           </div>

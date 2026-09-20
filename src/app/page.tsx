@@ -125,14 +125,14 @@ export default function HomePage() {
                     className={`p-2.5 rounded-xl text-center border transition-all ${
                       gio.isHoangDao
                         ? 'bg-emerald-50/80 border-emerald-200 text-emerald-900 shadow-xs'
-                        : 'bg-stone-50 border-stone-100 text-stone-400'
+                        : 'bg-stone-50 border-stone-100 text-stone-600'
                     }`}
                   >
                     <div className="flex items-center justify-center gap-1 font-semibold text-sm">
                       {gio.name}
                       {gio.isHoangDao && <span className="text-xs">✨</span>}
                     </div>
-                    <div className="text-[11px] opacity-80 mt-0.5">{gio.time}</div>
+                    <div className="text-xs font-medium opacity-90 mt-0.5">{gio.time}</div>
                   </div>
                 ))}
               </div>
@@ -262,7 +262,7 @@ export default function HomePage() {
                     } ${!isToday && isSun ? 'text-red-600 font-semibold' : ''}`}
                   >
                     <span className="text-xs leading-none">{d}</span>
-                    <span className={`text-[9px] mt-0.5 leading-none ${isToday ? 'text-white/80' : 'text-stone-400'}`}>
+                    <span className={`text-[10px] mt-0.5 leading-none font-medium ${isToday ? 'text-white/80' : 'text-stone-600'}`}>
                       {lunar.lunarDate.day}
                     </span>
                   </Link>
@@ -270,7 +270,7 @@ export default function HomePage() {
               }
               return (
                 <div>
-                  <div className="grid grid-cols-7 gap-1 mb-2 text-center text-[11px] font-bold text-stone-400 uppercase">
+                  <div className="grid grid-cols-7 gap-1 mb-2 text-center text-xs font-bold text-stone-600 uppercase">
                     {['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN'].map((d, i) => (
                       <div key={d} className={i === 6 ? 'text-red-500' : ''}>{d}</div>
                     ))}

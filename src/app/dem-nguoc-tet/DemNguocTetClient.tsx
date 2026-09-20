@@ -201,6 +201,7 @@ export default function DemNguocTetClient({ tetInfo }: DemNguocTetClientProps) {
             <button
               type="button"
               onClick={handleCopyLink}
+              aria-label="Sao chép liên kết đếm ngược Tết"
               className="flex items-center gap-2 px-4 py-2.5 bg-amber-500 hover:bg-amber-600 text-amber-950 font-bold rounded-xl transition-all shadow-md"
             >
               {copiedLink ? <Check className="w-4 h-4 text-amber-950" /> : <Copy className="w-4 h-4" />}
@@ -332,7 +333,8 @@ export default function DemNguocTetClient({ tetInfo }: DemNguocTetClientProps) {
                 <button
                   type="button"
                   onClick={() => handleCopyWish(wish, idx)}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-amber-100 hover:bg-amber-200 text-amber-900 text-xs font-bold transition-colors"
+                  aria-label="Sao chép câu chúc Tết này"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-amber-100 hover:bg-amber-200 text-amber-900 text-xs font-bold transition-colors cursor-pointer"
                 >
                   {copiedWishIdx === idx ? (
                     <>

@@ -258,14 +258,14 @@ export default async function XemNgayDetailPage({ params }: Props) {
                   className={`p-3 rounded-xl text-center border transition-all ${
                     gio.isHoangDao
                       ? 'bg-emerald-50/80 border-emerald-200 text-emerald-900 shadow-xs'
-                      : 'bg-stone-50 border-stone-100 text-stone-400'
+                      : 'bg-stone-50 border-stone-100 text-stone-600'
                   }`}
                 >
                   <div className="flex items-center justify-center gap-1 font-bold text-sm">
                     {gio.name}
                     {gio.isHoangDao && <span className="text-xs">✨</span>}
                   </div>
-                  <div className="text-[11px] opacity-80 mt-0.5">{gio.time}</div>
+                  <div className="text-xs font-medium opacity-90 mt-0.5">{gio.time}</div>
                 </div>
               ))}
             </div>

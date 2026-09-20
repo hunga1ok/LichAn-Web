@@ -211,7 +211,7 @@ export default function VanKhanHubClient({ initialItems }: Props) {
                       <span className="font-bold text-amber-950 shrink-0">Cúng:</span>
                       <span className="truncate">{item.target}</span>
                     </div>
-                    <div className="flex items-center gap-1 text-[11px] text-stone-500">
+                    <div className="flex items-center gap-1 text-xs text-stone-600">
                       <Clock className="w-3 h-3 text-amber-700 shrink-0" />
                       <span className="truncate">{item.timeRecommended}</span>
                     </div>
@@ -219,8 +219,8 @@ export default function VanKhanHubClient({ initialItems }: Props) {
 
                   {/* Sắm lễ preview */}
                   <div className="space-y-1">
-                    <span className="font-semibold text-stone-600 text-[11px]">Sắm lễ gồm:</span>
-                    <ul className="text-[11px] text-stone-500 space-y-0.5 pl-3 list-disc">
+                    <span className="font-semibold text-stone-700 text-xs">Sắm lễ gồm:</span>
+                    <ul className="text-xs text-stone-600 space-y-0.5 pl-3 list-disc">
                       {item.samLe.slice(0, 2).map((s, idx) => (
                         <li key={idx} className="truncate">{s}</li>
                       ))}
@@ -234,7 +234,7 @@ export default function VanKhanHubClient({ initialItems }: Props) {
 
                   {/* Link action */}
                   <div className="pt-2 border-t border-stone-100 flex items-center justify-between">
-                    <span className="text-[11px] text-stone-400">Chuẩn cổ truyền</span>
+                    <span className="text-xs text-stone-500">Chuẩn cổ truyền</span>
                     <Link 
                       href={`/van-khan/${item.slug}`} 
                       className="font-bold text-xs text-amber-800 hover:text-amber-950 flex items-center gap-1 hover:underline"

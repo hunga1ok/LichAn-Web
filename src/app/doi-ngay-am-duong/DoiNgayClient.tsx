@@ -144,7 +144,7 @@ export default function DoiNgayClient() {
 
         <CardContent className="p-6">
           <form onSubmit={handleConvert} className="space-y-5">
-            <div className="grid grid-cols-3 gap-3.5">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-3.5">
               <div>
                 <label className="block text-xs font-semibold text-stone-600 mb-1.5">
                   Ngày {mode === 'solar2lunar' ? 'Dương' : 'Âm'}
@@ -152,6 +152,7 @@ export default function DoiNgayClient() {
                 <Select
                   value={day}
                   onChange={(e) => setDay(Number(e.target.value))}
+                  aria-label={`Chọn ngày ${mode === 'solar2lunar' ? 'dương' : 'âm'}`}
                 >
                   {Array.from({ length: 31 }, (_, i) => i + 1).map((d) => (
                     <option key={d} value={d}>Ngày {d}</option>
@@ -166,6 +167,7 @@ export default function DoiNgayClient() {
                 <Select
                   value={month}
                   onChange={(e) => setMonth(Number(e.target.value))}
+                  aria-label={`Chọn tháng ${mode === 'solar2lunar' ? 'dương' : 'âm'}`}
                 >
                   {Array.from({ length: 12 }, (_, i) => i + 1).map((m) => (
                     <option key={m} value={m}>Tháng {m}</option>
@@ -179,6 +181,7 @@ export default function DoiNgayClient() {
                   type="number"
                   value={year}
                   onChange={(e) => setYear(Number(e.target.value))}
+                  aria-label="Nhập năm"
                   min={1800}
                   max={2199}
                 />
@@ -213,6 +216,7 @@ export default function DoiNgayClient() {
                 type="button"
                 variant="outline"
                 onClick={handleResetToday}
+                aria-label="Đặt lại ngày hôm nay"
                 className="h-11 px-4 gap-1.5 text-xs text-stone-600 border-stone-300 hover:bg-stone-50"
               >
                 <RotateCcw className="w-3.5 h-3.5" /> Hôm nay
@@ -227,12 +231,13 @@ export default function DoiNgayClient() {
           {result && (
             <div className="mt-8 pt-6 border-t border-stone-100">
               <div className="flex items-center justify-center gap-3 mb-3">
-                <h3 className="text-xs font-bold uppercase tracking-wider text-stone-400">
+                <h3 className="text-xs font-bold uppercase tracking-wider text-stone-600">
                   Kết Quả Chuyển Đổi
                 </h3>
                 <button
                   type="button"
                   onClick={handleCopyLink}
+                  aria-label="Sao chép liên kết kết quả đổi ngày"
                   className="inline-flex items-center gap-1 text-xs font-medium text-amber-800 hover:text-amber-950 bg-amber-50 hover:bg-amber-100/80 px-2 py-0.5 rounded-full border border-amber-200 transition-colors cursor-pointer"
                   title="Sao chép liên kết có chứa kết quả ngày này"
                 >

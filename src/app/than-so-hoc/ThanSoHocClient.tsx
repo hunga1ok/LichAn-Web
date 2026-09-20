@@ -138,6 +138,7 @@ export default function ThanSoHocClient() {
                   <button
                     type="button"
                     onClick={handleCopyLink}
+                    aria-label="Sao chép liên kết kết quả thần số học"
                     className="inline-flex items-center gap-1 text-xs font-medium text-amber-900 hover:text-amber-950 bg-amber-200/60 hover:bg-amber-200 px-2.5 py-0.5 rounded-full border border-amber-300 transition-colors cursor-pointer"
                     title="Sao chép liên kết có chứa kết quả ngày sinh này"
                   >

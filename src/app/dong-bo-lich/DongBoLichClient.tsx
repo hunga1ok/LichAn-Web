@@ -102,6 +102,8 @@ export default function DongBoLichClient({ initialEvents, currentYear }: DongBoL
             <button
               type="button"
               onClick={() => setEnableReminder(!enableReminder)}
+              aria-pressed={enableReminder}
+              aria-label="Bật hoặc tắt thông báo nhắc nhở 20h tối hôm trước"
               className={`w-full flex items-center justify-between px-4 py-3 rounded-xl border transition-all text-sm font-medium ${
                 enableReminder
                   ? 'bg-amber-100 border-amber-300 text-amber-900'
@@ -133,7 +135,7 @@ export default function DongBoLichClient({ initialEvents, currentYear }: DongBoL
               <Apple className="w-5 h-5 transition-transform group-hover:scale-110" />
               <div className="text-left">
                 <div className="text-sm">Apple Calendar</div>
-                <div className="text-[11px] text-gray-300 font-normal">iPhone, iPad, Mac (1-Click)</div>
+                <div className="text-xs text-stone-200 font-normal">iPhone, iPad, Mac (1-Click)</div>
               </div>
             </a>
 
@@ -147,7 +149,7 @@ export default function DongBoLichClient({ initialEvents, currentYear }: DongBoL
               <Calendar className="w-5 h-5 transition-transform group-hover:scale-110" />
               <div className="text-left">
                 <div className="text-sm">Google Calendar</div>
-                <div className="text-[11px] text-blue-100 font-normal">Android & Máy tính Web</div>
+                <div className="text-xs text-blue-100 font-normal">Android & Máy tính Web</div>
               </div>
               <ExternalLink className="w-4 h-4 ml-auto text-blue-200" />
             </a>
@@ -161,7 +163,7 @@ export default function DongBoLichClient({ initialEvents, currentYear }: DongBoL
               <Download className="w-5 h-5 transition-transform group-hover:scale-110" />
               <div className="text-left">
                 <div className="text-sm">Tải file .ICS</div>
-                <div className="text-[11px] text-amber-200 font-normal">Cho Outlook hoặc ứng dụng khác</div>
+                <div className="text-xs text-amber-200 font-normal">Cho Outlook hoặc ứng dụng khác</div>
               </div>
             </a>
           </div>
@@ -181,6 +183,7 @@ export default function DongBoLichClient({ initialEvents, currentYear }: DongBoL
             <button
               type="button"
               onClick={handleCopyLink}
+              aria-label="Sao chép đường dẫn Webcal"
               className="w-full sm:w-auto shrink-0 flex items-center justify-center gap-1.5 px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold rounded-lg transition-colors shadow-xs"
             >
               {copied ? (

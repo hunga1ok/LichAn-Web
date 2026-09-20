@@ -18,6 +18,7 @@ import {
 import { evaluateSinhCon, SinhConReport } from '@/lib/xem-tuoi';
 import { getAllHoaGiapList, HoaGiapData } from '@/lib/tu-vi/hoa-giap';
 import { Select } from '@/components/ui/select';
+import { Button } from '@/components/ui/button';
 
 const QUICK_PARENTS = [
   { label: 'Bố Canh Ngọ (1990) — Mẹ Giáp Tuất (1994)', bo: 1990, me: 1994 },
@@ -230,6 +231,7 @@ export default function SinhConClient() {
             <button
               type="button"
               onClick={handleCopyLink}
+              aria-label="Sao chép liên kết kết quả xem tuổi sinh con"
               className="inline-flex items-center gap-1 text-xs font-medium text-emerald-800 hover:text-emerald-950 bg-emerald-50 hover:bg-emerald-100/80 px-2.5 py-1 rounded-full border border-emerald-200 transition-colors cursor-pointer"
               title="Sao chép liên kết có chứa kết quả này"
             >
@@ -247,46 +249,30 @@ export default function SinhConClient() {
             </button>
           </div>
 
-          <button
-            type="button"
+          <Button
+            type="submit"
             onClick={handleSearch}
-            className="w-full sm:w-auto px-7 py-3 rounded-xl bg-gradient-to-r from-emerald-700 to-teal-800 hover:from-emerald-800 hover:to-teal-900 text-white font-bold text-sm shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer"
+            className="w-full sm:w-auto px-8 h-12 bg-gradient-to-r from-emerald-600 to-teal-700 hover:from-emerald-700 hover:to-teal-800 text-white font-bold text-base shadow-md cursor-pointer"
           >
-            <Sparkles className="w-4 h-4 text-emerald-200" />
-          </button>
+            <Sparkles className="w-5 h-5 mr-2" />
+            Xem Luận Giải Chi Tiết
+          </Button>
         </div>
       </section>
 
-      {/* 2. Banner Đánh Giá Năm Đã Chọn */}
+      {/* 2. Banner Kết Quả Tổng Quan */}
       <section
         ref={resultRef}
-        className={`rounded-3xl p-6 sm:p-10 shadow-xl border text-white transition-all ${
-          justCalculated ? 'ring-4 ring-emerald-400/80' : ''
-        } ${
-          selectedYear.level === 'DAI_CAT'
-            ? 'bg-gradient-to-br from-emerald-900 via-teal-950 to-stone-900 border-emerald-400/40'
-            : selectedYear.level === 'CAT'
-            ? 'bg-gradient-to-br from-amber-900 via-emerald-950 to-stone-900 border-amber-400/40'
-            : selectedYear.level === 'BINH_HOA'
-            ? 'bg-gradient-to-br from-stone-800 to-stone-900 border-stone-400/40'
-            : 'bg-gradient-to-br from-rose-900 to-stone-950 border-rose-400/40'
-        }`}
+        className="bg-gradient-to-br from-emerald-900 via-teal-900 to-stone-900 text-white rounded-3xl p-6 sm:p-10 shadow-xl border border-emerald-500/30"
       >
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-6 border-b border-white/20">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-white/10 pb-6">
           <div>
-            <div className="flex items-center gap-2">
-              <span className="text-xs font-bold uppercase tracking-wider text-emerald-300">
-                Kết Quả Xem Tuổi Sinh Con Năm {conYear}
-              </span>
-              {justCalculated && (
-                <span className="text-[10px] bg-emerald-400 text-emerald-950 font-black px-2 py-0.5 rounded-full animate-bounce">
-                  Vừa cập nhật
-                </span>
-              )}
-            </div>
-            <h3 className="text-2xl sm:text-3xl font-extrabold font-serif text-white mt-1">
-              Bố {bo.hoaGiap.canChi} + Mẹ {me.hoaGiap.canChi} → Con {selectedYear.conHoaGiap.canChi}
-            </h3>
+            <span className="text-xs font-bold uppercase tracking-wider text-emerald-300">
+              Kết Quả Luận Giải Cung Mệnh & Ngũ Hành
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-extrabold font-serif text-white mt-1">
+              Bố {bo.birthYear} + Mẹ {me.birthYear} sinh con năm {selectedYear.conYear} ({selectedYear.conHoaGiap.canChi})
+            </h2>
             <p className="text-xs text-stone-300 mt-1">
               Bố: {bo.hoaGiap.menh} | Mẹ: {me.hoaGiap.menh} | Con: {selectedYear.conHoaGiap.menh}
             </p>
@@ -294,7 +280,7 @@ export default function SinhConClient() {
 
           <div className="flex items-center gap-3 bg-black/30 backdrop-blur px-5 py-3 rounded-2xl border border-white/20">
             <div className="text-right">
-              <div className="text-[11px] uppercase tracking-wider font-bold text-emerald-300">Mức Độ Cát Khí</div>
+              <div className="text-xs uppercase tracking-wider font-bold text-emerald-300">Mức Độ Cát Khí</div>
               <div className="text-xs font-semibold text-stone-200">{selectedYear.levelLabel}</div>
             </div>
             <div className="text-4xl font-black text-amber-400 font-mono">
@@ -356,7 +342,7 @@ export default function SinhConClient() {
                 >
                   {ry.levelLabel}
                 </span>
-                <span className="text-[11px] text-emerald-700 font-semibold hover:underline">
+                <span className="text-xs text-emerald-700 font-semibold hover:underline">
                   Bấm xem →
                 </span>
               </div>

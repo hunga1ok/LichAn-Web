@@ -206,6 +206,7 @@ export default function VoChongClient() {
             <button
               type="button"
               onClick={handleCopyLink}
+              aria-label="Sao chép liên kết kết quả xem tuổi vợ chồng"
               className="inline-flex items-center gap-1 text-xs font-medium text-amber-800 hover:text-amber-950 bg-amber-50 hover:bg-amber-100/80 px-2.5 py-1 rounded-full border border-amber-200 transition-colors cursor-pointer"
               title="Sao chép liên kết có chứa kết quả của 2 tuổi này"
             >
@@ -272,7 +273,7 @@ export default function VoChongClient() {
           {/* Điểm số */}
           <div className="flex items-center gap-3 bg-black/30 backdrop-blur px-5 py-3 rounded-2xl border border-white/20">
             <div className="text-right">
-              <div className="text-[11px] uppercase tracking-wider font-bold text-amber-300">Độ Hòa Hợp</div>
+              <div className="text-xs uppercase tracking-wider font-bold text-amber-300">Độ Hòa Hợp</div>
               <div className="text-xs font-semibold text-stone-200">{conclusion.levelLabel}</div>
             </div>
             <div className="text-4xl font-black text-amber-400 font-mono">

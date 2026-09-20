@@ -187,7 +187,7 @@ export default function XemTuoiClient() {
             }`}>
               <div className="flex items-center justify-between">
                 <span className="text-xs font-bold text-stone-600 uppercase">1. Hạn Tam Tai</span>
-                <Badge variant="outline" className={`text-[11px] font-bold ${
+                <Badge variant="outline" className={`text-xs font-bold ${
                   result.tamTai.isPham ? 'bg-rose-100 text-rose-800 border-rose-300' : 'bg-emerald-100 text-emerald-800 border-emerald-300'
                 }`}>
                   {result.tamTai.isPham ? `Phạm Tam Tai (Năm ${result.tamTai.yearRank})` : 'Không phạm'}
@@ -205,7 +205,7 @@ export default function XemTuoiClient() {
             }`}>
               <div className="flex items-center justify-between">
                 <span className="text-xs font-bold text-stone-600 uppercase">2. Hạn Kim Lâu</span>
-                <Badge variant="outline" className={`text-[11px] font-bold ${
+                <Badge variant="outline" className={`text-xs font-bold ${
                   result.kimLau.isPham ? 'bg-rose-100 text-rose-800 border-rose-300' : 'bg-emerald-100 text-emerald-800 border-emerald-300'
                 }`}>
                   {result.kimLau.isPham ? result.kimLau.typeName : 'Không phạm'}
@@ -223,7 +223,7 @@ export default function XemTuoiClient() {
             }`}>
               <div className="flex items-center justify-between">
                 <span className="text-xs font-bold text-stone-600 uppercase">3. Hạn Hoang Ốc</span>
-                <Badge variant="outline" className={`text-[11px] font-bold ${
+                <Badge variant="outline" className={`text-xs font-bold ${
                   result.hoangOc.isGood ? 'bg-emerald-100 text-emerald-800 border-emerald-300' : 'bg-rose-100 text-rose-800 border-rose-300'
                 }`}>
                   {result.hoangOc.cungName} ({result.hoangOc.isGood ? 'Cát' : 'Hung'})

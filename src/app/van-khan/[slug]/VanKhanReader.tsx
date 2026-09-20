@@ -76,9 +76,12 @@ export default function VanKhanReader({ item }: Props) {
         <div className="flex items-center gap-2 flex-wrap">
           {/* Font Size Adjuster */}
           <div className="flex items-center bg-stone-100 rounded-lg p-1 border border-stone-200 text-xs">
-            <span className="px-2 text-stone-500 font-medium">Chữ:</span>
+            <span className="px-2 text-stone-600 font-medium">Chữ:</span>
             <button
+              type="button"
               onClick={() => setFontSize('base')}
+              aria-label="Cỡ chữ tiêu chuẩn"
+              aria-pressed={fontSize === 'base'}
               className={`px-2.5 py-1 rounded cursor-pointer font-bold ${
                 fontSize === 'base' ? 'bg-white text-amber-900 shadow-xs' : 'text-stone-600 hover:text-stone-900'
               }`}
@@ -87,7 +90,10 @@ export default function VanKhanReader({ item }: Props) {
               A
             </button>
             <button
+              type="button"
               onClick={() => setFontSize('lg')}
+              aria-label="Cỡ chữ vừa"
+              aria-pressed={fontSize === 'lg'}
               className={`px-2.5 py-1 rounded cursor-pointer font-bold ${
                 fontSize === 'lg' ? 'bg-white text-amber-900 shadow-xs' : 'text-stone-600 hover:text-stone-900'
               }`}
@@ -96,7 +102,10 @@ export default function VanKhanReader({ item }: Props) {
               A+
             </button>
             <button
+              type="button"
               onClick={() => setFontSize('xl')}
+              aria-label="Cỡ chữ lớn"
+              aria-pressed={fontSize === 'xl'}
               className={`px-2.5 py-1 rounded cursor-pointer font-bold text-sm ${
                 fontSize === 'xl' ? 'bg-white text-amber-900 shadow-xs' : 'text-stone-600 hover:text-stone-900'
               }`}
@@ -111,6 +120,7 @@ export default function VanKhanReader({ item }: Props) {
             variant="outline"
             size="sm"
             onClick={handleCopy}
+            aria-label="Sao chép bài văn khấn"
             className="border-amber-900/20 text-stone-700 hover:bg-amber-50 cursor-pointer gap-1.5 text-xs"
           >
             {copied ? (
@@ -131,6 +141,7 @@ export default function VanKhanReader({ item }: Props) {
             variant="outline"
             size="sm"
             onClick={handlePrint}
+            aria-label="In bài cúng"
             className="border-amber-900/20 text-stone-700 hover:bg-amber-50 cursor-pointer gap-1.5 text-xs"
           >
             <Printer className="w-3.5 h-3.5" />
