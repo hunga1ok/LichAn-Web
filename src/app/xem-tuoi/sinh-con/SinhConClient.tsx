@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useState, useMemo, useRef } from 'react';
+import React, { useState, useMemo, useRef, useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
 import {
   Baby,
   Sparkles,
@@ -12,9 +13,11 @@ import {
   Check,
   ChevronDown,
   ChevronUp,
+  Share2,
 } from 'lucide-react';
 import { evaluateSinhCon, SinhConReport } from '@/lib/xem-tuoi';
 import { getAllHoaGiapList, HoaGiapData } from '@/lib/tu-vi/hoa-giap';
+import { Select } from '@/components/ui/select';
 
 const QUICK_PARENTS = [
   { label: 'Bố Canh Ngọ (1990) — Mẹ Giáp Tuất (1994)', bo: 1990, me: 1994 },
@@ -24,10 +27,15 @@ const QUICK_PARENTS = [
 ];
 
 export default function SinhConClient() {
-  const [boYear, setBoYear] = useState<number>(1990);
-  const [meYear, setMeYear] = useState<number>(1993);
-  const [conYear, setConYear] = useState<number>(2026);
-  const [isCalculating, setIsCalculating] = useState<boolean>(false);
+  const searchParams = useSearchParams();
+  const initBo = Number(searchParams.get('bo')) || 1990;
+  const initMe = Number(searchParams.get('me')) || 1993;
+  const initNam = Number(searchParams.get('nam')) || 2026;
+
+  const [boYear, setBoYear] = useState<number>(initBo);
+  const [meYear, setMeYear] = useState<number>(initMe);
+  const [conYear, setConYear] = useState<number>(initNam);
+  const [copied, setCopied] = useState<boolean>(false);
   const [lastCalculatedTime, setLastCalculatedTime] = useState<string>('');
   const [justCalculated, setJustCalculated] = useState<boolean>(false);
   const [expandedCriteria, setExpandedCriteria] = useState<Record<string, boolean>>({
@@ -35,6 +43,17 @@ export default function SinhConClient() {
     thienCan: true,
     diaChi: true,
   });
+
+  // Đồng bộ query params lên URL
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const url = new URL(window.location.href);
+      url.searchParams.set('bo', boYear.toString());
+      url.searchParams.set('me', meYear.toString());
+      url.searchParams.set('nam', conYear.toString());
+      window.history.replaceState(null, '', url.toString());
+    }
+  }, [boYear, meYear, conYear]);
 
   const resultRef = useRef<HTMLElement>(null);
 
@@ -53,57 +72,50 @@ export default function SinhConClient() {
   };
 
   const handleSearch = () => {
-    setIsCalculating(true);
-    setJustCalculated(false);
-    setTimeout(() => {
-      setIsCalculating(false);
-      setJustCalculated(true);
-      const now = new Date();
-      setLastCalculatedTime(
-        `${now.getHours().toString().padStart(2, '0')}:${now
-          .getMinutes()
-          .toString()
-          .padStart(2, '0')}:${now.getSeconds().toString().padStart(2, '0')}`
-      );
-      resultRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 350);
+    setJustCalculated(true);
+    const now = new Date();
+    setLastCalculatedTime(
+      `${now.getHours().toString().padStart(2, '0')}:${now
+        .getMinutes()
+        .toString()
+        .padStart(2, '0')}:${now.getSeconds().toString().padStart(2, '0')}`
+    );
+    resultRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
   const handleSelectYear = (year: number) => {
     setConYear(year);
-    setIsCalculating(true);
-    setJustCalculated(false);
-    setTimeout(() => {
-      setIsCalculating(false);
-      setJustCalculated(true);
-      const now = new Date();
-      setLastCalculatedTime(
-        `${now.getHours().toString().padStart(2, '0')}:${now
-          .getMinutes()
-          .toString()
-          .padStart(2, '0')}:${now.getSeconds().toString().padStart(2, '0')}`
-      );
-      resultRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 300);
+    setJustCalculated(true);
+    const now = new Date();
+    setLastCalculatedTime(
+      `${now.getHours().toString().padStart(2, '0')}:${now
+        .getMinutes()
+        .toString()
+        .padStart(2, '0')}:${now.getSeconds().toString().padStart(2, '0')}`
+    );
+    resultRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
   const handleSelectQuickParents = (b: number, m: number) => {
     setBoYear(b);
     setMeYear(m);
-    setIsCalculating(true);
-    setJustCalculated(false);
-    setTimeout(() => {
-      setIsCalculating(false);
-      setJustCalculated(true);
-      const now = new Date();
-      setLastCalculatedTime(
-        `${now.getHours().toString().padStart(2, '0')}:${now
-          .getMinutes()
-          .toString()
-          .padStart(2, '0')}:${now.getSeconds().toString().padStart(2, '0')}`
-      );
-      resultRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 300);
+    setJustCalculated(true);
+    const now = new Date();
+    setLastCalculatedTime(
+      `${now.getHours().toString().padStart(2, '0')}:${now
+        .getMinutes()
+        .toString()
+        .padStart(2, '0')}:${now.getSeconds().toString().padStart(2, '0')}`
+    );
+    resultRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  const handleCopyLink = () => {
+    if (typeof window !== 'undefined') {
+      navigator.clipboard.writeText(window.location.href);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }
   };
 
   return (
@@ -143,69 +155,69 @@ export default function SinhConClient() {
             <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">
               Năm sinh Bố
             </label>
-            <select
+            <Select
               value={boYear}
               onChange={(e) => {
                 setBoYear(Number(e.target.value));
                 setJustCalculated(false);
               }}
               aria-label="Năm sinh Bố"
-              className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-emerald-50/30 text-gray-900 font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm"
+              className="h-12 bg-emerald-50/30 font-semibold"
             >
               {hoaGiapList.map((hg) => (
                 <option key={hg.year} value={hg.year}>
                   {hg.year} — {hg.canChi} ({hg.conGiap}) - {hg.menh.split(' ')[0]}
                 </option>
               ))}
-            </select>
+            </Select>
           </div>
 
           <div>
             <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">
               Năm sinh Mẹ
             </label>
-            <select
+            <Select
               value={meYear}
               onChange={(e) => {
                 setMeYear(Number(e.target.value));
                 setJustCalculated(false);
               }}
               aria-label="Năm sinh Mẹ"
-              className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-emerald-50/30 text-gray-900 font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm"
+              className="h-12 bg-emerald-50/30 font-semibold"
             >
               {hoaGiapList.map((hg) => (
                 <option key={hg.year} value={hg.year}>
                   {hg.year} — {hg.canChi} ({hg.conGiap}) - {hg.menh.split(' ')[0]}
                 </option>
               ))}
-            </select>
+            </Select>
           </div>
 
           <div>
             <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">
               Năm dự kiến sinh Con
             </label>
-            <select
+            <Select
               value={conYear}
               onChange={(e) => {
                 setConYear(Number(e.target.value));
                 setJustCalculated(false);
               }}
               aria-label="Năm dự kiến sinh Con"
-              className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-emerald-50/30 text-gray-900 font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm"
+              className="h-12 bg-emerald-50/30 font-semibold"
             >
               {[2024, 2025, 2026, 2027, 2028, 2029, 2030].map((y) => (
                 <option key={y} value={y}>
                   Năm {y}
                 </option>
               ))}
-            </select>
+            </Select>
           </div>
         </div>
 
-        {/* Nút Tra Cứu */}
+        {/* Nút Tra Cứu & Chia sẻ */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-amber-100">
-          <div className="text-xs text-stone-600 flex items-center gap-1.5">
+          <div className="text-xs text-stone-600 flex flex-wrap items-center gap-2">
             {lastCalculatedTime ? (
               <span className="inline-flex items-center gap-1 text-emerald-700 font-bold bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">
                 <Check className="w-3.5 h-3.5" /> Đã phân tích lúc {lastCalculatedTime}
@@ -215,25 +227,32 @@ export default function SinhConClient() {
                 * Bấm nút bên dưới hoặc chọn năm từ bảng xếp hạng để xem luận giải
               </span>
             )}
+            <button
+              type="button"
+              onClick={handleCopyLink}
+              className="inline-flex items-center gap-1 text-xs font-medium text-emerald-800 hover:text-emerald-950 bg-emerald-50 hover:bg-emerald-100/80 px-2.5 py-1 rounded-full border border-emerald-200 transition-colors cursor-pointer"
+              title="Sao chép liên kết có chứa kết quả này"
+            >
+              {copied ? (
+                <>
+                  <Check className="w-3.5 h-3.5 text-emerald-600" />
+                  <span className="text-emerald-700 font-semibold">Đã chép link!</span>
+                </>
+              ) : (
+                <>
+                  <Share2 className="w-3.5 h-3.5 text-emerald-700" />
+                  <span>Chia sẻ kết quả</span>
+                </>
+              )}
+            </button>
           </div>
 
           <button
             type="button"
             onClick={handleSearch}
-            disabled={isCalculating}
-            className="w-full sm:w-auto px-7 py-3 rounded-xl bg-gradient-to-r from-emerald-700 to-teal-800 hover:from-emerald-800 hover:to-teal-900 text-white font-bold text-sm shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-75"
+            className="w-full sm:w-auto px-7 py-3 rounded-xl bg-gradient-to-r from-emerald-700 to-teal-800 hover:from-emerald-800 hover:to-teal-900 text-white font-bold text-sm shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer"
           >
-            {isCalculating ? (
-              <>
-                <Loader2 className="w-4 h-4 animate-spin text-emerald-300" />
-                Đang luận giải tương sinh...
-              </>
-            ) : (
-              <>
-                <Sparkles className="w-4 h-4 text-emerald-300" />
-                Tra Cứu Tuổi Sinh Con Ngay
-              </>
-            )}
+            <Sparkles className="w-4 h-4 text-emerald-200" />
           </button>
         </div>
       </section>

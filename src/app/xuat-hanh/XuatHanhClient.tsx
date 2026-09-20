@@ -6,6 +6,7 @@ import { lunarService } from '@/lib/lunar';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { Select } from '@/components/ui/select';
 import {
   Compass,
   Clock,
@@ -55,7 +56,7 @@ export default function XuatHanhClient() {
         >
           <Compass className="w-3.5 h-3.5 mr-1.5 inline" /> TRA CỨU NHANH
         </Badge>
-        <h1 className="text-3xl md:text-4xl font-black text-[#8B6914] tracking-tight">
+        <h1 className="text-3xl md:text-4xl font-black text-primary tracking-tight">
           Hướng Xuất Hành {isToday ? 'Hôm Nay' : `${selectedDay}/${selectedMonth}/${selectedYear}`}
         </h1>
         <p className="text-stone-600 max-w-xl mx-auto text-sm">
@@ -68,21 +69,20 @@ export default function XuatHanhClient() {
       <Card className="border-amber-900/15">
         <CardContent className="pt-6">
           <div className="flex flex-wrap items-end gap-3">
-            <div>
+            <div className="min-w-[100px]">
               <label className="text-xs font-medium text-stone-500 block mb-1">Ngày</label>
-              <select
+              <Select
                 value={selectedDay}
                 onChange={(e) => setSelectedDay(Number(e.target.value))}
-                className="border border-stone-300 rounded-lg px-3 py-2 text-sm bg-white focus:ring-2 focus:ring-amber-300 focus:border-amber-400"
               >
                 {Array.from({ length: daysInMonth }, (_, i) => i + 1).map((d) => (
                   <option key={d} value={d}>{d}</option>
                 ))}
-              </select>
+              </Select>
             </div>
-            <div>
+            <div className="min-w-[120px]">
               <label className="text-xs font-medium text-stone-500 block mb-1">Tháng</label>
-              <select
+              <Select
                 value={selectedMonth}
                 onChange={(e) => {
                   const newMonth = Number(e.target.value);
@@ -90,24 +90,22 @@ export default function XuatHanhClient() {
                   const maxDay = new Date(selectedYear, newMonth, 0).getDate();
                   if (selectedDay > maxDay) setSelectedDay(maxDay);
                 }}
-                className="border border-stone-300 rounded-lg px-3 py-2 text-sm bg-white focus:ring-2 focus:ring-amber-300 focus:border-amber-400"
               >
                 {Array.from({ length: 12 }, (_, i) => i + 1).map((m) => (
                   <option key={m} value={m}>Tháng {m}</option>
                 ))}
-              </select>
+              </Select>
             </div>
-            <div>
+            <div className="min-w-[110px]">
               <label className="text-xs font-medium text-stone-500 block mb-1">Năm</label>
-              <select
+              <Select
                 value={selectedYear}
                 onChange={(e) => setSelectedYear(Number(e.target.value))}
-                className="border border-stone-300 rounded-lg px-3 py-2 text-sm bg-white focus:ring-2 focus:ring-amber-300 focus:border-amber-400"
               >
                 {Array.from({ length: 11 }, (_, i) => today.getFullYear() - 2 + i).map((y) => (
                   <option key={y} value={y}>{y}</option>
                 ))}
-              </select>
+              </Select>
             </div>
             {!isToday && (
               <Button
@@ -130,14 +128,14 @@ export default function XuatHanhClient() {
       {/* Thông tin ngày */}
       <Card className="border-amber-900/15">
         <CardHeader className="bg-gradient-to-r from-amber-50 to-orange-50/50 border-b border-amber-900/10 pb-3">
-          <CardTitle className="text-base flex items-center gap-2 text-[#8B6914]">
+          <CardTitle className="text-base flex items-center gap-2 text-primary">
             <CalendarDays className="w-4 h-4" />
             Thông Tin Ngày {dayInfo.dayOfWeek} — {selectedDay}/{selectedMonth}/{selectedYear}
           </CardTitle>
         </CardHeader>
         <CardContent className="pt-4">
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-sm">
-            <div className="text-center p-3 rounded-lg bg-[#FEF7E6] border border-amber-200/60">
+            <div className="text-center p-3 rounded-lg bg-background-alt border border-amber-200/60">
               <div className="text-xs text-stone-500 mb-1">Âm lịch</div>
               <div className="font-bold text-amber-900">
                 {dayInfo.lunarDate.day}/{dayInfo.lunarDate.month}
@@ -249,7 +247,7 @@ export default function XuatHanhClient() {
       {/* Giờ Hoàng Đạo */}
       <Card className="border-amber-900/15">
         <CardHeader className="border-b border-stone-100 pb-3">
-          <CardTitle className="text-base flex items-center gap-2 text-[#8B6914]">
+          <CardTitle className="text-base flex items-center gap-2 text-primary">
             <Clock className="w-4 h-4" /> Giờ Hoàng Đạo Trong Ngày
           </CardTitle>
         </CardHeader>
@@ -278,7 +276,7 @@ export default function XuatHanhClient() {
       {/* CTA xem thêm */}
       <div className="text-center">
         <Link href="/xem-ngay-tot/xuat-hanh">
-          <Button className="bg-[#8B6914] hover:bg-[#725510] text-white gap-2 font-medium shadow-sm">
+          <Button className="bg-primary hover:bg-primary-dark text-white gap-2 font-medium shadow-sm">
             Xem danh sách ngày tốt xuất hành cả tháng <ArrowRight className="w-4 h-4" />
           </Button>
         </Link>

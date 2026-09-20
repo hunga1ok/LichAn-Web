@@ -142,12 +142,12 @@ export default function VanKhanReader({ item }: Props) {
       {/* Header Info */}
       <div className="space-y-3">
         <div className="flex items-center gap-2">
-          <Badge variant="outline" className="px-3 py-0.5 text-xs bg-amber-50 border-amber-300 text-[#8B6914]">
+          <Badge variant="outline" className="px-3 py-0.5 text-xs bg-amber-50 border-amber-300 text-primary">
             {item.categoryName}
           </Badge>
         </div>
 
-        <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#8B6914] tracking-tight">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-primary tracking-tight">
           {item.title}
         </h1>
 
@@ -224,7 +224,7 @@ export default function VanKhanReader({ item }: Props) {
           </span>
         </div>
 
-        <div className="rounded-2xl bg-[#FEF7E6] border-2 border-amber-900/20 p-6 sm:p-8 md:p-10 shadow-sm relative print:bg-white print:border-stone-400">
+        <div className="rounded-2xl bg-background-alt border-2 border-amber-900/20 p-6 sm:p-8 md:p-10 shadow-sm relative print:bg-white print:border-stone-400">
           <div className={`font-serif text-stone-900 whitespace-pre-line ${getTextClass()}`}>
             {item.baiVanKhan}
           </div>

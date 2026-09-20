@@ -65,9 +65,9 @@ export default async function BlogPostDetailPage({ params }: Props) {
     <article className="max-w-4xl mx-auto space-y-8">
       {/* Breadcrumbs */}
       <nav className="flex items-center gap-2 text-xs text-stone-500">
-        <Link href="/" className="hover:text-[#8B6914]">Trang chủ</Link>
+        <Link href="/" className="hover:text-primary">Trang chủ</Link>
         <ChevronRight className="w-3 h-3" />
-        <Link href="/blog" className="hover:text-[#8B6914]">Cẩm nang</Link>
+        <Link href="/blog" className="hover:text-primary">Cẩm nang</Link>
         <ChevronRight className="w-3 h-3" />
         <span className="text-stone-800 font-medium truncate max-w-xs md:max-w-md">{post.title}</span>
       </nav>
@@ -75,7 +75,7 @@ export default async function BlogPostDetailPage({ params }: Props) {
       {/* Article Header */}
       <div className="space-y-4 border-b border-stone-200 pb-6">
         <div className="flex flex-wrap items-center gap-2">
-          <Badge className="bg-[#8B6914]">{post.category}</Badge>
+          <Badge className="bg-primary">{post.category}</Badge>
           <span className="text-xs text-stone-500 flex items-center gap-1">
             <Clock className="w-3.5 h-3.5" /> {post.readTime}
           </span>
@@ -89,13 +89,13 @@ export default async function BlogPostDetailPage({ params }: Props) {
           {post.title}
         </h1>
 
-        <p className="text-base sm:text-lg text-stone-600 font-medium leading-relaxed italic border-l-4 border-[#8B6914] pl-4 py-1 bg-amber-50/40 rounded-r-lg">
+        <p className="text-base sm:text-lg text-stone-600 font-medium leading-relaxed italic border-l-4 border-primary pl-4 py-1 bg-amber-50/40 rounded-r-lg">
           {post.description}
         </p>
 
         <div className="flex items-center justify-between pt-2">
           <div className="flex items-center gap-2 text-xs text-stone-600">
-            <div className="w-7 h-7 rounded-full bg-amber-100 text-[#8B6914] flex items-center justify-center font-bold">
+            <div className="w-7 h-7 rounded-full bg-amber-100 text-primary flex items-center justify-center font-bold">
               LA
             </div>
             <span className="font-semibold">{post.author}</span>
@@ -110,14 +110,14 @@ export default async function BlogPostDetailPage({ params }: Props) {
       </div>
 
       {/* Article Body Content */}
-      <div className="prose prose-stone max-w-none prose-headings:text-amber-950 prose-headings:font-bold prose-h2:text-2xl prose-h2:border-b prose-h2:border-stone-100 prose-h2:pb-2 prose-h3:text-xl prose-p:leading-relaxed prose-p:text-stone-700 prose-blockquote:border-l-4 prose-blockquote:border-[#8B6914] prose-blockquote:bg-amber-50/60 prose-blockquote:p-4 prose-blockquote:rounded-r-xl prose-blockquote:italic prose-blockquote:text-stone-800 prose-li:text-stone-700">
+      <div className="prose prose-stone max-w-none prose-headings:text-amber-950 prose-headings:font-bold prose-h2:text-2xl prose-h2:border-b prose-h2:border-stone-100 prose-h2:pb-2 prose-h3:text-xl prose-p:leading-relaxed prose-p:text-stone-700 prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:bg-amber-50/60 prose-blockquote:p-4 prose-blockquote:rounded-r-xl prose-blockquote:italic prose-blockquote:text-stone-800 prose-li:text-stone-700">
         <div 
           className="space-y-4 leading-relaxed"
           dangerouslySetInnerHTML={{
             __html: post.content
               .replace(/### (.*?)\n/g, '<h3 class="text-lg font-bold text-amber-950 mt-6 mb-2">$1</h3>')
               .replace(/## (.*?)\n/g, '<h2 class="text-xl sm:text-2xl font-black text-amber-950 mt-8 mb-3 pb-2 border-b border-stone-200">$1</h2>')
-              .replace(/> (.*?)\n/g, '<blockquote class="border-l-4 border-[#8B6914] bg-amber-50/70 p-4 my-4 rounded-r-xl text-stone-900 font-serif leading-relaxed">$1</blockquote>')
+              .replace(/> (.*?)\n/g, '<blockquote class="border-l-4 border-primary bg-amber-50/70 p-4 my-4 rounded-r-xl text-stone-900 font-serif leading-relaxed">$1</blockquote>')
               .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
               .replace(/\*(.*?)\*/g, '<em>$1</em>')
               .replace(/^- (.*?)\n/gm, '<li class="ml-4 list-disc text-sm text-stone-700 my-1">$1</li>')
@@ -144,14 +144,14 @@ export default async function BlogPostDetailPage({ params }: Props) {
       {relatedPosts.length > 0 && (
         <div className="pt-8 border-t border-stone-200 space-y-4">
           <h3 className="text-xl font-bold text-stone-900 flex items-center gap-2">
-            <BookOpen className="w-5 h-5 text-[#8B6914]" /> Bài Viết Cùng Chủ Đề
+            <BookOpen className="w-5 h-5 text-primary" /> Bài Viết Cùng Chủ Đề
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {relatedPosts.map((related) => (
-              <Card key={related.slug} className="border-amber-900/10 hover:border-[#8B6914]/50 transition-all hover:shadow-sm">
+              <Card key={related.slug} className="border-amber-900/10 hover:border-primary/50 transition-all hover:shadow-sm">
                 <CardContent className="p-4 space-y-2">
                   <Badge variant="secondary" className="text-[10px] mb-1">{related.category}</Badge>
-                  <h4 className="font-bold text-sm text-stone-900 hover:text-[#8B6914] line-clamp-2 leading-snug">
+                  <h4 className="font-bold text-sm text-stone-900 hover:text-primary line-clamp-2 leading-snug">
                     <Link href={`/blog/${related.slug}`}>
                       {related.title}
                     </Link>

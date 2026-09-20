@@ -20,10 +20,10 @@ export default function BlogListingPage() {
     <div className="max-w-5xl mx-auto space-y-10">
       {/* Header Banner */}
       <div className="text-center space-y-3">
-        <Badge variant="outline" className="px-3 py-1 text-sm bg-amber-50 border-amber-300 text-[#8B6914]">
+        <Badge variant="outline" className="px-3 py-1 text-sm bg-amber-50 border-amber-300 text-primary">
           <BookOpen className="w-3.5 h-3.5 mr-1" /> KHO TÀNG TRI THỨC DÂN GIAN
         </Badge>
-        <h1 className="text-3xl md:text-4xl font-extrabold text-[#8B6914]">
+        <h1 className="text-3xl md:text-4xl font-extrabold text-primary">
           Cẩm Nang Văn Hóa & Phong Tục
         </h1>
         <p className="text-stone-600 max-w-2xl mx-auto text-sm md:text-base">
@@ -33,17 +33,17 @@ export default function BlogListingPage() {
 
       {/* Featured Article */}
       {featuredPost && (
-        <Card className="border-2 border-[#D4A017]/40 bg-gradient-to-br from-amber-50/70 via-white to-orange-50/30 overflow-hidden shadow-sm hover:shadow-md transition-all">
+        <Card className="border-2 border-accent/40 bg-gradient-to-br from-amber-50/70 via-white to-orange-50/30 overflow-hidden shadow-sm hover:shadow-md transition-all">
           <div className="p-6 md:p-8 flex flex-col md:flex-row gap-6 items-start justify-between">
             <div className="space-y-3 max-w-2xl">
               <div className="flex items-center gap-2">
-                <Badge className="bg-[#8B6914]">Nổi bật</Badge>
+                <Badge className="bg-primary">Nổi bật</Badge>
                 <Badge variant="secondary">{featuredPost.category}</Badge>
                 <span className="text-xs text-stone-500 flex items-center gap-1">
                   <Clock className="w-3.5 h-3.5" /> {featuredPost.readTime}
                 </span>
               </div>
-              <h2 className="text-2xl md:text-3xl font-bold text-stone-900 leading-snug hover:text-[#8B6914] transition-colors">
+              <h2 className="text-2xl md:text-3xl font-bold text-stone-900 leading-snug hover:text-primary transition-colors">
                 <Link href={`/blog/${featuredPost.slug}`}>
                   {featuredPost.title}
                 </Link>
@@ -72,14 +72,14 @@ export default function BlogListingPage() {
       {/* Articles Grid */}
       <div className="space-y-4">
         <h3 className="text-xl font-bold text-stone-900 flex items-center gap-2">
-          <Sparkles className="w-5 h-5 text-[#8B6914]" /> Bài Viết Mới Nhất
+          <Sparkles className="w-5 h-5 text-primary" /> Bài Viết Mới Nhất
         </h3>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {regularPosts.map((post) => (
             <Card
               key={post.slug}
-              className="flex flex-col border-amber-900/10 hover:border-[#8B6914]/40 transition-all hover:shadow-md bg-white overflow-hidden group"
+              className="flex flex-col border-amber-900/10 hover:border-primary/40 transition-all hover:shadow-md bg-white overflow-hidden group"
             >
               <CardHeader className="pb-3 bg-stone-50/50 border-b border-stone-100">
                 <div className="flex justify-between items-center text-xs">
@@ -94,7 +94,7 @@ export default function BlogListingPage() {
 
               <CardContent className="pt-4 flex-1 flex flex-col justify-between space-y-4">
                 <div className="space-y-2">
-                  <h4 className="font-bold text-base text-stone-900 group-hover:text-[#8B6914] transition-colors line-clamp-2 leading-snug">
+                  <h4 className="font-bold text-base text-stone-900 group-hover:text-primary transition-colors line-clamp-2 leading-snug">
                     <Link href={`/blog/${post.slug}`}>
                       {post.title}
                     </Link>
@@ -108,7 +108,7 @@ export default function BlogListingPage() {
                   <span className="text-stone-400">{post.publishedAt}</span>
                   <Link
                     href={`/blog/${post.slug}`}
-                    className="text-[#8B6914] font-semibold hover:underline flex items-center gap-1"
+                    className="text-primary font-semibold hover:underline flex items-center gap-1"
                   >
                     Chi tiết <ArrowRight className="w-3 h-3" />
                   </Link>

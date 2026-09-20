@@ -55,10 +55,10 @@ export default function VanKhanPage() {
 
       {/* Header Banner */}
       <div className="text-center space-y-4 max-w-3xl mx-auto pt-2">
-        <Badge variant="outline" className="px-3.5 py-1 text-sm bg-amber-50 border-amber-300 text-[#8B6914]">
+        <Badge variant="outline" className="px-3.5 py-1 text-sm bg-amber-50 border-amber-300 text-primary">
           <BookOpen className="w-3.5 h-3.5 mr-1.5 inline" /> NGHI LỄ PHONG TỤC CỔ TRUYỀN
         </Badge>
-        <h1 className="text-3xl md:text-5xl font-black text-[#8B6914] tracking-tight">
+        <h1 className="text-3xl md:text-5xl font-black text-primary tracking-tight">
           Kho Văn Khấn Cổ Truyền
         </h1>
         <p className="text-stone-600 md:text-lg leading-relaxed">

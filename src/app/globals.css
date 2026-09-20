@@ -4,8 +4,16 @@
   --color-primary: #8B6914;
   --color-primary-dark: #6e5310;
   --color-primary-light: #d4a017;
+  --color-accent: #D4A017;
   --color-background-alt: #FEF7E6;
   --color-danger: #DC240E;
+  --color-surface: #FFFFFF;
+  --color-muted: #78716c;
+  --color-muted-foreground: #57534e;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
 }
 
 :root {

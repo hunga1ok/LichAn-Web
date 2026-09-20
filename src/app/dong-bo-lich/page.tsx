@@ -40,14 +40,13 @@ export default function DongBoLichPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FEF7E6] py-10 px-4 sm:px-6 lg:px-8">
+    <div className="max-w-5xl mx-auto space-y-10">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <div className="max-w-5xl mx-auto space-y-10">
-        {/* Banner Hero */}
+      {/* Banner Hero */}
         <div className="text-center space-y-4">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-100 text-amber-900 text-xs font-bold uppercase tracking-wider">
             <CalendarCheck className="w-4 h-4 text-amber-700" />
@@ -89,6 +88,5 @@ export default function DongBoLichPage() {
         {/* Khối chức năng chính */}
         <DongBoLichClient initialEvents={events} currentYear={currentYear} />
       </div>
-    </div>
   );
 }

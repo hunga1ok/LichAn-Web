@@ -139,10 +139,10 @@ export default function XemNgayTotHubPage() {
     <div className="space-y-12">
       {/* Hero Header */}
       <div className="text-center space-y-4 max-w-3xl mx-auto pt-4">
-        <Badge variant="outline" className="px-3.5 py-1 text-sm bg-amber-50 border-amber-300 text-[#8B6914]">
+        <Badge variant="outline" className="px-3.5 py-1 text-sm bg-amber-50 border-amber-300 text-primary">
           <Sparkles className="w-3.5 h-3.5 mr-1.5 inline" /> KHÂM THIÊN GIÁM CHÍNH TÔNG
         </Badge>
-        <h1 className="text-3xl md:text-5xl font-black text-[#8B6914] tracking-tight">
+        <h1 className="text-3xl md:text-5xl font-black text-primary tracking-tight">
           Xem Ngày Tốt Chuyên Sâu
         </h1>
         <p className="text-stone-600 md:text-lg leading-relaxed">
@@ -169,7 +169,7 @@ export default function XemNgayTotHubPage() {
                   </Badge>
                 </div>
                 <div>
-                  <CardTitle className="text-2xl text-[#8B6914]">{cat.title}</CardTitle>
+                  <CardTitle className="text-2xl text-primary">{cat.title}</CardTitle>
                   <CardDescription className="text-stone-600 mt-1.5 text-sm leading-relaxed">
                     {cat.description}
                   </CardDescription>
@@ -177,7 +177,7 @@ export default function XemNgayTotHubPage() {
               </CardHeader>
 
               <CardContent className="space-y-4 pt-0">
-                <div className="p-3.5 rounded-lg bg-[#FEF7E6]/70 border border-amber-900/10 space-y-2">
+                <div className="p-3.5 rounded-lg bg-background-alt/70 border border-amber-900/10 space-y-2">
                   <div className="text-xs font-bold text-amber-900 uppercase tracking-wider">
                     Quy tắc trạch cát cổ truyền:
                   </div>
@@ -196,7 +196,7 @@ export default function XemNgayTotHubPage() {
                     Tháng {currentMonth}/{currentYear}: <strong className="text-emerald-700 font-bold">{cat.goodCount} ngày tốt</strong>
                   </span>
                   <Link href={`/xem-ngay-tot/${cat.slug}`}>
-                    <Button className="bg-[#8B6914] hover:bg-[#725510] text-white gap-1.5 font-medium shadow-sm">
+                    <Button className="bg-primary hover:bg-primary-dark text-white gap-1.5 font-medium shadow-sm">
                       Chọn ngày ngay <ArrowRight className="w-4 h-4" />
                     </Button>
                   </Link>
@@ -210,11 +210,11 @@ export default function XemNgayTotHubPage() {
       {/* Trust & Quality Assurance Section */}
       <div className="rounded-2xl bg-white border border-amber-900/15 p-6 md:p-8 space-y-6 shadow-sm">
         <div className="flex items-center gap-3 border-b border-amber-900/10 pb-4">
-          <div className="p-2.5 rounded-lg bg-amber-50 text-[#8B6914] border border-amber-200">
+          <div className="p-2.5 rounded-lg bg-amber-50 text-primary border border-amber-200">
             <ShieldCheck className="w-6 h-6" />
           </div>
           <div>
-            <h2 className="text-xl md:text-2xl font-bold text-[#8B6914]">
+            <h2 className="text-xl md:text-2xl font-bold text-primary">
               Tại sao thuật toán Trạch Nhật của Lịch An chuẩn xác tuyệt đối?
             </h2>
             <p className="text-stone-500 text-xs md:text-sm">

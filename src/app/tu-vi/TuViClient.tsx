@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import {
   Sparkles,
@@ -17,14 +18,17 @@ import {
   ArrowRight,
   Info,
   Calendar,
+  Share2,
 } from 'lucide-react';
+import { Select } from '@/components/ui/select';
 import {
   getTuViPersonalReport,
   getAllHoaGiapList,
   HoaGiapData,
   TuViPersonalReport,
+  TU_VI_12_CON_GIAP,
+  TuViConGiap,
 } from '@/lib/tu-vi';
-import { TU_VI_12_CON_GIAP, TuViConGiap } from '@/lib/tu-vi';
 
 const CON_GIAP_LIST = [
   { chi: 'Tý', name: 'Tý (Chuột)', emoji: '🐭' },
@@ -42,15 +46,51 @@ const CON_GIAP_LIST = [
 ];
 
 export default function TuViClient() {
-  const [activeTab, setActiveTab] = useState<'canhan' | 'congiap'>('canhan');
+  const searchParams = useSearchParams();
+  const initBirth = Number(searchParams.get('nam')) || 1993;
+  const initTarget = Number(searchParams.get('xem')) || 2026;
+  const initGender = (searchParams.get('gt') === 'nu' ? 'nu' : 'nam') as 'nam' | 'nu';
+  const initTab = (searchParams.get('tab') === 'congiap' ? 'congiap' : 'canhan') as 'canhan' | 'congiap';
+  const initChi = searchParams.get('chi') || 'Tý';
+
+  const [activeTab, setActiveTab] = useState<'canhan' | 'congiap'>(initTab);
 
   // State cho Tra cứu cá nhân hóa
-  const [birthYear, setBirthYear] = useState<number>(1993);
-  const [targetYear, setTargetYear] = useState<number>(2026);
-  const [gender, setGender] = useState<'nam' | 'nu'>('nam');
+  const [birthYear, setBirthYear] = useState<number>(initBirth);
+  const [targetYear, setTargetYear] = useState<number>(initTarget);
+  const [gender, setGender] = useState<'nam' | 'nu'>(initGender);
+  const [copied, setCopied] = useState<boolean>(false);
 
   // State cho xem nhanh 12 con giáp
-  const [selectedChi, setSelectedChi] = useState<string>('Tý');
+  const [selectedChi, setSelectedChi] = useState<string>(initChi);
+
+  // Đồng bộ query params lên URL
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const url = new URL(window.location.href);
+      url.searchParams.set('tab', activeTab);
+      if (activeTab === 'canhan') {
+        url.searchParams.set('nam', birthYear.toString());
+        url.searchParams.set('xem', targetYear.toString());
+        url.searchParams.set('gt', gender);
+        url.searchParams.delete('chi');
+      } else {
+        url.searchParams.set('chi', selectedChi);
+        url.searchParams.delete('nam');
+        url.searchParams.delete('xem');
+        url.searchParams.delete('gt');
+      }
+      window.history.replaceState(null, '', url.toString());
+    }
+  }, [activeTab, birthYear, targetYear, gender, selectedChi]);
+
+  const handleCopyLink = () => {
+    if (typeof window !== 'undefined') {
+      navigator.clipboard.writeText(window.location.href);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }
+  };
 
   const report: TuViPersonalReport = useMemo(() => {
     return getTuViPersonalReport(birthYear, targetYear, gender);
@@ -115,18 +155,18 @@ export default function TuViClient() {
                 <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">
                   Năm sinh (Âm lịch)
                 </label>
-                <select
+                <Select
                   value={birthYear}
                   onChange={(e) => setBirthYear(Number(e.target.value))}
                   aria-label="Chọn năm sinh"
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-amber-50/40 text-gray-900 font-semibold focus:outline-none focus:ring-2 focus:ring-amber-500 text-sm"
+                  className="h-12 bg-amber-50/40 font-semibold"
                 >
                   {hoaGiapList.map((hg) => (
                     <option key={hg.year} value={hg.year}>
                       {hg.year} — {hg.canChi} ({hg.conGiap})
                     </option>
                   ))}
-                </select>
+                </Select>
               </div>
 
               {/* Giới tính */}
@@ -165,11 +205,11 @@ export default function TuViClient() {
                 <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">
                   Năm xem niên hạn
                 </label>
-                <select
+                <Select
                   value={targetYear}
                   onChange={(e) => setTargetYear(Number(e.target.value))}
                   aria-label="Chọn năm xem niên hạn"
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-amber-50/40 text-gray-900 font-semibold focus:outline-none focus:ring-2 focus:ring-amber-500 text-sm"
+                  className="h-12 bg-amber-50/40 font-semibold"
                 >
                   <option value={2025}>Năm 2025 (Ất Tỵ)</option>
                   <option value={2026}>Năm 2026 (Bính Ngọ)</option>
@@ -177,15 +217,36 @@ export default function TuViClient() {
                   <option value={2028}>Năm 2028 (Mậu Thân)</option>
                   <option value={2029}>Năm 2029 (Kỷ Dậu)</option>
                   <option value={2030}>Năm 2030 (Canh Tuất)</option>
-                </select>
+                </Select>
               </div>
             </div>
 
-            {/* Nút Tra Cứu */}
+            {/* Nút Tra Cứu & Chia sẻ */}
             <div className="mt-6 flex flex-col sm:flex-row items-center justify-between gap-3 pt-4 border-t border-amber-100">
-              <p className="text-xs text-stone-500 italic">
-                * Kết quả tự động cập nhật ngay khi bạn thay đổi năm sinh, giới tính hoặc năm xem.
-              </p>
+              <div className="flex items-center gap-2">
+                <p className="text-xs text-stone-500 italic">
+                  * Kết quả tự động cập nhật ngay khi thay đổi thông tin.
+                </p>
+                <button
+                  type="button"
+                  onClick={handleCopyLink}
+                  className="inline-flex items-center gap-1 text-xs font-medium text-amber-800 hover:text-amber-950 bg-amber-50 hover:bg-amber-100/80 px-2.5 py-1 rounded-full border border-amber-200 transition-colors cursor-pointer"
+                  title="Sao chép liên kết lá số này"
+                >
+                  {copied ? (
+                    <>
+                      <Check className="w-3.5 h-3.5 text-emerald-600" />
+                      <span className="text-emerald-700 font-semibold">Đã chép link!</span>
+                    </>
+                  ) : (
+                    <>
+                      <Share2 className="w-3.5 h-3.5 text-amber-700" />
+                      <span>Chia sẻ lá số</span>
+                    </>
+                  )}
+                </button>
+              </div>
+
               <button
                 type="button"
                 onClick={handleSearch}
@@ -215,12 +276,22 @@ export default function TuViClient() {
                 </p>
               </div>
 
-              <Link
-                href={`/tu-vi/${report.hoaGiap.slug}`}
-                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-600 text-amber-950 font-bold text-xs transition-all shadow-sm"
-              >
-                Xem tử vi trọn đời {report.hoaGiap.canChi} <ArrowRight className="w-4 h-4" />
-              </Link>
+              <div className="flex items-center gap-2.5">
+                <button
+                  type="button"
+                  onClick={handleCopyLink}
+                  className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-amber-950/70 hover:bg-amber-900 text-amber-200 border border-amber-500/30 text-xs font-bold transition-all cursor-pointer"
+                >
+                  <Share2 className="w-3.5 h-3.5" />
+                  <span>{copied ? 'Đã chép link!' : 'Chia sẻ'}</span>
+                </button>
+                <Link
+                  href={`/tu-vi/${report.hoaGiap.slug}`}
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-600 text-amber-950 font-bold text-xs transition-all shadow-sm"
+                >
+                  Xem tử vi trọn đời {report.hoaGiap.canChi} <ArrowRight className="w-4 h-4" />
+                </Link>
+              </div>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">

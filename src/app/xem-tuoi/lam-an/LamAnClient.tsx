@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useState, useMemo, useRef } from 'react';
+import React, { useState, useMemo, useRef, useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
 import {
   Briefcase,
   Sparkles,
@@ -12,9 +13,11 @@ import {
   Check,
   ChevronDown,
   ChevronUp,
+  Share2,
 } from 'lucide-react';
 import { evaluateLamAn, LamAnReport } from '@/lib/xem-tuoi';
 import { getAllHoaGiapList, HoaGiapData } from '@/lib/tu-vi/hoa-giap';
+import { Select } from '@/components/ui/select';
 
 const QUICK_PARTNERS = [
   { label: 'Canh Ngọ (1990) — Nhâm Thân (1992)', chuSu: 1990, doiTac: 1992 },
@@ -24,11 +27,17 @@ const QUICK_PARTNERS = [
 ];
 
 export default function LamAnClient() {
-  const [chuSuYear, setChuSuYear] = useState<number>(1990);
-  const [doiTacYear, setDoiTacYear] = useState<number>(1993);
-  const [chuSuGender, setChuSuGender] = useState<'nam' | 'nu'>('nam');
-  const [doiTacGender, setDoiTacGender] = useState<'nam' | 'nu'>('nam');
-  const [isCalculating, setIsCalculating] = useState<boolean>(false);
+  const searchParams = useSearchParams();
+  const initChuSu = Number(searchParams.get('a')) || 1990;
+  const initDoiTac = Number(searchParams.get('b')) || 1993;
+  const initChuSuGender = (searchParams.get('ga') === 'nu' ? 'nu' : 'nam') as 'nam' | 'nu';
+  const initDoiTacGender = (searchParams.get('gb') === 'nu' ? 'nu' : 'nam') as 'nam' | 'nu';
+
+  const [chuSuYear, setChuSuYear] = useState<number>(initChuSu);
+  const [doiTacYear, setDoiTacYear] = useState<number>(initDoiTac);
+  const [chuSuGender, setChuSuGender] = useState<'nam' | 'nu'>(initChuSuGender);
+  const [doiTacGender, setDoiTacGender] = useState<'nam' | 'nu'>(initDoiTacGender);
+  const [copied, setCopied] = useState<boolean>(false);
   const [lastCalculatedTime, setLastCalculatedTime] = useState<string>('');
   const [justCalculated, setJustCalculated] = useState<boolean>(false);
   const [expandedCriteria, setExpandedCriteria] = useState<Record<string, boolean>>({
@@ -37,6 +46,18 @@ export default function LamAnClient() {
     diaChi: true,
     cungPhi: true,
   });
+
+  // Đồng bộ query params lên URL
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const url = new URL(window.location.href);
+      url.searchParams.set('a', chuSuYear.toString());
+      url.searchParams.set('b', doiTacYear.toString());
+      url.searchParams.set('ga', chuSuGender);
+      url.searchParams.set('gb', doiTacGender);
+      window.history.replaceState(null, '', url.toString());
+    }
+  }, [chuSuYear, doiTacYear, chuSuGender, doiTacGender]);
 
   const resultRef = useRef<HTMLElement>(null);
 
@@ -55,39 +76,37 @@ export default function LamAnClient() {
   };
 
   const handleSearch = () => {
-    setIsCalculating(true);
-    setJustCalculated(false);
-    setTimeout(() => {
-      setIsCalculating(false);
-      setJustCalculated(true);
-      const now = new Date();
-      setLastCalculatedTime(
-        `${now.getHours().toString().padStart(2, '0')}:${now
-          .getMinutes()
-          .toString()
-          .padStart(2, '0')}:${now.getSeconds().toString().padStart(2, '0')}`
-      );
-      resultRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 350);
+    setJustCalculated(true);
+    const now = new Date();
+    setLastCalculatedTime(
+      `${now.getHours().toString().padStart(2, '0')}:${now
+        .getMinutes()
+        .toString()
+        .padStart(2, '0')}:${now.getSeconds().toString().padStart(2, '0')}`
+    );
+    resultRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
   const handleSelectQuickPartner = (c: number, d: number) => {
     setChuSuYear(c);
     setDoiTacYear(d);
-    setIsCalculating(true);
-    setJustCalculated(false);
-    setTimeout(() => {
-      setIsCalculating(false);
-      setJustCalculated(true);
-      const now = new Date();
-      setLastCalculatedTime(
-        `${now.getHours().toString().padStart(2, '0')}:${now
-          .getMinutes()
-          .toString()
-          .padStart(2, '0')}:${now.getSeconds().toString().padStart(2, '0')}`
-      );
-      resultRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 300);
+    setJustCalculated(true);
+    const now = new Date();
+    setLastCalculatedTime(
+      `${now.getHours().toString().padStart(2, '0')}:${now
+        .getMinutes()
+        .toString()
+        .padStart(2, '0')}:${now.getSeconds().toString().padStart(2, '0')}`
+    );
+    resultRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  const handleCopyLink = () => {
+    if (typeof window !== 'undefined') {
+      navigator.clipboard.writeText(window.location.href);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }
   };
 
   return (
@@ -128,21 +147,21 @@ export default function LamAnClient() {
             <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider">
               Năm sinh Chủ sự (Bạn)
             </label>
-            <select
+            <Select
               value={chuSuYear}
               onChange={(e) => {
                 setChuSuYear(Number(e.target.value));
                 setJustCalculated(false);
               }}
               aria-label="Năm sinh Chủ sự"
-              className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-blue-50/30 text-gray-900 font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+              className="h-12 bg-blue-50/30 font-semibold"
             >
               {hoaGiapList.map((hg) => (
                 <option key={hg.year} value={hg.year}>
                   {hg.year} — {hg.canChi} ({hg.conGiap}) - {hg.menh.split(' ')[0]}
                 </option>
               ))}
-            </select>
+            </Select>
             <div className="flex gap-2">
               <button
                 type="button"
@@ -176,21 +195,21 @@ export default function LamAnClient() {
             <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider">
               Năm sinh Đối tác hợp tác
             </label>
-            <select
+            <Select
               value={doiTacYear}
               onChange={(e) => {
                 setDoiTacYear(Number(e.target.value));
                 setJustCalculated(false);
               }}
               aria-label="Năm sinh Đối tác hợp tác"
-              className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-blue-50/30 text-gray-900 font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+              className="h-12 bg-blue-50/30 font-semibold"
             >
               {hoaGiapList.map((hg) => (
                 <option key={hg.year} value={hg.year}>
                   {hg.year} — {hg.canChi} ({hg.conGiap}) - {hg.menh.split(' ')[0]}
                 </option>
               ))}
-            </select>
+            </Select>
             <div className="flex gap-2">
               <button
                 type="button"
@@ -220,9 +239,9 @@ export default function LamAnClient() {
           </div>
         </div>
 
-        {/* Nút Tra Cứu */}
+        {/* Nút Tra Cứu & Chia sẻ */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-amber-100">
-          <div className="text-xs text-stone-600 flex items-center gap-1.5">
+          <div className="text-xs text-stone-600 flex flex-wrap items-center gap-2">
             {lastCalculatedTime ? (
               <span className="inline-flex items-center gap-1 text-emerald-700 font-bold bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">
                 <Check className="w-3.5 h-3.5" /> Đã phân tích lúc {lastCalculatedTime}
@@ -232,25 +251,33 @@ export default function LamAnClient() {
                 * Bấm nút bên dưới để tính toán tương sinh tài vận và phân chia vai trò
               </span>
             )}
+            <button
+              type="button"
+              onClick={handleCopyLink}
+              className="inline-flex items-center gap-1 text-xs font-medium text-blue-800 hover:text-blue-950 bg-blue-50 hover:bg-blue-100/80 px-2.5 py-1 rounded-full border border-blue-200 transition-colors cursor-pointer"
+              title="Sao chép liên kết có chứa kết quả này"
+            >
+              {copied ? (
+                <>
+                  <Check className="w-3.5 h-3.5 text-emerald-600" />
+                  <span className="text-emerald-700 font-semibold">Đã chép link!</span>
+                </>
+              ) : (
+                <>
+                  <Share2 className="w-3.5 h-3.5 text-blue-700" />
+                  <span>Chia sẻ kết quả</span>
+                </>
+              )}
+            </button>
           </div>
 
           <button
             type="button"
             onClick={handleSearch}
-            disabled={isCalculating}
-            className="w-full sm:w-auto px-7 py-3 rounded-xl bg-gradient-to-r from-blue-700 to-indigo-800 hover:from-blue-800 hover:to-indigo-900 text-white font-bold text-sm shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-75"
+            className="w-full sm:w-auto px-7 py-3 rounded-xl bg-gradient-to-r from-blue-700 to-indigo-800 hover:from-blue-800 hover:to-indigo-900 text-white font-bold text-sm shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer"
           >
-            {isCalculating ? (
-              <>
-                <Loader2 className="w-4 h-4 animate-spin text-blue-200" />
-                Đang đánh giá tài vận...
-              </>
-            ) : (
-              <>
-                <Sparkles className="w-4 h-4 text-blue-200" />
-                Tra Cứu Tuổi Làm Ăn Ngay
-              </>
-            )}
+            <Sparkles className="w-4 h-4 text-blue-200" />
+            Tra Cứu Tuổi Làm Ăn Ngay
           </button>
         </div>
       </section>

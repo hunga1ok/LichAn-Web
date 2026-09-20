@@ -84,14 +84,13 @@ export default async function TuViHoaGiapDetailPage({
   };
 
   return (
-    <div className="min-h-screen bg-[#FEF7E6] py-10 px-4 sm:px-6 lg:px-8">
+    <div className="max-w-4xl mx-auto space-y-8">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <div className="max-w-4xl mx-auto space-y-8">
-        {/* Nút quay lại */}
+      {/* Nút quay lại */}
         <Link
           href="/tu-vi"
           className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-800 hover:text-amber-950 transition-colors"
@@ -308,6 +307,5 @@ export default async function TuViHoaGiapDetailPage({
           </div>
         </section>
       </div>
-    </div>
   );
 }

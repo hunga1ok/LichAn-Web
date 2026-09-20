@@ -74,10 +74,10 @@ export default function PhongThuyHubPage() {
     <div className="space-y-12">
       {/* Header */}
       <div className="text-center space-y-3 max-w-3xl mx-auto pt-2">
-        <Badge variant="outline" className="px-3.5 py-1 text-sm bg-amber-50 border-amber-300 text-[#8B6914]">
+        <Badge variant="outline" className="px-3.5 py-1 text-sm bg-amber-50 border-amber-300 text-primary">
           <ShieldCheck className="w-3.5 h-3.5 mr-1.5 inline" /> PHONG THỦY CHÍNH TÔNG KHÂM THIÊN GIÁM
         </Badge>
-        <h1 className="text-3xl md:text-5xl font-black text-[#8B6914] tracking-tight">
+        <h1 className="text-3xl md:text-5xl font-black text-primary tracking-tight">
           Phong Thủy Cổ Truyền
         </h1>
         <p className="text-stone-600 md:text-lg leading-relaxed">
@@ -102,7 +102,7 @@ export default function PhongThuyHubPage() {
                 </div>
 
                 <div>
-                  <CardTitle className="text-xl font-bold text-[#8B6914]">{t.title}</CardTitle>
+                  <CardTitle className="text-xl font-bold text-primary">{t.title}</CardTitle>
                   <CardDescription className="text-stone-600 text-xs sm:text-sm mt-1.5 leading-relaxed">
                     {t.desc}
                   </CardDescription>
@@ -110,7 +110,7 @@ export default function PhongThuyHubPage() {
               </CardHeader>
 
               <CardContent className="space-y-4 pt-0">
-                <div className="p-3 rounded-lg bg-[#FEF7E6]/70 border border-amber-900/10 space-y-1.5 text-xs text-stone-700">
+                <div className="p-3 rounded-lg bg-background-alt/70 border border-amber-900/10 space-y-1.5 text-xs text-stone-700">
                   <span className="font-bold text-amber-950 block">Đặc điểm nổi bật:</span>
                   <ul className="space-y-1 pl-4 list-disc text-stone-600">
                     {t.criteria.map((c, i) => (
@@ -120,7 +120,7 @@ export default function PhongThuyHubPage() {
                 </div>
 
                 <Link href={t.link} className="block">
-                  <Button className="w-full bg-[#8B6914] hover:bg-[#725510] text-white font-medium text-xs sm:text-sm shadow-xs cursor-pointer gap-1">
+                  <Button className="w-full bg-primary hover:bg-primary-dark text-white font-medium text-xs sm:text-sm shadow-xs cursor-pointer gap-1">
                     {t.cta} <ArrowRight className="w-4 h-4" />
                   </Button>
                 </Link>

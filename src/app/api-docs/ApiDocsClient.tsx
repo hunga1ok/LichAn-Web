@@ -388,7 +388,7 @@ curl -X GET "${fullUrl}" \\
                 <Button
                   onClick={handleExecuteRequest}
                   disabled={loading}
-                  className="bg-[#8B6914] hover:bg-[#725510] text-white text-xs font-bold gap-1.5 cursor-pointer shrink-0"
+                  className="bg-primary hover:bg-primary-dark text-white text-xs font-bold gap-1.5 cursor-pointer shrink-0"
                 >
                   {loading ? (
                     <>

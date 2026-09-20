@@ -15,6 +15,7 @@ export * from './sao-chieu-menh';
 export * from './bat-han';
 export * from './cung-phi';
 export * from './hoa-giap';
+export * from './con-giap';
 
 export interface TuViPersonalReport {
   birthYear: number;

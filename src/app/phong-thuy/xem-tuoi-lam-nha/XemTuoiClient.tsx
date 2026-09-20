@@ -83,7 +83,7 @@ export default function XemTuoiClient() {
       {/* Form Input Card */}
       <Card className="border-amber-900/15 shadow-sm bg-white overflow-hidden">
         <CardHeader className="bg-gradient-to-r from-amber-50/80 to-stone-50 border-b border-amber-900/10 py-5">
-          <CardTitle className="text-xl font-bold text-[#8B6914] flex items-center gap-2">
+          <CardTitle className="text-xl font-bold text-primary flex items-center gap-2">
             <Calendar className="w-5 h-5" /> Nhập Thông Tin Tra Cứu
           </CardTitle>
           <CardDescription className="text-stone-600 text-xs sm:text-sm">
@@ -133,7 +133,7 @@ export default function XemTuoiClient() {
             <div>
               <Button 
                 type="submit" 
-                className="w-full bg-[#8B6914] hover:bg-[#725510] text-white font-bold py-2.5 h-auto cursor-pointer shadow-sm"
+                className="w-full bg-primary hover:bg-primary-dark text-white font-bold py-2.5 h-auto cursor-pointer shadow-sm"
               >
                 Xem Kết Quả Ngay
               </Button>

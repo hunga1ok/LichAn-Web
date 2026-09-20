@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useState, useMemo, useRef } from 'react';
+import React, { useState, useMemo, useRef, useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
 import {
   Sparkles,
   Trophy,
@@ -12,9 +13,11 @@ import {
   Check,
   ChevronDown,
   ChevronUp,
+  Share2,
 } from 'lucide-react';
 import { getTopXongDat, XongDatReport } from '@/lib/xem-tuoi';
 import { getAllHoaGiapList, HoaGiapData } from '@/lib/tu-vi/hoa-giap';
+import { Select } from '@/components/ui/select';
 
 const QUICK_GIA_CHU = [
   { label: 'Canh Ngọ (1990)', year: 1990 },
@@ -25,12 +28,26 @@ const QUICK_GIA_CHU = [
 ];
 
 export default function XongDatClient() {
-  const [giaChuYear, setGiaChuYear] = useState<number>(1990);
-  const [targetYear, setTargetYear] = useState<number>(2026);
-  const [isCalculating, setIsCalculating] = useState<boolean>(false);
+  const searchParams = useSearchParams();
+  const initGiaChu = Number(searchParams.get('gia_chu')) || 1990;
+  const initNam = Number(searchParams.get('nam')) || 2026;
+
+  const [giaChuYear, setGiaChuYear] = useState<number>(initGiaChu);
+  const [targetYear, setTargetYear] = useState<number>(initNam);
+  const [copied, setCopied] = useState<boolean>(false);
   const [lastCalculatedTime, setLastCalculatedTime] = useState<string>('');
   const [justCalculated, setJustCalculated] = useState<boolean>(false);
   const [expandedCandidates, setExpandedCandidates] = useState<Record<number, boolean>>({});
+
+  // Đồng bộ query params lên URL
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const url = new URL(window.location.href);
+      url.searchParams.set('gia_chu', giaChuYear.toString());
+      url.searchParams.set('nam', targetYear.toString());
+      window.history.replaceState(null, '', url.toString());
+    }
+  }, [giaChuYear, targetYear]);
 
   const resultRef = useRef<HTMLElement>(null);
 
@@ -49,38 +66,36 @@ export default function XongDatClient() {
   };
 
   const handleSearch = () => {
-    setIsCalculating(true);
-    setJustCalculated(false);
-    setTimeout(() => {
-      setIsCalculating(false);
-      setJustCalculated(true);
-      const now = new Date();
-      setLastCalculatedTime(
-        `${now.getHours().toString().padStart(2, '0')}:${now
-          .getMinutes()
-          .toString()
-          .padStart(2, '0')}:${now.getSeconds().toString().padStart(2, '0')}`
-      );
-      resultRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 350);
+    setJustCalculated(true);
+    const now = new Date();
+    setLastCalculatedTime(
+      `${now.getHours().toString().padStart(2, '0')}:${now
+        .getMinutes()
+        .toString()
+        .padStart(2, '0')}:${now.getSeconds().toString().padStart(2, '0')}`
+    );
+    resultRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
   const handleSelectQuickGiaChu = (y: number) => {
     setGiaChuYear(y);
-    setIsCalculating(true);
-    setJustCalculated(false);
-    setTimeout(() => {
-      setIsCalculating(false);
-      setJustCalculated(true);
-      const now = new Date();
-      setLastCalculatedTime(
-        `${now.getHours().toString().padStart(2, '0')}:${now
-          .getMinutes()
-          .toString()
-          .padStart(2, '0')}:${now.getSeconds().toString().padStart(2, '0')}`
-      );
-      resultRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 300);
+    setJustCalculated(true);
+    const now = new Date();
+    setLastCalculatedTime(
+      `${now.getHours().toString().padStart(2, '0')}:${now
+        .getMinutes()
+        .toString()
+        .padStart(2, '0')}:${now.getSeconds().toString().padStart(2, '0')}`
+    );
+    resultRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  const handleCopyLink = () => {
+    if (typeof window !== 'undefined') {
+      navigator.clipboard.writeText(window.location.href);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }
   };
 
   return (
@@ -120,47 +135,47 @@ export default function XongDatClient() {
             <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">
               Năm sinh Gia Chủ (Âm lịch)
             </label>
-            <select
+            <Select
               value={giaChuYear}
               onChange={(e) => {
                 setGiaChuYear(Number(e.target.value));
                 setJustCalculated(false);
               }}
               aria-label="Năm sinh Gia Chủ"
-              className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-amber-50/30 text-gray-900 font-semibold focus:outline-none focus:ring-2 focus:ring-amber-500 text-sm"
+              className="h-12 bg-amber-50/30 font-semibold"
             >
               {hoaGiapList.map((hg) => (
                 <option key={hg.year} value={hg.year}>
                   {hg.year} — {hg.canChi} ({hg.conGiap}) - {hg.menh.split(' ')[0]}
                 </option>
               ))}
-            </select>
+            </Select>
           </div>
 
           <div>
             <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">
               Năm xông đất / Mở hàng khai xuân
             </label>
-            <select
+            <Select
               value={targetYear}
               onChange={(e) => {
                 setTargetYear(Number(e.target.value));
                 setJustCalculated(false);
               }}
               aria-label="Năm xông đất"
-              className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-amber-50/30 text-gray-900 font-semibold focus:outline-none focus:ring-2 focus:ring-amber-500 text-sm"
+              className="h-12 bg-amber-50/30 font-semibold"
             >
               <option value={2025}>Năm 2025 (Ất Tỵ)</option>
               <option value={2026}>Năm 2026 (Bính Ngọ)</option>
               <option value={2027}>Năm 2027 (Đinh Mùi)</option>
               <option value={2028}>Năm 2028 (Mậu Thân)</option>
-            </select>
+            </Select>
           </div>
         </div>
 
-        {/* Nút Tra Cứu */}
+        {/* Nút Tra Cứu & Chia sẻ */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-amber-100">
-          <div className="text-xs text-stone-600 flex items-center gap-1.5">
+          <div className="text-xs text-stone-600 flex flex-wrap items-center gap-2">
             {lastCalculatedTime ? (
               <span className="inline-flex items-center gap-1 text-emerald-700 font-bold bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">
                 <Check className="w-3.5 h-3.5" /> Đã xếp hạng lúc {lastCalculatedTime}
@@ -170,25 +185,33 @@ export default function XongDatClient() {
                 * Bấm nút bên dưới để tính toán và xếp hạng Top tuổi xông nhà
               </span>
             )}
+            <button
+              type="button"
+              onClick={handleCopyLink}
+              className="inline-flex items-center gap-1 text-xs font-medium text-amber-800 hover:text-amber-950 bg-amber-50 hover:bg-amber-100/80 px-2.5 py-1 rounded-full border border-amber-200 transition-colors cursor-pointer"
+              title="Sao chép liên kết có chứa kết quả này"
+            >
+              {copied ? (
+                <>
+                  <Check className="w-3.5 h-3.5 text-emerald-600" />
+                  <span className="text-emerald-700 font-semibold">Đã chép link!</span>
+                </>
+              ) : (
+                <>
+                  <Share2 className="w-3.5 h-3.5 text-amber-700" />
+                  <span>Chia sẻ kết quả</span>
+                </>
+              )}
+            </button>
           </div>
 
           <button
             type="button"
             onClick={handleSearch}
-            disabled={isCalculating}
-            className="w-full sm:w-auto px-7 py-3 rounded-xl bg-gradient-to-r from-amber-700 to-amber-800 hover:from-amber-800 hover:to-amber-900 text-white font-bold text-sm shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-75"
+            className="w-full sm:w-auto px-7 py-3 rounded-xl bg-gradient-to-r from-amber-700 to-amber-800 hover:from-amber-800 hover:to-amber-900 text-white font-bold text-sm shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer"
           >
-            {isCalculating ? (
-              <>
-                <Loader2 className="w-4 h-4 animate-spin text-amber-300" />
-                Đang quét 60 hoa giáp...
-              </>
-            ) : (
-              <>
-                <Sparkles className="w-4 h-4 text-amber-300" />
-                Tra Cứu Tuổi Xông Đất Ngay
-              </>
-            )}
+            <Sparkles className="w-4 h-4 text-amber-300" />
+            Xem Danh Sách Tuổi Đẹp Nhất
           </button>
         </div>
       </section>

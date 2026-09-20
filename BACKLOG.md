@@ -46,7 +46,22 @@
 │ Sprint 6          │ Phân Hệ Xem Tuổi Toàn Diện:       │ ✅ Hoàn thành  │
 │                   │ Vợ Chồng, Làm Ăn, Sinh Con, Xông  │                │
 ├───────────────────┼───────────────────────────────────┼────────────────┤
-│ Sprint 7          │ PWA Offline & Thông báo đẩy       │ ⏳ Kế tiếp     │
+│ Sprint 7          │ Tối Ưu SEO Core Pages, Sửa Lỗi    │ ✅ Hoàn thành  │
+│                   │ Kỹ Thuật & Trang 404/Error (Đợt 1)│                │
+├───────────────────┼───────────────────────────────────┼────────────────┤
+│ Sprint 8          │ Nâng Cấp UX Navigation, Bộ Chọn   │ ✅ Hoàn thành  │
+│                   │ Lịch Vạn Niên & Tiện Ích (Đợt 2)  │                │
+├───────────────────┼───────────────────────────────────┼────────────────┤
+│ Sprint 9          │ Design System Foundation:          │ ✅ Hoàn thành  │
+│                   │ UI Primitives & Design Tokens       │                │
+├───────────────────┼───────────────────────────────────┼────────────────┤
+│ Sprint 10         │ UX Deep Linking & Polish: URL      │ ✅ Hoàn thành  │
+│                   │ State Sync & Tương tác nhất quán   │                │
+├───────────────────┼───────────────────────────────────┼────────────────┤
+│ Sprint 11         │ Accessibility & Micro-Polish:      │ ⏳ Kế tiếp     │
+│                   │ Contrast, Font Size, ARIA Labels   │                │
+├───────────────────┼───────────────────────────────────┼────────────────┤
+│ Sprint 12         │ PWA Offline & Thông báo đẩy       │ 📋 Backlog     │
 │                   │ nhắc nhở Mùng 1, Ngày Rằm         │                │
 └───────────────────┴───────────────────────────────────┴────────────────┘
 ```
@@ -69,153 +84,131 @@
 
 ---
 
-### 🔨 SPRINT 2: BỘ CÔNG CỤ PHONG THỦY TÍNH HẠN & MƯỢN TUỔI LÀM NHÀ
-> **Mục tiêu**: Cung cấp công cụ tra cứu xem tuổi chuẩn xác cho gia chủ khi chuẩn bị làm nhà hoặc cưới hỏi.
-
-#### User Stories:
-- **Story 2.1 — Thuật toán tính Tam Tai**:
-  - Căn cứ Tam Hợp cục:
-    - Tuổi Thân - Tý - Thìn: Hạn Tam Tai vào 3 năm Dần - Mão - Thìn.
-    - Tuổi Dần - Ngọ - Tuất: Hạn Tam Tai vào 3 năm Thân - Dậu - Tuất.
-    - Tuổi Tỵ - Dậu - Sửu: Hạn Tam Tai vào 3 năm Hợi - Tý - Sửu.
-    - Tuổi Hợi - Mão - Mùi: Hạn Tam Tai vào 3 năm Tỵ - Ngọ - Mùi.
-  - Output: Xác định năm cần xem có phạm Tam Tai hay không, là năm Tam Tai thứ mấy (đầu, giữa hay cuối).
-- **Story 2.2 — Thuật toán tính Kim Lâu**:
-  - Tính tuổi mụ (Tuổi mụ = Năm xem - Năm sinh + 1).
-  - Lấy tuổi mụ chia cho 9, xét số dư:
-    - Dư 1: Phạm **Kim Lâu Thân** (hại bản thân gia chủ).
-    - Dư 3: Phạm **Kim Lâu Thê** (hại vợ/chồng).
-    - Dư 6: Phạm **Kim Lâu Tử** (hại con cái).
-    - Dư 8: Phạm **Kim Lâu Súc** (hại vật nuôi, kinh tế).
-    - Các số dư khác (0, 2, 4, 5, 7): Không phạm Kim Lâu.
-- **Story 2.3 — Thuật toán tính Hoang Ốc**:
-  - Tính theo vòng tròn 6 cung Hoang Ốc:
-    - 1. **Nhất Cát** (Cát): Làm nhà tuổi này an cư lạc nghiệp.
-    - 2. **Nhì Nghi** (Cát): Nhà cửa hưng vượng, giàu có.
-    - 3. **Tam Địa Sát** (Hung): Mắc bệnh tật, tai ương.
-    - 4. **Tứ Tấn Tài** (Cát): Phúc lộc dồi dào, làm ăn phát tài.
-    - 5. **Ngũ Thọ Tử** (Hung): Gia đình ly tán, bất hòa.
-    - 6. **Lục Hoang Ốc** (Hung): Khó thành đạt, vạn sự trắc trở.
-- **Story 2.4 — Xem Tuổi Làm Nhà Tổng Hợp & Gợi Ý Mượn Tuổi**:
-  - Đánh giá tổng hợp: Tuổi đẹp nhất là tuổi **không phạm cả 3 đại hạn Tam Tai, Kim Lâu, Hoang Ốc**.
-  - Nếu gia chủ phạm hạn: Hệ thống tự động quét các năm sinh từ 20 đến 70 tuổi để **gợi ý Top các tuổi đẹp nhất trong năm** thích hợp để mượn tuổi động thổ.
-  - Hướng dẫn thủ tục chuộc nhà và giấy tờ mượn tuổi theo cổ truyền.
-- **Story 2.5 — Giao diện & Trải nghiệm (`/phong-thuy/xem-tuoi-lam-nha`)**:
-  - Form nhập năm sinh gia chủ và năm dự kiến khởi công.
-  - Thẻ kết quả đồ họa trực quan (Huy hiệu Xanh lá: Đại Cát; Đỏ: Phạm hạn).
-  - Viết 30+ unit tests kiểm định thuật toán Tam Tai, Kim Lâu, Hoang Ốc.
+### ✅ SPRINT 2: BỘ CÔNG CỤ PHONG THỦY TÍNH HẠN & MƯỢN TUỔI LÀM NHÀ (ĐÃ XONG 100%)
+- [x] **Story 2.1 — Thuật toán tính Tam Tai** (Tam Hợp Cục, xác định năm Tam Tai 1/2/3).
+- [x] **Story 2.2 — Thuật toán tính Kim Lâu** (Tuổi mụ chia 9, phân loại Thân/Thê/Tử/Súc).
+- [x] **Story 2.3 — Thuật toán tính Hoang Ốc** (Vòng 6 cung: Nhất Cát → Lục Hoang Ốc).
+- [x] **Story 2.4 — Xem Tuổi Làm Nhà Tổng Hợp & Gợi Ý Mượn Tuổi**.
+- [x] **Story 2.5 — Giao diện `/phong-thuy/xem-tuoi-lam-nha`** + 30 unit tests.
 
 ---
 
-### 🌐 SPRINT 3: REST API BACKEND (`/api/v1/...`) SẴN SÀNG CHO MOBILE APP
-> **Mục tiêu**: Đóng gói toàn bộ lõi thuật toán thành RESTful API để sau này Mobile App (React Native/Flutter/iOS/Android) hoặc bên thứ 3 có thể gọi trực tiếp.
-
-#### User Stories:
-- **Story 3.1 — Endpoint Ngày (`GET /api/v1/lunar/day`)**:
-  - Query params: `?date=YYYY-MM-DD` (hoặc mặc định hôm nay).
-  - Trả về JSON: Dương lịch, Âm lịch, Can Chi, Giờ hoàng đạo, Trực, Tiết khí, Sao tốt/xấu, Việc nên/không nên làm, Lễ hội.
-- **Story 3.2 — Endpoint Tháng (`GET /api/v1/lunar/month`)**:
-  - Query params: `?month=MM&year=YYYY`.
-  - Trả về mảng 28-31 ngày đầy đủ dữ liệu cho lưới lịch vạn niên.
-- **Story 3.3 — Endpoint Đổi Ngày (`GET /api/v1/lunar/convert`)**:
-  - Query params: `?type=solar2lunar&d=...&m=...&y=...` hoặc `type=lunar2solar`.
-- **Story 3.4 — Endpoint Ngày Tốt (`GET /api/v1/lunar/auspicious`)**:
-  - Query params: `?purpose=cuoi-hoi|khai-truong|dong-tho|xuat-hanh&month=MM&year=YYYY`.
-  - Trả về danh sách ngày đạt điểm cát khí kèm lý do và cảnh báo.
-- **Story 3.5 — Endpoint Văn Khấn (`GET /api/v1/van-khan`)**:
-  - `GET /api/v1/van-khan`: Danh sách bài khấn, lọc theo category hoặc search keyword.
-  - `GET /api/v1/van-khan/:slug`: Chi tiết bài khấn, sắm lễ, lưu ý.
-- **Story 3.6 — Cấu hình Kỹ thuật**:
-  - Cấu hình CORS mở (`Access-Control-Allow-Origin: *`).
-  - Chuẩn hóa format response `{ success: true, data: ..., error: null }`.
-  - Trang tài liệu API Documentation đơn giản tại `/api-docs`.
+### ✅ SPRINT 3: REST API BACKEND (`/api/v1/...`) (ĐÃ XONG 100%)
+- [x] **Story 3.1–3.6** — Endpoints: Ngày, Tháng, Đổi Ngày, Ngày Tốt, Văn Khấn, CORS & API Docs.
 
 ---
 
-### 📅 SPRINT 4: ĐỒNG BỘ LỊCH (.ICS) & TIỆN ÍCH ĐẾM NGƯỢC TẾT (GROWTH / VIRAL) ✅ (HOÀN THÀNH)
-> **Mục tiêu**: Giúp người dùng gắn bó lâu dài thông qua nhắc lịch trên điện thoại và hút lượng truy cập lớn dịp cuối năm.
-
-#### User Stories:
-- **Story 4.1 — Xuất File iCalendar (.ics)**: ✅
-  - Sinh file `.ics` chuẩn RFC 5545 tương thích 100% với Apple Calendar, Google Calendar, Outlook.
-  - Tùy chọn xuất:
-    - Lịch Ngày Rằm & Mùng 1 trong năm (có thông báo nhắc trước 1 ngày lúc 20:00).
-    - Lịch các ngày lễ truyền thống (Tết Nguyên Đán, Giỗ Tổ, Vu Lan, Trung Thu, Táo Quân...).
-- **Story 4.2 — Đăng Ký Lịch Trực Tiếp (Webcal One-click Subscribe)**: ✅
-  - Đường dẫn `webcal://lichan.com/api/v1/calendar/subscribe.ics` giúp người dùng iPhone/Mac/Android bấm một nút là tự động thêm lịch vào máy mà không cần tải file thủ công.
-- **Story 4.3 — Trang Giao Diện Đồng Bộ Lịch (`/dong-bo-lich`)**: ✅
-  - Bộ điều khiển tương tác chọn nội dung (Rằm/Mùng 1/Lễ Tết), chọn năm, bật/tắt nhắc nhở.
-  - Nút đồng bộ Apple Calendar 1-click, Google Calendar import, Tải file .ics, và Copy URL.
-  - Danh sách xem trước sự kiện mẫu và hướng dẫn từng bước cho iOS, Android, Outlook.
-- **Story 4.4 — Trang Đếm Ngược Tết Nguyên Đán (`/dem-nguoc-tet`)**: ✅
-  - Đồng hồ đếm ngược thời gian thực (Ngày : Giờ : Phút : Giây) đến 00:00 đêm Giao Thừa dựa trên thuật toán thiên văn.
-  - Thông tin con giáp năm mới, phong tục đón xuân, danh sách các việc cần chuẩn bị từ 23 tháng Chạp đến mùng 1 Tết.
-  - Nút chia sẻ lên Facebook, Zalo, sao chép link và sao chép lời chúc Tết tạo hiệu ứng lan truyền (viral).
-- **Story 4.5 — Bộ Kiểm Thử (33 Unit Tests)**: ✅
-  - 33 test cases kiểm thử định dạng RFC 5545, VEVENT, VALARM, ngày Rằm/Mùng 1 và đếm ngược Tết pass 100%.
+### ✅ SPRINT 4: ĐỒNG BỘ LỊCH (.ICS) & TIỆN ÍCH ĐẾM NGƯỢC TẾT (ĐÃ XONG 100%)
+- [x] **Story 4.1–4.5** — File iCalendar RFC 5545, Webcal Subscribe, Giao diện `/dong-bo-lich`, Đếm Ngược Tết, 33 unit tests.
 
 ---
 
-### 🔮 SPRINT 5: TỬ VI CÁ NHÂN HÓA THEO NĂM SINH & CỬU DIỆU NIÊN HẠN ✅ (HOÀN THÀNH)
-> **Mục tiêu**: Nâng cấp trang Tử vi từ 12 con giáp chung chung thành bảng luận giải cá nhân hóa chi tiết theo năm sinh.
-
-#### User Stories:
-- **Story 5.1 — Bảng Cửu Diệu Sao Chiếu Mệnh**: ✅
-  - Thuật toán tính 9 sao theo tuổi mụ và giới tính (La Hầu, Thổ Tú, Thủy Diệu, Thái Bạch, Thái Dương, Vân Hớn, Kế Đô, Thái Âm, Mộc Đức).
-  - Đánh giá Cát/Hung, tháng kỵ/hợp, chi tiết nghi thức cúng dâng sao (ngày cúng, giờ cúng, hướng lạy, số đèn, bài vị) và link văn khấn cúng sao giải hạn.
-- **Story 5.2 — Bảng Bát Hạn Niên Vận**: ✅
-  - Tính 8 niên hạn: Huỳnh Tuyền, Tam Kheo, Ngũ Mộ, Thiên Tinh, Tán Tận, Thiên La, Địa Võng, Diêm Vương.
-  - Phân định Đại hạn / Tiểu hạn, ý nghĩa và lời khuyên phòng tránh cụ thể.
-- **Story 5.3 — Cung Mệnh & Bát Trạch Hướng Nhà**: ✅
-  - Tính Cung Phi (Càn, Khảm, Cấn, Chấn, Tốn, Ly, Khôn, Đoài) chuẩn Lạc Thư cho cả thế kỷ 20 và 21.
-  - Phân loại Đông Tứ Mệnh và Tây Tứ Mệnh.
-  - Bảng 4 hướng tốt (Sinh Khí, Thiên Y, Diên Niên, Phục Vị) và 4 hướng xấu (Tuyệt Mệnh, Ngũ Quỷ, Lục Sát, Họa Hại), màu sắc hợp/kỵ.
-- **Story 5.4 — Giao Diện & Dynamic Pages `/tu-vi/[slug]`**: ✅
-  - Trang `/tu-vi` cho phép chọn năm sinh, giới tính, năm xem niên hạn -> trả về báo cáo tử vi cá nhân hóa lập tức.
-  - Sinh tĩnh (SSG) 66 trang `/tu-vi/[slug]` cho 66 năm hoa giáp (1960 - 2025) tối ưu SEO tuyệt đối.
-  - Endpoint REST API `GET /api/v1/tu-vi` phục vụ Mobile App.
-- **Story 5.5 — Bộ Kiểm Thử (48 Unit Tests)**: ✅
-  - 48 test cases kiểm thử độc lập sao Cửu Diệu, Bát Hạn, Cung Phi Bát Trạch, Hoa Giáp nạp âm và báo cáo tổng hợp pass 100%.
+### ✅ SPRINT 5: TỬ VI CÁ NHÂN HÓA & CỬU DIỆU NIÊN HẠN (ĐÃ XONG 100%)
+- [x] **Story 5.1–5.5** — Cửu Diệu, Bát Hạn, Cung Phi Bát Trạch, SSG 66 trang Hoa Giáp, 48 unit tests.
 
 ---
 
-### 🎎 SPRINT 6: PHÂN HỆ XEM TUỔI TOÀN DIỆN (HÔN NHÂN, LÀM ĂN, SINH CON, XÔNG ĐẤT) ✅ (HOÀN THÀNH)
-> **Mục tiêu**: Xây dựng phân hệ Xem Tuổi chuyên sâu, chuẩn xác theo các thư tịch cổ điển Việt Nam (Hiệp Kỷ Biện Phương Thư, Ngọc Hạp Thông Thư, Lạc Thư Bát Trạch), giải quyết toàn diện nhu cầu xem tuổi của người Việt.
-
-#### User Stories:
-- **Story 6.1 — Xem Tuổi Vợ Chồng (Hôn Nhân)**: ✅
-  - Phân tích tương hợp qua 5 trụ cột: Ngũ Hành nạp âm (2đ), Thiên Can (2đ), Địa Chi (2đ), Cung Phi Bát Trạch (2đ), Niên Mệnh Cung Phi (2đ).
-  - Thang điểm chuẩn hóa 10/10, kết luận Cát/Bình hòa/Hung, lời khuyên thiết thực và phương pháp hóa giải tương khắc (chọn năm sinh con, hướng nhà, cách ứng xử).
-  - Giao diện trực quan tại `/xem-tuoi/vo-chong` & REST API `GET /api/v1/xem-tuoi/vo-chong`.
-- **Story 6.2 — Xem Tuổi Làm Ăn (Kinh Doanh & Khởi Nghiệp)**: ✅
-  - Đánh giá tương sinh tài lộc, phối ngẫu cung phi Bát San làm ăn (Sinh Khí, Diên Niên, v.v.).
-  - Tự động gợi ý phân bổ vai trò chiến lược: ai nên phụ trách đối ngoại / mở rộng thị trường, ai nên quản trị dòng tiền / vận hành nội bộ.
-  - Giao diện tại `/xem-tuoi/lam-an` & REST API `GET /api/v1/xem-tuoi/lam-an`.
-- **Story 6.3 — Xem Tuổi Sinh Con (Hợp Bố Mẹ)**: ✅
-  - Phân tích tương hợp 3 chiều: Bố - Con, Mẹ - Con, và Con - Bố Mẹ (Ngũ Hành, Thiên Can, Địa Chi).
-  - Tự động quét và xếp hạng 5 năm kế tiếp giúp các cặp vợ chồng dễ dàng lên kế hoạch sinh con đại cát.
-  - Giao diện tại `/xem-tuoi/sinh-con` & REST API `GET /api/v1/xem-tuoi/sinh-con`.
-- **Story 6.4 — Xem Tuổi Xông Đất & Mở Hàng Đầu Năm**: ✅
-  - Thuật toán phối hợp 3 chiều: Gia Chủ - Năm Mới - Người Xông Đất (Ngũ hành, Thiên can, Địa chi).
-  - Xếp hạng Top 10 tuổi đẹp nhất kèm danh sách tuổi đại kỵ tuyệt đối tránh xông nhà.
-  - Giao diện tại `/xem-tuoi/xong-dat` & REST API `GET /api/v1/xem-tuoi/xong-dat`.
-- **Story 6.5 — Hub Trung Tâm & Cập Nhật Điều Hướng Toàn Trang**: ✅
-  - Trang Hub `/xem-tuoi` tổng hợp đầy đủ 6 công cụ xem tuổi (Vợ chồng, Làm ăn, Sinh con, Xông đất, Làm nhà, Tử vi).
-  - Cập nhật Header, Footer, Sitemap XML và tài liệu API Docs `/api-docs`.
-- **Story 6.6 — Bộ Kiểm Thử (31 Unit Tests)**: ✅
-  - 31 test cases kiểm thử độc lập các thuật toán quy tắc ngũ hành, thiên can, địa chi, cung phi, vợ chồng, làm ăn, sinh con, xông đất pass 100%.
+### ✅ SPRINT 6: PHÂN HỆ XEM TUỔI TOÀN DIỆN (ĐÃ XONG 100%)
+- [x] **Story 6.1–6.6** — Vợ Chồng, Làm Ăn, Sinh Con, Xông Đất, Hub `/xem-tuoi`, 31 unit tests.
 
 ---
 
-### 📱 SPRINT 7: PWA HOÀN CHỈNH & MOBILE WEB TIỆN DỤNG
+### ✅ SPRINT 7: TỐI ƯU SEO, CORE PAGES & BẢO TRÌ KỸ THUẬT (ĐÃ XONG 100%)
+- [x] **Story 7.1–7.5** — Tách Server/Client Components, Nâng cấp `/xem-ngay/[date]`, Schema.org Fix, 404/Error Pages, SEO Config.
+
+---
+
+### ✅ SPRINT 8: NÂNG CẤP UX NAVIGATION & TIỆN ÍCH LỊCH (ĐÃ XONG 100%)
+- [x] **Story 8.1–8.5** — Header Restructure, Mobile Menu Backdrop, Month/Year Picker, UX Form, Padding & PWA Icons.
+
+---
+
+### ✅ SPRINT 9: XÂY DỰNG DESIGN SYSTEM CỐT LÕI (FOUNDATION) (ĐÃ XONG 100%)
+> **Mục tiêu**: Thiết lập hệ thống thiết kế (Design System) hoàn chỉnh gồm Design Tokens, UI Primitives chuẩn hóa, và loại bỏ triệt để mã hex hardcode trên toàn bộ codebase.
+
+#### User Stories:
+- [x] **Story 9.1 — Mở Rộng Design Tokens (`globals.css`)**:
+  - Bổ sung các biến `@theme` còn thiếu: `--color-primary-hover` (#6e5310), `--color-accent` (#D4A017), `--color-surface` (#FFFFFF), `--color-muted` (stone-500), `--color-muted-foreground` (stone-600).
+  - Chuẩn hóa thang bo góc: `--radius-sm` (6px), `--radius-md` (8px), `--radius-lg` (12px), `--radius-xl` (16px).
+
+- [x] **Story 9.2 — Bổ Sung UI Primitives (`@/components/ui/`)**:
+  - **[MỚI] `input.tsx`**: Input chuẩn hóa focus ring, height, padding, hỗ trợ `disabled` & `error` state.
+  - **[MỚI] `select.tsx`**: Dropdown tùy biến với icon mũi tên phong thủy, fix lỗi iOS Safari caret.
+  - **[MỚI] `tabs.tsx`**: Component chuyển tab `underline`/`pills`, bo góc đồng bộ Card cha, animated indicator.
+  - **[MỚI] `skeleton.tsx`**: Khung xương tải trang (`SkeletonLine`, `SkeletonCircle`, `SkeletonCard`) dùng cho loading states.
+
+- [x] **Story 9.3 — Loại Bỏ Hardcode Hex & Áp Dụng Design Tokens**:
+  - Thay `text-[#8B6914]` → `text-primary`, `bg-[#8B6914]` → `bg-primary` trên **~26 file TSX**.
+  - Thay `hover:bg-[#6e5310]` / `hover:bg-[#725510]` → `hover:bg-primary-dark`.
+  - Thay `text-[#DC240E]` → `text-danger`, `border-[#D4A017]` → `border-accent`.
+  - Thay `bg-[#FEF7E6]` → `bg-background-alt`.
+  - Đảm bảo component `button.tsx`, `badge.tsx` cũng chuyển sang dùng token.
+
+- [x] **Story 9.4 — Áp Dụng UI Primitives Thay Thế Native HTML**:
+  - Thay toàn bộ `<select className="...">` native bằng `<Select>` component tại: `DoiNgayClient` (3), `ThanSoHocClient` (3), `XuatHanhClient` (3), `LichVanNienClient` (2), `TuViClient` (3).
+  - Thay `<input type="number" className="...">` bằng `<Input>` component tại: `DoiNgayClient` (1), `ThanSoHocClient` (1).
+  - Thay tab switcher tự viết bằng `<Tabs>` component tại: `DoiNgayClient` (Solar ↔ Lunar), `TuViClient` (Cá nhân ↔ Con giáp).
+
+---
+
+### ✅ SPRINT 10: TỐI ƯU TƯƠNG TÁC & DEEP LINKING (UX POLISH) (ĐÃ XONG 100%)
+> **Mục tiêu**: Giải quyết các điểm ma sát tương tác lớn nhất — cho phép chia sẻ link kết quả, cải thiện phản hồi thị giác trên mobile, thống nhất pattern tương tác.
+
+#### User Stories:
+- [x] **Story 10.1 — URL State Sync (Deep Linking / Shareable Results)**:
+  - Tích hợp `useSearchParams` + `window.history.replaceState` cho 8 trang công cụ:
+    - `/xem-tuoi/vo-chong?chong=1990&vo=1994`
+    - `/xem-tuoi/lam-an?a=1990&b=1993&ga=nam&gb=nu`
+    - `/xem-tuoi/sinh-con?bo=1990&me=1993&nam=2026`
+    - `/xem-tuoi/xong-dat?gia_chu=1990&nam=2026`
+    - `/than-so-hoc?d=19&m=9&y=1995`
+    - `/doi-ngay-am-duong?mode=solar2lunar&d=20&m=9&y=2026&leap=0`
+    - `/tu-vi?tab=canhan&nam=1993&xem=2026&gt=nam`
+    - `/lich-van-nien?thang=9&nam=2026`
+  - Khi user thay đổi input → URL cập nhật tức thì (không reload). Khi mở link chia sẻ → state load đúng giá trị.
+  - Tích hợp nút Chia sẻ sao chép link có tooltip phản hồi trực quan.
+
+- [x] **Story 10.2 — Loại Bỏ Fake Loading Delay & Thống Nhất Pattern Phản Hồi**:
+  - Xóa `setTimeout(350ms)` fake loading tại `VoChongClient.tsx`, `LamAnClient.tsx`, `SinhConClient.tsx`, `XongDatClient.tsx`.
+  - Thống nhất: Kết quả hiển thị tức thì (reactive `useMemo`) mượt mà, phản hồi tức thì.
+
+- [x] **Story 10.3 — Cải Thiện Lịch Vạn Niên Trên Mobile**:
+  - Thêm `touch-manipulation` loại bỏ trễ click 300ms trên màn hình cảm ứng di động.
+  - Thêm visual feedback active ring animation (`active:scale-95`) khi chạm ô ngày.
+  - Bổ sung chấm đỏ chỉ thị ngày lễ cho giao diện di động.
+  - Nút chia sẻ link tháng/năm trực quan.
+
+---
+
+### ♿ SPRINT 11: ACCESSIBILITY & MICRO-POLISH (A11Y)
+> **Mục tiêu**: Nâng chuẩn trải nghiệm cho đối tượng người lớn tuổi (40-65+) — đối tượng chính của Lịch An — và tuân thủ WCAG AA.
+
+#### User Stories:
+- **Story 11.1 — Nâng Cỡ Chữ Tối Thiểu & Tăng Contrast**:
+  - Nâng `text-[11px]` → `text-xs` (12px) cho nội dung người dùng cần đọc (giờ hoàng đạo, sắm lễ, mô tả) trên ~14 file.
+  - Giữ nguyên `text-[11px]` cho label kỹ thuật API docs (chấp nhận được vì đối tượng là developer).
+  - Nâng chữ phụ `text-stone-400`/`text-stone-500` → `text-stone-600` trên nền sáng để đạt contrast ratio ≥ 4.5:1.
+
+- **Story 11.2 — Bổ Sung ARIA Labels & Focus Management**:
+  - Thêm `aria-label` cho icon button (hamburger menu, nút chuyển tháng/năm, nút chuyển ngày).
+  - Focus trap cho mobile menu drawer.
+  - Đảm bảo tab focus tuần tự hợp lý trên Tabs, Select, Input mới.
+
+- **Story 11.3 — Responsive Fine-Tuning Cho Màn Hình Nhỏ (360px)**:
+  - Kiểm tra form 3 cột trên viewport 360px, sửa chữ bị ép sát viền.
+  - Trên màn hình < 375px: chuyển form Ngày-Tháng-Năm thành `grid-cols-1` hoặc `grid-cols-2 + 1`.
+
+---
+
+### 📱 SPRINT 12: PWA HOÀN CHỈNH & MOBILE WEB TIỆN DỤNG
 > **Mục tiêu**: Trải nghiệm mượt mà như một ứng dụng gốc trên điện thoại không cần cài từ App Store.
 
 #### User Stories:
-- **Story 7.1 — Offline Caching**:
+- **Story 12.1 — Offline Caching**:
   - Service Worker lưu cache toàn bộ thuật toán âm lịch và các bài văn khấn, vào những nơi không có sóng/3G (nhà chùa, nghĩa trang, vùng sâu) vẫn mở ra xem được bình thường.
-- **Story 7.2 — Add to Home Screen (A2HS)**:
+- **Story 12.2 — Add to Home Screen (A2HS)**:
   - Banner hướng dẫn cài đặt Lịch An vào màn hình chính điện thoại với 1 chạm.
-- **Story 7.3 — Web Push Notification (Thông báo đẩy)**:
+- **Story 12.3 — Web Push Notification (Thông báo đẩy)**:
   - Cho phép người dùng đăng ký nhận thông báo nhắc nhở vào 19:00 tối hôm trước ngày Mùng 1 và ngày Rằm.
 
 ---
@@ -231,3 +224,4 @@
    - Duy trì điểm Google Lighthouse: Performance ≥ 90, Accessibility ≥ 95, SEO = 100.
 4. **Tự Động Lưu Trữ (Git Workflow)**:
    - Mỗi khi hoàn tất một Story hoặc một Sprint, tự động chạy build kiểm định, commit và push lên kho lưu trữ GitHub.
+

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Heart, ArrowLeft, ShieldCheck } from 'lucide-react';
@@ -26,36 +26,36 @@ export default function VoChongPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FEF7E6] py-10 px-4 sm:px-6 lg:px-8">
+    <div className="max-w-4xl mx-auto space-y-8">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <div className="max-w-4xl mx-auto space-y-8">
-        <Link
-          href="/xem-tuoi"
-          className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-800 hover:text-amber-950 transition-colors"
-        >
-          <ArrowLeft className="w-4 h-4" /> Quay lại Trung Tâm Xem Tuổi
-        </Link>
+      <Link
+        href="/xem-tuoi"
+        className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-800 hover:text-amber-950 transition-colors"
+      >
+        <ArrowLeft className="w-4 h-4" /> Quay lại Trung Tâm Xem Tuổi
+      </Link>
 
-        {/* Header Hero */}
-        <div className="text-center space-y-3">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-rose-100 text-rose-800 text-xs font-bold uppercase tracking-wider">
-            <Heart className="w-4 h-4 text-rose-600" />
-            Hôn Nhân & Hòa Hợp Gia Đạo
-          </div>
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-amber-950 font-serif">
-            Xem Tuổi Vợ Chồng Kết Hôn
-          </h1>
-          <p className="text-gray-700 max-w-2xl mx-auto text-sm sm:text-base leading-relaxed">
-            Đánh giá hợp khắc theo 5 tiêu chuẩn kinh điển: <strong>Ngũ hành, Thiên can, Địa chi, Cung phi Bát trạch</strong> và <strong>Niên mệnh</strong> kèm lời khuyên hóa giải gia đạo.
-          </p>
+      {/* Header Hero */}
+      <div className="text-center space-y-3">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-rose-100 text-rose-800 text-xs font-bold uppercase tracking-wider">
+          <Heart className="w-4 h-4 text-rose-600" />
+          Hôn Nhân & Hòa Hợp Gia Đạo
         </div>
-
-        <VoChongClient />
+        <h1 className="text-3xl sm:text-4xl font-extrabold text-amber-950 font-serif">
+          Xem Tuổi Vợ Chồng Kết Hôn
+        </h1>
+        <p className="text-gray-700 max-w-2xl mx-auto text-sm sm:text-base leading-relaxed">
+          Đánh giá hợp khắc theo 5 tiêu chuẩn kinh điển: <strong>Ngũ hành, Thiên can, Địa chi, Cung phi Bát trạch</strong> và <strong>Niên mệnh</strong> kèm lời khuyên hóa giải gia đạo.
+        </p>
       </div>
+
+      <Suspense fallback={<div className="text-center py-12 text-stone-500">Đang tải công cụ xem tuổi...</div>}>
+        <VoChongClient />
+      </Suspense>
     </div>
   );
 }

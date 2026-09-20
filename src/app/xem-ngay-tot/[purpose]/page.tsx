@@ -257,7 +257,7 @@ export default async function AuspiciousDetailPage({ params }: PageProps) {
 
       {/* Cẩm nang hướng dẫn chuyên sâu */}
       <div className="rounded-2xl bg-white border border-amber-900/15 p-6 md:p-8 space-y-6 shadow-sm">
-        <h2 className="text-xl md:text-2xl font-bold text-[#8B6914] border-b border-amber-900/10 pb-3">
+        <h2 className="text-xl md:text-2xl font-bold text-primary border-b border-amber-900/10 pb-3">
           {config.guideTitle}
         </h2>
         <div className="space-y-4">

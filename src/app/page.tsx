@@ -46,8 +46,8 @@ export default function HomePage() {
           <CardHeader className="bg-gradient-to-r from-amber-50 to-orange-50/50 border-b border-amber-900/10 pb-4">
             <div className="flex flex-wrap justify-between items-center gap-3">
               <div className="flex items-center gap-2">
-                <CalendarIcon className="w-6 h-6 text-[#8B6914]" />
-                <CardTitle className="text-2xl text-[#8B6914]">Hôm Nay Có Gì Tốt?</CardTitle>
+                <CalendarIcon className="w-6 h-6 text-primary" />
+                <CardTitle className="text-2xl text-primary">Hôm Nay Có Gì Tốt?</CardTitle>
               </div>
               <div className="flex gap-2">
                 <Link href={formatUrlDate(yesterday)}>
@@ -83,19 +83,19 @@ export default function HomePage() {
                 <div className="text-8xl font-black text-stone-800 tracking-tight my-2">
                   {dayInfo.solarDate.day}
                 </div>
-                <div className="text-lg font-semibold text-[#DC240E]">{dayInfo.dayOfWeek}</div>
+                <div className="text-lg font-semibold text-danger">{dayInfo.dayOfWeek}</div>
               </div>
 
               {/* Âm lịch */}
-              <div className="border-2 border-[#D4A017]/40 rounded-2xl p-6 bg-gradient-to-br from-[#FEF7E6] to-amber-50/50 shadow-sm relative overflow-hidden">
+              <div className="border-2 border-accent/40 rounded-2xl p-6 bg-gradient-to-br from-background-alt to-amber-50/50 shadow-sm relative overflow-hidden">
                 <div className="absolute top-2 right-2 opacity-10">
-                  <Flame className="w-24 h-24 text-[#8B6914]" />
+                  <Flame className="w-24 h-24 text-primary" />
                 </div>
-                <Badge className="mb-2 bg-[#8B6914]">ÂM LỊCH</Badge>
+                <Badge className="mb-2 bg-primary">ÂM LỊCH</Badge>
                 <div className="text-amber-900 font-medium">
                   Tháng {dayInfo.lunarDate.month} {dayInfo.lunarDate.leap ? '(Nhuận)' : ''}
                 </div>
-                <div className="text-8xl font-black text-[#8B6914] tracking-tight my-2">
+                <div className="text-8xl font-black text-primary tracking-tight my-2">
                   {dayInfo.lunarDate.day}
                 </div>
                 <div className="text-lg font-bold text-amber-950">
@@ -115,7 +115,7 @@ export default function HomePage() {
             {/* Giờ Hoàng Đạo */}
             <div className="mb-8">
               <div className="flex items-center gap-2 mb-4 pb-2 border-b border-stone-100">
-                <Clock className="w-5 h-5 text-[#8B6914]" />
+                <Clock className="w-5 h-5 text-primary" />
                 <h3 className="text-lg font-bold text-stone-800">Giờ Hoàng Đạo Trong Ngày</h3>
               </div>
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2.5">
@@ -205,7 +205,7 @@ export default function HomePage() {
         {/* Thông tin trực nhật & tiết khí */}
         <Card className="border-amber-900/10">
           <CardHeader className="pb-3 border-b border-stone-100">
-            <CardTitle className="text-base flex items-center gap-2 text-[#8B6914]">
+            <CardTitle className="text-base flex items-center gap-2 text-primary">
               <Compass className="w-4 h-4" /> Khí Tiết & Trực Nhật
             </CardTitle>
           </CardHeader>
@@ -234,7 +234,7 @@ export default function HomePage() {
           <CardHeader className="pb-3 border-b border-stone-100">
             <div className="flex justify-between items-center">
               <CardTitle className="text-base">Tháng {month}/{year}</CardTitle>
-              <Link href="/lich-van-nien" className="text-xs text-[#8B6914] font-medium hover:underline">
+              <Link href="/lich-van-nien" className="text-xs text-primary font-medium hover:underline">
                 Xem cả năm →
               </Link>
             </div>
@@ -257,7 +257,7 @@ export default function HomePage() {
                     href={`/xem-ngay/${d.toString().padStart(2, '0')}-${month.toString().padStart(2, '0')}-${year}`}
                     className={`text-center p-1 rounded-lg text-xs transition-colors flex flex-col items-center justify-center ${
                       isToday
-                        ? 'bg-[#8B6914] text-white font-bold shadow-xs'
+                        ? 'bg-primary text-white font-bold shadow-xs'
                         : 'hover:bg-amber-50 text-stone-700'
                     } ${!isToday && isSun ? 'text-red-600 font-semibold' : ''}`}
                   >

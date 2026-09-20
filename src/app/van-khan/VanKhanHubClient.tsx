@@ -193,7 +193,7 @@ export default function VanKhanHubClient({ initialItems }: Props) {
                     </span>
                   </div>
 
-                  <CardTitle className="text-lg font-bold text-[#8B6914] line-clamp-2 hover:text-[#725510]">
+                  <CardTitle className="text-lg font-bold text-primary line-clamp-2 hover:text-primary-dark">
                     <Link href={`/van-khan/${item.slug}`}>
                       {item.title}
                     </Link>
@@ -206,7 +206,7 @@ export default function VanKhanHubClient({ initialItems }: Props) {
 
                 <CardContent className="space-y-3 pt-0 text-xs">
                   {/* Đối tượng & Thời gian */}
-                  <div className="p-2.5 rounded-lg bg-[#FEF7E6]/70 border border-amber-900/10 space-y-1 text-stone-700">
+                  <div className="p-2.5 rounded-lg bg-background-alt/70 border border-amber-900/10 space-y-1 text-stone-700">
                     <div className="flex items-start gap-1">
                       <span className="font-bold text-amber-950 shrink-0">Cúng:</span>
                       <span className="truncate">{item.target}</span>

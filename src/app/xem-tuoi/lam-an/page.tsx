@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Briefcase, ArrowLeft } from 'lucide-react';
@@ -26,36 +26,36 @@ export default function LamAnPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FEF7E6] py-10 px-4 sm:px-6 lg:px-8">
+    <div className="max-w-4xl mx-auto space-y-8">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <div className="max-w-4xl mx-auto space-y-8">
-        <Link
-          href="/xem-tuoi"
-          className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-800 hover:text-amber-950 transition-colors"
-        >
-          <ArrowLeft className="w-4 h-4" /> Quay lại Trung Tâm Xem Tuổi
-        </Link>
+      <Link
+        href="/xem-tuoi"
+        className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-800 hover:text-amber-950 transition-colors"
+      >
+        <ArrowLeft className="w-4 h-4" /> Quay lại Trung Tâm Xem Tuổi
+      </Link>
 
-        {/* Header Hero */}
-        <div className="text-center space-y-3">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-100 text-blue-800 text-xs font-bold uppercase tracking-wider">
-            <Briefcase className="w-4 h-4 text-blue-600" />
-            Tài Vận & Hợp Tác Kinh Doanh
-          </div>
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-amber-950 font-serif">
-            Xem Tuổi Hợp Tác Làm Ăn
-          </h1>
-          <p className="text-gray-700 max-w-2xl mx-auto text-sm sm:text-base leading-relaxed">
-            Đánh giá độ tương hợp ngũ hành, can chi và cung phi giữa <strong>Chủ sự</strong> và <strong>Đối tác</strong> nhằm xây dựng sự nghiệp vững chắc, phát tài phát lộc.
-          </p>
+      {/* Header Hero */}
+      <div className="text-center space-y-3">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-100 text-blue-800 text-xs font-bold uppercase tracking-wider">
+          <Briefcase className="w-4 h-4 text-blue-600" />
+          Tài Vận & Hợp Tác Kinh Doanh
         </div>
-
-        <LamAnClient />
+        <h1 className="text-3xl sm:text-4xl font-extrabold text-amber-950 font-serif">
+          Xem Tuổi Hợp Tác Làm Ăn
+        </h1>
+        <p className="text-gray-700 max-w-2xl mx-auto text-sm sm:text-base leading-relaxed">
+          Đánh giá độ tương hợp ngũ hành, can chi và cung phi giữa <strong>Chủ sự</strong> và <strong>Đối tác</strong> nhằm xây dựng sự nghiệp vững chắc, phát tài phát lộc.
+        </p>
       </div>
+
+      <Suspense fallback={<div className="text-center py-12 text-stone-500">Đang tải công cụ xem tuổi làm ăn...</div>}>
+        <LamAnClient />
+      </Suspense>
     </div>
   );
 }

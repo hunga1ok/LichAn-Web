@@ -27,12 +27,22 @@ export async function generateMetadata(): Promise<Metadata> {
 export default function DemNguocTetPage() {
   const tetInfo = getNextTetInfo();
 
+  const startDayStr = String(tetInfo.solarDate.day).padStart(2, '0');
+  const startMonthStr = String(tetInfo.solarDate.month).padStart(2, '0');
+  const startDateStr = `${tetInfo.solarDate.year}-${startMonthStr}-${startDayStr}T00:00:00+07:00`;
+
+  const endDateObj = new Date(tetInfo.solarDate.year, tetInfo.solarDate.month - 1, tetInfo.solarDate.day + 3);
+  const endYear = endDateObj.getFullYear();
+  const endMonthStr = String(endDateObj.getMonth() + 1).padStart(2, '0');
+  const endDayStr = String(endDateObj.getDate()).padStart(2, '0');
+  const endDateStr = `${endYear}-${endMonthStr}-${endDayStr}T23:59:59+07:00`;
+
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Event',
     name: `Tết Nguyên Đán ${tetInfo.canChiYear}`,
-    startDate: `${tetInfo.solarDate.year}-${String(tetInfo.solarDate.month).padStart(2, '0')}-${String(tetInfo.solarDate.day).padStart(2, '0')}T00:00:00+07:00`,
-    endDate: `${tetInfo.solarDate.year}-${String(tetInfo.solarDate.month).padStart(2, '0')}-${String(tetInfo.solarDate.day + 3).padStart(2, '0')}T23:59:59+07:00`,
+    startDate: startDateStr,
+    endDate: endDateStr,
     eventStatus: 'https://schema.org/EventScheduled',
     eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
     location: {
@@ -47,15 +57,13 @@ export default function DemNguocTetPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FEF7E6] py-10 px-4 sm:px-6 lg:px-8">
+    <div className="max-w-5xl mx-auto">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <div className="max-w-5xl mx-auto">
-        <DemNguocTetClient tetInfo={tetInfo} />
-      </div>
+      <DemNguocTetClient tetInfo={tetInfo} />
     </div>
   );
 }

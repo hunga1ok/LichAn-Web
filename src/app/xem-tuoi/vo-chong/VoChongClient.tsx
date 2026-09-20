@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useState, useMemo, useRef } from 'react';
+import React, { useState, useMemo, useRef, useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
 import {
   Heart,
   ShieldCheck,
@@ -16,9 +17,11 @@ import {
   ChevronUp,
   RefreshCw,
   Check,
+  Share2,
 } from 'lucide-react';
 import { evaluateVoChong, VoChongReport } from '@/lib/xem-tuoi';
 import { getAllHoaGiapList, HoaGiapData } from '@/lib/tu-vi/hoa-giap';
+import { Select } from '@/components/ui/select';
 
 const QUICK_PAIRS = [
   { label: 'Canh Ngọ (1990) — Giáp Tuất (1994)', chong: 1990, vo: 1994 },
@@ -29,9 +32,13 @@ const QUICK_PAIRS = [
 ];
 
 export default function VoChongClient() {
-  const [chongYear, setChongYear] = useState<number>(1990);
-  const [voYear, setVoYear] = useState<number>(1993);
-  const [isCalculating, setIsCalculating] = useState<boolean>(false);
+  const searchParams = useSearchParams();
+  const initChong = Number(searchParams.get('chong')) || 1990;
+  const initVo = Number(searchParams.get('vo')) || 1993;
+
+  const [chongYear, setChongYear] = useState<number>(initChong);
+  const [voYear, setVoYear] = useState<number>(initVo);
+  const [copied, setCopied] = useState<boolean>(false);
   const [lastCalculatedTime, setLastCalculatedTime] = useState<string>('');
   const [justCalculated, setJustCalculated] = useState<boolean>(false);
   const [expandedCriteria, setExpandedCriteria] = useState<Record<string, boolean>>({
@@ -41,6 +48,16 @@ export default function VoChongClient() {
     cungPhi: true,
     nienMenh: true,
   });
+
+  // Đồng bộ query params lên URL khi năm thay đổi
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const url = new URL(window.location.href);
+      url.searchParams.set('chong', chongYear.toString());
+      url.searchParams.set('vo', voYear.toString());
+      window.history.replaceState(null, '', url.toString());
+    }
+  }, [chongYear, voYear]);
 
   const hoaGiapList: HoaGiapData[] = useMemo(() => {
     return getAllHoaGiapList();
@@ -58,39 +75,37 @@ export default function VoChongClient() {
   };
 
   const handleSearch = () => {
-    setIsCalculating(true);
-    setJustCalculated(false);
-    setTimeout(() => {
-      setIsCalculating(false);
-      setJustCalculated(true);
-      const now = new Date();
-      setLastCalculatedTime(
-        `${now.getHours().toString().padStart(2, '0')}:${now
-          .getMinutes()
-          .toString()
-          .padStart(2, '0')}:${now.getSeconds().toString().padStart(2, '0')}`
-      );
-      resultRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 350);
+    setJustCalculated(true);
+    const now = new Date();
+    setLastCalculatedTime(
+      `${now.getHours().toString().padStart(2, '0')}:${now
+        .getMinutes()
+        .toString()
+        .padStart(2, '0')}:${now.getSeconds().toString().padStart(2, '0')}`
+    );
+    resultRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
   const handleSelectQuickPair = (c: number, v: number) => {
     setChongYear(c);
     setVoYear(v);
-    setIsCalculating(true);
-    setJustCalculated(false);
-    setTimeout(() => {
-      setIsCalculating(false);
-      setJustCalculated(true);
-      const now = new Date();
-      setLastCalculatedTime(
-        `${now.getHours().toString().padStart(2, '0')}:${now
-          .getMinutes()
-          .toString()
-          .padStart(2, '0')}:${now.getSeconds().toString().padStart(2, '0')}`
-      );
-      resultRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 300);
+    setJustCalculated(true);
+    const now = new Date();
+    setLastCalculatedTime(
+      `${now.getHours().toString().padStart(2, '0')}:${now
+        .getMinutes()
+        .toString()
+        .padStart(2, '0')}:${now.getSeconds().toString().padStart(2, '0')}`
+    );
+    resultRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  const handleCopyLink = () => {
+    if (typeof window !== 'undefined') {
+      navigator.clipboard.writeText(window.location.href);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }
   };
 
   return (
@@ -136,21 +151,21 @@ export default function VoChongClient() {
             <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">
               Năm sinh Chồng (Âm lịch)
             </label>
-            <select
+            <Select
               value={chongYear}
               onChange={(e) => {
                 setChongYear(Number(e.target.value));
                 setJustCalculated(false);
               }}
               aria-label="Chọn năm sinh chồng"
-              className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-amber-50/40 text-gray-900 font-semibold focus:outline-none focus:ring-2 focus:ring-amber-500 text-sm"
+              className="h-12 bg-amber-50/40 font-semibold"
             >
               {hoaGiapList.map((hg) => (
                 <option key={hg.year} value={hg.year}>
                   {hg.year} — {hg.canChi} ({hg.conGiap}) - {hg.menh.split(' ')[0]}
                 </option>
               ))}
-            </select>
+            </Select>
           </div>
 
           {/* Vợ */}
@@ -158,55 +173,63 @@ export default function VoChongClient() {
             <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">
               Năm sinh Vợ (Âm lịch)
             </label>
-            <select
+            <Select
               value={voYear}
               onChange={(e) => {
                 setVoYear(Number(e.target.value));
                 setJustCalculated(false);
               }}
               aria-label="Chọn năm sinh vợ"
-              className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-amber-50/40 text-gray-900 font-semibold focus:outline-none focus:ring-2 focus:ring-amber-500 text-sm"
+              className="h-12 bg-amber-50/40 font-semibold"
             >
               {hoaGiapList.map((hg) => (
                 <option key={hg.year} value={hg.year}>
                   {hg.year} — {hg.canChi} ({hg.conGiap}) - {hg.menh.split(' ')[0]}
                 </option>
               ))}
-            </select>
+            </Select>
           </div>
         </div>
 
-        {/* Nút Tra Cứu */}
+        {/* Nút Tra Cứu & Chia sẻ */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-amber-100">
-          <div className="text-xs text-stone-600 flex items-center gap-1.5">
+          <div className="text-xs text-stone-600 flex flex-wrap items-center gap-2">
             {lastCalculatedTime ? (
               <span className="inline-flex items-center gap-1 text-emerald-700 font-bold bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">
                 <Check className="w-3.5 h-3.5" /> Đã luận giải lúc {lastCalculatedTime}
               </span>
             ) : (
               <span className="italic text-stone-500">
-                * Bấm nút bên dưới để tính điểm và mở bảng luận giải chi tiết
+                * Bấm nút bên dưới để xem điểm và luận giải chi tiết
               </span>
             )}
+            <button
+              type="button"
+              onClick={handleCopyLink}
+              className="inline-flex items-center gap-1 text-xs font-medium text-amber-800 hover:text-amber-950 bg-amber-50 hover:bg-amber-100/80 px-2.5 py-1 rounded-full border border-amber-200 transition-colors cursor-pointer"
+              title="Sao chép liên kết có chứa kết quả của 2 tuổi này"
+            >
+              {copied ? (
+                <>
+                  <Check className="w-3.5 h-3.5 text-emerald-600" />
+                  <span className="text-emerald-700 font-semibold">Đã chép link!</span>
+                </>
+              ) : (
+                <>
+                  <Share2 className="w-3.5 h-3.5 text-amber-700" />
+                  <span>Chia sẻ kết quả</span>
+                </>
+              )}
+            </button>
           </div>
 
           <button
             type="button"
             onClick={handleSearch}
-            disabled={isCalculating}
-            className="w-full sm:w-auto px-7 py-3 rounded-xl bg-gradient-to-r from-amber-700 via-amber-800 to-amber-900 hover:from-amber-800 hover:to-amber-950 text-white font-bold text-sm shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-75"
+            className="w-full sm:w-auto px-7 py-3 rounded-xl bg-gradient-to-r from-amber-700 via-amber-800 to-amber-900 hover:from-amber-800 hover:to-amber-950 text-white font-bold text-sm shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer"
           >
-            {isCalculating ? (
-              <>
-                <Loader2 className="w-4 h-4 animate-spin text-amber-300" />
-                Đang luận giải lá số...
-              </>
-            ) : (
-              <>
-                <Sparkles className="w-4 h-4 text-amber-300" />
-                Tra Cứu Hợp Khắc Ngay
-              </>
-            )}
+            <Sparkles className="w-4 h-4 text-amber-300" />
+            Tra Cứu Hợp Khắc Ngay
           </button>
         </div>
       </section>

@@ -104,11 +104,11 @@ export default function AuspiciousClientView({
             ← Tất cả mục đích
           </Link>
           <span className="text-stone-300">•</span>
-          <Badge variant="outline" className="px-3 py-0.5 text-xs bg-amber-50 border-amber-300 text-[#8B6914]">
+          <Badge variant="outline" className="px-3 py-0.5 text-xs bg-amber-50 border-amber-300 text-primary">
             {badgeText}
           </Badge>
         </div>
-        <h1 className="text-3xl md:text-4xl font-extrabold text-[#8B6914] tracking-tight">
+        <h1 className="text-3xl md:text-4xl font-extrabold text-primary tracking-tight">
           {purposeTitle}
         </h1>
         <p className="text-stone-600 text-sm md:text-base leading-relaxed">
@@ -131,7 +131,7 @@ export default function AuspiciousClientView({
               <ChevronLeft className="w-4 h-4" />
             </Button>
 
-            <div className="px-3 py-1.5 rounded-lg bg-[#FEF7E6] border border-amber-900/15 font-bold text-[#8B6914] text-base sm:text-lg min-w-[180px] text-center">
+            <div className="px-3 py-1.5 rounded-lg bg-background-alt border border-amber-900/15 font-bold text-primary text-base sm:text-lg min-w-[180px] text-center">
               Tháng {selectedMonth} / {selectedYear}
             </div>
 
@@ -266,7 +266,7 @@ export default function AuspiciousClientView({
                     <div className="flex items-center gap-2 self-start sm:self-center">
                       <div className="text-right hidden sm:block">
                         <div className="text-xs text-stone-500 font-medium">Chỉ số cát khí</div>
-                        <div className="text-base font-black text-[#8B6914]">{day.score}/100</div>
+                        <div className="text-base font-black text-primary">{day.score}/100</div>
                       </div>
                       <Badge variant="outline" className={`px-3 py-1 font-bold text-xs ${scoreBadge.color}`}>
                         {scoreBadge.text}
@@ -325,7 +325,7 @@ export default function AuspiciousClientView({
                       {day.hoangDaoHours.map((h, i) => (
                         <span 
                           key={i} 
-                          className="px-2.5 py-1 rounded bg-[#FEF7E6] border border-amber-900/15 text-amber-900 text-xs font-medium"
+                          className="px-2.5 py-1 rounded bg-background-alt border border-amber-900/15 text-amber-900 text-xs font-medium"
                         >
                           {h}
                         </span>
