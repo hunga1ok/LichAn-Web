@@ -264,6 +264,25 @@ export default function AuspiciousClientView({
                           <span>Ngày: <strong>{day.canChiDay}</strong></span>
                           <span>•</span>
                           <span>Trực: <strong>{day.truc}</strong></span>
+                          {day.sao28 && (
+                            <>
+                              <span>•</span>
+                              <span className="inline-flex items-center gap-1">
+                                Sao: <strong className={day.sao28.nature === 'Cát' ? 'text-emerald-700' : day.sao28.nature === 'Hung' ? 'text-red-600' : 'text-stone-700'}>
+                                  {day.sao28.fullName}
+                                </strong>
+                                <span className={`text-[10px] px-1.5 py-0.5 rounded font-semibold border ${
+                                  day.sao28.nature === 'Cát' 
+                                    ? 'bg-emerald-50 text-emerald-700 border-emerald-200' 
+                                    : day.sao28.nature === 'Hung' 
+                                    ? 'bg-red-50 text-red-700 border-red-200' 
+                                    : 'bg-stone-50 text-stone-600 border-stone-200'
+                                }`}>
+                                  {day.sao28.nature}
+                                </span>
+                              </span>
+                            </>
+                          )}
                         </div>
                       </div>
                     </div>

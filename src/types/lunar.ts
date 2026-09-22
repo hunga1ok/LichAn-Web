@@ -1,3 +1,5 @@
+import type { NhiThapBatTu } from '../lib/lunar/nhi-thap-bat-tu';
+
 export interface LunarDate {
   day: number;
   month: number;
@@ -41,6 +43,7 @@ export interface DayInfo {
   saoTot: string[];
   saoXau: string[];
   truc: string;
+  nhiThapBatTu: NhiThapBatTu;
   viecNenLam: string[];
   viecKhongNenLam: string[];
   ngayLe: string[];
@@ -82,9 +85,10 @@ export interface AuspiciousDayResult {
   dayOfWeek: string;
   canChiDay: string;
   truc: string;
+  sao28?: NhiThapBatTu;
   score: number; // Thang điểm 0 - 100
   isAuspicious: boolean; // true = Ngày tốt
-  reasons: string[]; // Các lý do tốt (Bất Tương, Trực Thành, Sao Thiên Hỷ...)
+  reasons: string[]; // Các lý do tốt (Bất Tương, Trực Thành, Sao Thiên Hỷ, Sao 28 Tú cát...)
   warnings: string[]; // Các điểm kiêng kỵ (nếu có)
   hoangDaoHours: string[]; // Giờ hoàng đạo tốt nhất trong ngày
 }
@@ -124,9 +128,15 @@ export interface ILunarService {
   /** Tính 12 giờ Hoàng Đạo / Hắc Đạo của ngày */
   getGioHoangDao(jd: number): GioHoangDao[];
 
+  /** Lấy thông tin Nhị Thập Bát Tú của ngày theo Julian Day */
+  getNhiThapBatTu(jd: number): NhiThapBatTu;
+
   /** Lọc danh sách ngày tốt theo mục đích cụ thể (cưới hỏi, khai trương, động thổ...) */
   getAuspiciousDays(purpose: AuspiciousPurpose, month: number, year: number): AuspiciousDayResult[];
 
   /** Tra cứu hướng và giờ xuất hành Lý Thuần Phong */
   getXuatHanhInfo(day: number, month: number, year: number): XuatHanhInfo;
 }
+
+export type { NhiThapBatTu } from '../lib/lunar/nhi-thap-bat-tu';
+

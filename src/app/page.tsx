@@ -104,13 +104,51 @@ export default function HomePage() {
                 <div className="text-xs text-stone-600 mt-1 font-medium">
                   Tháng {dayInfo.canChiMonth.fullName} • Năm {dayInfo.canChiYear.fullName}
                 </div>
-                {dayInfo.nguHanhDay && (
-                  <div className="mt-2 text-xs inline-block px-2.5 py-0.5 rounded-full bg-amber-100/80 text-amber-900 border border-amber-200/60 font-semibold">
-                    Ngũ hành: {dayInfo.nguHanhDay}
-                  </div>
-                )}
+                <div className="mt-2 flex flex-wrap justify-center gap-1.5">
+                  {dayInfo.nguHanhDay && (
+                    <span className="text-xs px-2.5 py-0.5 rounded-full bg-amber-100/80 text-amber-900 border border-amber-200/60 font-semibold">
+                      Ngũ hành: {dayInfo.nguHanhDay}
+                    </span>
+                  )}
+                  {dayInfo.nhiThapBatTu && (
+                    <span className={`text-xs px-2.5 py-0.5 rounded-full font-semibold border ${
+                      dayInfo.nhiThapBatTu.nature === 'Cát' 
+                        ? 'bg-emerald-100/80 text-emerald-900 border-emerald-200' 
+                        : dayInfo.nhiThapBatTu.nature === 'Hung'
+                        ? 'bg-red-100/80 text-red-900 border-red-200'
+                        : 'bg-stone-100 text-stone-800 border-stone-200'
+                    }`}>
+                      Sao {dayInfo.nhiThapBatTu.name} ({dayInfo.nhiThapBatTu.nature})
+                    </span>
+                  )}
+                </div>
               </div>
             </div>
+
+            {/* Banner Nhị Thập Bát Tú hôm nay */}
+            {dayInfo.nhiThapBatTu && (
+              <div className="mb-6 p-3.5 rounded-xl bg-amber-50/70 border border-amber-200/60 flex flex-wrap items-center justify-between gap-2 text-xs">
+                <div className="flex items-center gap-2">
+                  <span className="text-base">⭐</span>
+                  <div>
+                    <span className="text-stone-500 font-medium">Nhị Thập Bát Tú: </span>
+                    <strong className="text-stone-900 font-bold">Sao {dayInfo.nhiThapBatTu.fullName} ({dayInfo.nhiThapBatTu.animal})</strong>
+                    <span className="text-stone-500 hidden sm:inline"> • {dayInfo.nhiThapBatTu.direction}</span>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Badge 
+                    variant={dayInfo.nhiThapBatTu.nature === 'Cát' ? 'success' : dayInfo.nhiThapBatTu.nature === 'Hung' ? 'destructive' : 'secondary'}
+                    className="font-bold text-xs py-0.5"
+                  >
+                    {dayInfo.nhiThapBatTu.nature === 'Cát' ? '✨ Cát Tinh' : dayInfo.nhiThapBatTu.nature === 'Hung' ? '⚠️ Hung Tinh' : '⚖️ Bình Hòa'}
+                  </Badge>
+                  <Link href={`/xem-ngay/${day}-${month}-${year}`} className="text-primary font-semibold hover:underline">
+                    Chi tiết →
+                  </Link>
+                </div>
+              </div>
+            )}
 
             {/* Giờ Hoàng Đạo */}
             <div className="mb-8">
@@ -218,6 +256,17 @@ export default function HomePage() {
               <span className="text-stone-500">Trực</span>
               <Badge variant="outline" className="font-semibold">Trực {dayInfo.truc}</Badge>
             </div>
+            {dayInfo.nhiThapBatTu && (
+              <div className="flex justify-between items-center py-1 border-b border-stone-50">
+                <span className="text-stone-500">28 Chòm Sao</span>
+                <Badge 
+                  variant={dayInfo.nhiThapBatTu.nature === 'Cát' ? 'success' : dayInfo.nhiThapBatTu.nature === 'Hung' ? 'destructive' : 'secondary'} 
+                  className="font-semibold text-xs"
+                >
+                  Sao {dayInfo.nhiThapBatTu.fullName}
+                </Badge>
+              </div>
+            )}
             <div className="flex justify-between items-center py-1 border-b border-stone-50">
               <span className="text-stone-500">Năm âm</span>
               <span className="font-semibold text-stone-800">{dayInfo.canChiYear.fullName}</span>

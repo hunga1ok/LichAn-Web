@@ -34,3 +34,9 @@ export const getAuspiciousDays = (purpose: import('@/types/lunar').AuspiciousPur
 
 export const getXuatHanhInfo = (day: number, month: number, year: number) =>
   lunarService.getXuatHanhInfo(day, month, year);
+
+export const getNhiThapBatTu = (jd: number) =>
+  lunarService.getNhiThapBatTu(jd);
+
+export * from './nhi-thap-bat-tu';
+

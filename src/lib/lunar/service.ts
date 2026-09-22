@@ -20,8 +20,10 @@ import {
   GioHoangDao,
   AuspiciousPurpose,
   AuspiciousDayResult,
-  XuatHanhInfo 
+  XuatHanhInfo,
+  NhiThapBatTu
 } from '@/types/lunar';
+import { getNhiThapBatTuByJd } from './nhi-thap-bat-tu';
 
 import { 
   solarToLunar as coreSolarToLunar, 
@@ -91,6 +93,8 @@ export class LunarService implements ILunarService {
     const viecNenLam = getViecNenLam(truc, saoTot);
     const viecKhongNenLam = getViecKhongNenLam(truc, saoXau);
 
+    const nhiThapBatTu = this.getNhiThapBatTu(jd);
+
     const ngayLe = getNgayLe(day, month, lunarDate.day, lunarDate.month);
     const nguHanhDay = getNguHanh(canChiDay.can, canChiDay.chi);
 
@@ -109,11 +113,19 @@ export class LunarService implements ILunarService {
       saoTot,
       saoXau,
       truc,
+      nhiThapBatTu,
       viecNenLam,
       viecKhongNenLam,
       ngayLe,
       nguHanhDay,
     };
+  }
+
+  /**
+   * Lấy thông tin Nhị Thập Bát Tú (28 chòm sao thiên văn) theo ngày Julian
+   */
+  public getNhiThapBatTu(jd: number): NhiThapBatTu {
+    return getNhiThapBatTuByJd(jd);
   }
 
   /**
@@ -403,6 +415,17 @@ export class LunarService implements ILunarService {
         }
       }
 
+      // 3. Tinh tú Nhị Thập Bát Tú (Tier 3: 28 Constellations)
+      const sao28 = this.getNhiThapBatTu(lunarDate.jd);
+      if (sao28.nature === 'Cát') {
+        score += 10;
+        reasons.push(`Sao Nhị Thập Bát Tú cát: ${sao28.fullName} (${sao28.animal}) - Tinh tú cát lợi bách sự`);
+      } else if (sao28.nature === 'Hung') {
+        score -= 15;
+        const mainKieng = sao28.kiengKy.slice(0, 2).join(', ');
+        warnings.push(`Sao Nhị Thập Bát Tú hung: ${sao28.fullName} (${sao28.animal}) - Hung tinh, kỵ ${mainKieng}`);
+      }
+
       // Giờ hoàng đạo
       const hoangDaoHours = gioHoangDao
         .filter((g) => g.isHoangDao)
@@ -426,6 +449,7 @@ export class LunarService implements ILunarService {
         dayOfWeek,
         canChiDay: canChiDay.fullName,
         truc,
+        sao28,
         score: finalScore,
         isAuspicious,
         reasons,

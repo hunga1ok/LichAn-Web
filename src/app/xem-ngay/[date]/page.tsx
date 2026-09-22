@@ -16,7 +16,8 @@ import {
   XCircle, 
   Flame, 
   ArrowRight,
-  RotateCcw
+  RotateCcw,
+  Star
 } from 'lucide-react';
 
 interface Props {
@@ -301,6 +302,79 @@ export default async function XemNgayDetailPage({ params }: Props) {
               </div>
             </div>
           </div>
+
+          {/* Nhị Thập Bát Tú (28 Chòm Sao Thiên Văn Cổ Truyền) */}
+          {dayInfo.nhiThapBatTu && (
+            <div className="p-5 rounded-2xl bg-gradient-to-br from-amber-50/70 via-orange-50/30 to-amber-50/50 border border-amber-200/80 shadow-xs space-y-4">
+              <div className="flex flex-wrap items-center justify-between gap-2 border-b border-amber-200/50 pb-3">
+                <div className="flex items-center gap-2">
+                  <Star className="w-5 h-5 text-accent fill-accent" />
+                  <h3 className="text-base sm:text-lg font-bold text-amber-950">
+                    Nhị Thập Bát Tú: <span className="text-primary font-black">Sao {dayInfo.nhiThapBatTu.fullName}</span>
+                  </h3>
+                </div>
+                <div>
+                  {dayInfo.nhiThapBatTu.nature === 'Cát' ? (
+                    <Badge variant="success" className="font-bold text-xs py-1">
+                      ✨ Cát Tinh (Đại Kiết)
+                    </Badge>
+                  ) : dayInfo.nhiThapBatTu.nature === 'Hung' ? (
+                    <Badge variant="destructive" className="font-bold text-xs py-1">
+                      ⚠️ Hung Tinh (Cần Kiêng Kỵ)
+                    </Badge>
+                  ) : (
+                    <Badge variant="secondary" className="font-bold text-xs py-1">
+                      ⚖️ Bình Hòa
+                    </Badge>
+                  )}
+                </div>
+              </div>
+
+              {/* Thông số thiên văn */}
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 text-xs">
+                <div className="p-2.5 rounded-xl bg-white/80 border border-amber-200/50">
+                  <span className="text-stone-500 block">Tứ Tượng Phương Vị:</span>
+                  <strong className="text-stone-800 font-bold">{dayInfo.nhiThapBatTu.direction}</strong>
+                </div>
+                <div className="p-2.5 rounded-xl bg-white/80 border border-amber-200/50">
+                  <span className="text-stone-500 block">Thất Diệu Ngũ Tinh:</span>
+                  <strong className="text-amber-900 font-bold">{dayInfo.nhiThapBatTu.element} Tú trực nhật</strong>
+                </div>
+                <div className="p-2.5 rounded-xl bg-white/80 border border-amber-200/50 col-span-2 sm:col-span-1">
+                  <span className="text-stone-500 block">Linh Thú Tượng Trưng:</span>
+                  <strong className="text-stone-800 font-bold">{dayInfo.nhiThapBatTu.animal}</strong>
+                </div>
+              </div>
+
+              {/* Bài thơ khẩu quyết */}
+              {dayInfo.nhiThapBatTu.tho && (
+                <div className="p-3.5 rounded-xl bg-amber-100/50 border border-amber-200/60 text-xs sm:text-sm text-stone-700 italic text-center font-serif leading-relaxed">
+                  &ldquo;{dayInfo.nhiThapBatTu.tho}&rdquo;
+                </div>
+              )}
+
+              {/* Việc cát - Kiêng kỵ theo Tú */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                <div className="p-3 rounded-xl bg-emerald-50/70 border border-emerald-200/60 space-y-1.5">
+                  <strong className="text-emerald-900 font-bold flex items-center gap-1.5">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" /> Cát Lợi Theo Sao:
+                  </strong>
+                  <div className="text-emerald-950 font-medium">
+                    {dayInfo.nhiThapBatTu.nenLam.join(', ')}
+                  </div>
+                </div>
+
+                <div className="p-3 rounded-xl bg-red-50/70 border border-red-200/60 space-y-1.5">
+                  <strong className="text-red-900 font-bold flex items-center gap-1.5">
+                    <XCircle className="w-3.5 h-3.5 text-red-600" /> Kiêng Cữ Theo Sao:
+                  </strong>
+                  <div className="text-red-950 font-medium">
+                    {dayInfo.nhiThapBatTu.kiengKy.join(', ')}
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
 
           {/* Việc Nên Làm / Kiêng Kỵ */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

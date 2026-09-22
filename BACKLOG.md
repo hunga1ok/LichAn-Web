@@ -6,16 +6,17 @@
 
 ## 📊 TỔNG QUAN TIẾN ĐỘ HIỆN TẠI
 
-- **Bộ kiểm thử tự động (Unit Tests)**: `468/468 Tests PASS (100%)`.
+- **Bộ kiểm thử tự động (Unit Tests)**: `491/491 Tests PASS (100%)`.
   - Core Thuật toán Âm Dương Hồ Ngọc Đức: `64/64 PASS` (Kiểm định > 3.653 ngày).
   - Module Trạch Nhật (Xem Ngày Tốt Chuyên Sâu): `105/105 PASS`.
+  - Module Nhị Thập Bát Tú (28 Chòm Sao Thiên Văn Cổ): `23/23 PASS` (Chu kỳ 28 ngày & Thất Diệu).
   - Module Kho Văn Khấn Cổ Truyền: `96/96 PASS`.
   - Module Phong Thủy (Tam Tai - Kim Lâu - Hoang Ốc): `73/73 PASS`.
   - REST API Backend Endpoints: `18/18 PASS`.
   - Module Đồng Bộ Lịch (.ICS) & Đếm Ngược Tết: `33/33 PASS`.
   - Module Tử Vi Cá Nhân Hóa & Cửu Diệu Niên Hạn: `48/48 PASS`.
   - Phân Hệ Xem Tuổi Toàn Diện (Vợ Chồng, Làm Ăn, Sinh Con, Xông Đất): `31/31 PASS`.
-- **Kiến trúc hệ thống**: Next.js 16 (App Router) + TypeScript Strict + Tailwind CSS 4 + SSG (Static Site Generation 116 trang).
+- **Kiến trúc hệ thống**: Next.js 16 (App Router) + TypeScript Strict + Tailwind CSS 4 + SSG (Static Site Generation 124 trang).
 - **Trạng thái Repo**: Đã đồng bộ lên GitHub `https://github.com/hunga1ok/LichAn-Web.git`.
 
 ---
@@ -75,9 +76,10 @@
 - [x] **Lịch Vạn Niên (`/lich-van-nien`)**: Lưới lịch tháng 7 cột trực quan, đổi tháng/năm, hiển thị ngày lễ và ngày hôm nay.
 - [x] **Đổi Ngày Âm Dương (`/doi-ngay-am-duong`)**: Chuyển đổi 2 chiều Dương ↔ Âm, hỗ trợ tháng nhuận.
 - [x] **Xem Ngày Tốt Chuyên Sâu (`/xem-ngay-tot`)**:
-  - Chọn ngày tốt theo 4 mục đích: Cưới hỏi, Khai trương, Động thổ, Xuất hành.
+  - Chọn ngày tốt theo 6 mục đích: Cưới hỏi, Khai trương, Động thổ, Xuất hành, Cắt tóc, Cất nóc.
   - Lọc bỏ đại hung (Tam Nương, Nguyệt Kỵ, Sát Chủ, Thụ Tử, Nguyệt Phá).
   - Tích hợp bảng Âm Dương Bất Tương, Hướng Hỷ Thần, Tài Thần và 6 giờ Lý Thuần Phong.
+  - **Tích hợp Nhị Thập Bát Tú (28 Chòm Sao Cổ)**: Chu kỳ thiên văn 28 ngày gắn với Thất Diệu, thơ ca quyết khẩu quyết, việc cát nên làm & kiêng kỵ, chấm điểm trọng số trạch cát tự động.
 - [x] **Kho Văn Khấn Cổ Truyền (`/van-khan`)**:
   - 11 bài văn khấn kinh điển phân theo 5 danh mục phong tục.
   - Trình đọc văn khấn tương tác: Tăng giảm cỡ chữ (A/A+/A++), checklist sắm lễ mâm cúng, sao chép 1-click, in ấn sạch đẹp (Print-friendly).
