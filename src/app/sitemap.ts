@@ -134,12 +134,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.95,
     },
     {
-      url: `${baseUrl}/api-docs`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.7,
-    },
-    {
       url: `${baseUrl}/doi-ngay-am-duong`,
       lastModified: now,
       changeFrequency: 'monthly',

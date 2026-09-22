@@ -16,7 +16,6 @@ import {
   CalendarCheck, 
   PartyPopper, 
   FileText, 
-  Code2,
   Menu,
   X
 } from 'lucide-react';
@@ -67,7 +66,6 @@ export default function Header() {
     { name: 'Đếm Ngược Tết', href: '/dem-nguoc-tet', desc: 'Đồng hồ đếm ngược đến Giao Thừa', icon: PartyPopper },
     { name: 'Thần Số Học Pythagoras', href: '/than-so-hoc', desc: 'Khám phá số chủ đạo & vận mệnh', icon: Sparkles },
     { name: 'Cẩm Nang Văn Hóa', href: '/blog', desc: 'Phong tục tập quán cổ truyền', icon: FileText },
-    { name: 'REST API Mobile', href: '/api-docs', desc: 'Dành cho nhà phát triển ứng dụng', icon: Code2 },
   ];
 
   const isUtilityActive = utilityLinks.some(link => pathname.startsWith(link.href));

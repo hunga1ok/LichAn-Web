@@ -23,7 +23,6 @@ export default function Footer() {
             <li><Link href="/dong-bo-lich" className="hover:text-primary-light">Đồng Bộ Lịch (.ICS)</Link></li>
             <li><Link href="/dem-nguoc-tet" className="hover:text-primary-light">Đếm Ngược Tết</Link></li>
             <li><Link href="/blog" className="hover:text-primary-light">Cẩm Nang Văn Hóa</Link></li>
-            <li><Link href="/api-docs" className="hover:text-primary-light">REST API (Mobile App)</Link></li>
           </ul>
         </div>
         <div>

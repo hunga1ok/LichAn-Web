@@ -13,6 +13,10 @@ export const metadata: Metadata = {
     description: 'Nền tảng API Lịch Âm Dương và Phong Thủy chính tông dành cho nhà phát triển ứng dụng di động.',
     type: 'website',
   },
+  robots: {
+    index: false,
+    follow: false,
+  },
 };
 
 export default function ApiDocsPage() {

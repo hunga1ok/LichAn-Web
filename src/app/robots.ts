@@ -5,6 +5,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: '*',
       allow: '/',
+      disallow: ['/api/', '/api-docs/'],
     },
     sitemap: 'https://lichan.com/sitemap.xml',
   };
