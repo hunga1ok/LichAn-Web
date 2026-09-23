@@ -11,8 +11,9 @@ import {
   XCircle, 
   Sparkles, 
   Clock, 
-  Compass,
-  Flame
+  Compass, 
+  Flame,
+  ShieldAlert
 } from 'lucide-react';
 
 export default function HomePage() {
@@ -47,7 +48,30 @@ export default function HomePage() {
             <div className="flex flex-wrap justify-between items-center gap-3">
               <div className="flex items-center gap-2">
                 <CalendarIcon className="w-6 h-6 text-primary" />
-                <CardTitle className="text-2xl text-primary">Hôm Nay Có Gì Tốt?</CardTitle>
+                <div>
+                  <CardTitle className="text-2xl text-primary">Hôm Nay Có Gì Tốt?</CardTitle>
+                  <div className="flex flex-wrap items-center gap-1.5 mt-1">
+                    {dayInfo.ngayHoangDao && (
+                      <Badge 
+                        className={`text-[11px] font-bold py-0.5 px-2.5 ${
+                          dayInfo.ngayHoangDao.isHoangDao 
+                            ? 'bg-amber-600 hover:bg-amber-700 text-white' 
+                            : 'bg-stone-200 text-stone-800'
+                        }`}
+                      >
+                        {dayInfo.ngayHoangDao.isHoangDao ? '✨' : '⚠️'} {dayInfo.ngayHoangDao.name}
+                      </Badge>
+                    )}
+                    {dayInfo.lucDieu && (
+                      <Badge 
+                        variant="outline"
+                        className="text-[11px] font-semibold py-0.5 px-2 bg-white border-amber-300 text-amber-900"
+                      >
+                        ☯️ {dayInfo.lucDieu.name}
+                      </Badge>
+                    )}
+                  </div>
+                </div>
               </div>
               <div className="flex gap-2">
                 <Link href={formatUrlDate(yesterday)}>
@@ -75,7 +99,7 @@ export default function HomePage() {
 
           <CardContent className="pt-6">
             {/* Lịch 2 cột: Dương - Âm */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8 text-center">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 text-center">
               {/* Dương lịch */}
               <div className="border border-stone-200 rounded-2xl p-6 bg-white shadow-sm hover:border-amber-300 transition-colors">
                 <Badge variant="outline" className="mb-2 text-stone-600 bg-stone-50">DƯƠNG LỊCH</Badge>
@@ -105,7 +129,11 @@ export default function HomePage() {
                   Tháng {dayInfo.canChiMonth.fullName} • Năm {dayInfo.canChiYear.fullName}
                 </div>
                 <div className="mt-2 flex flex-wrap justify-center gap-1.5">
-                  {dayInfo.nguHanhDay && (
+                  {dayInfo.napAm ? (
+                    <span className="text-xs px-2.5 py-0.5 rounded-full bg-amber-100/90 text-amber-950 border border-amber-300 font-semibold">
+                      {dayInfo.napAm}
+                    </span>
+                  ) : dayInfo.nguHanhDay && (
                     <span className="text-xs px-2.5 py-0.5 rounded-full bg-amber-100/80 text-amber-900 border border-amber-200/60 font-semibold">
                       Ngũ hành: {dayInfo.nguHanhDay}
                     </span>
@@ -124,6 +152,42 @@ export default function HomePage() {
                 </div>
               </div>
             </div>
+
+            {/* Cảnh báo Ngày Kỵ nếu có */}
+            {dayInfo.ngayKy && dayInfo.ngayKy.length > 0 && (
+              <div className="mb-6 p-3 rounded-xl bg-rose-50/90 border border-rose-200 text-rose-900 text-xs flex items-center gap-2 font-medium">
+                <ShieldAlert className="w-4 h-4 text-rose-600 shrink-0" />
+                <span>{dayInfo.ngayKy.join(' • ')}</span>
+              </div>
+            )}
+
+            {/* Đánh Giá Nhanh Hôm Nay */}
+            {dayInfo.luanGiai?.tongKet && (
+              <div className="mb-6 p-4 rounded-xl bg-gradient-to-r from-amber-50/90 via-orange-50/40 to-amber-50/70 border border-amber-200/80 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-xs">
+                <div className="space-y-1">
+                  <div className="flex items-center gap-2">
+                    <Badge className={`text-xs font-bold ${
+                      dayInfo.luanGiai.tongKet.danhGia === 'Đại Cát' || dayInfo.luanGiai.tongKet.danhGia === 'Cát Lành'
+                        ? 'bg-emerald-600 text-white'
+                        : dayInfo.luanGiai.tongKet.danhGia === 'Bình Hòa'
+                        ? 'bg-amber-600 text-white'
+                        : 'bg-rose-600 text-white'
+                    }`}>
+                      {dayInfo.luanGiai.tongKet.danhGia} ({dayInfo.luanGiai.tongKet.score}/100)
+                    </Badge>
+                    <span className="text-xs font-bold text-amber-950">Đánh giá Lịch Vạn Sự</span>
+                  </div>
+                  <p className="text-xs text-stone-700 line-clamp-2 leading-relaxed">
+                    {dayInfo.luanGiai.tongKet.loiKhuyen}
+                  </p>
+                </div>
+                <Link href={formatUrlDate(today)} className="shrink-0">
+                  <Button size="sm" variant="outline" className="text-xs h-8 bg-white border-amber-300 text-primary hover:bg-amber-50 gap-1 font-semibold">
+                    Xem luận giải chi tiết →
+                  </Button>
+                </Link>
+              </div>
+            )}
 
             {/* Banner Nhị Thập Bát Tú hôm nay */}
             {dayInfo.nhiThapBatTu && (

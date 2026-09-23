@@ -17,7 +17,13 @@ import {
   Flame, 
   ArrowRight,
   RotateCcw,
-  Star
+  Star,
+  BookOpen,
+  AlertTriangle,
+  ShieldAlert,
+  Scale,
+  Award,
+  Info
 } from 'lucide-react';
 
 interface Props {
@@ -53,18 +59,24 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const canChiDay = dayInfo.canChiDay.fullName;
   const canChiYear = dayInfo.canChiYear.fullName;
 
-  const title = `Chi Tiết Ngày ${day}/${month}/${year} — Âm Lịch ${lunarDay}/${lunarMonth} Ngày ${canChiDay}`;
-  const description = `Tra cứu chi tiết ngày ${day}/${month}/${year} dương lịch (tức ngày ${lunarDay}/${lunarMonth}${leapStr} năm ${canChiYear} âm lịch, ngày ${canChiDay}). Xem giờ hoàng đạo, tiết khí ${dayInfo.tietKhi}, trực ${dayInfo.truc}, sao tốt xấu và hướng xuất hành.`;
+  const hoangDaoStr = dayInfo.ngayHoangDao?.name ? ` — ${dayInfo.ngayHoangDao.name}` : '';
+  const lucDieuStr = dayInfo.lucDieu?.name ? `, Lục Diệu ${dayInfo.lucDieu.name}` : '';
+  const napAmStr = dayInfo.napAm ? `, Nạp âm ${dayInfo.napAm}` : '';
+
+  const title = `Chi Tiết Ngày ${day}/${month}/${year}${hoangDaoStr} — Âm Lịch ${lunarDay}/${lunarMonth} Ngày ${canChiDay}`;
+  const description = `Tra cứu Lịch Vạn Sự ngày ${day}/${month}/${year} dương lịch (tức ngày ${lunarDay}/${lunarMonth}${leapStr} năm ${canChiYear} âm lịch, ngày ${canChiDay}${napAmStr}). Xem ${dayInfo.ngayHoangDao?.name || 'Hoàng Đạo'}${lucDieuStr}, tiết khí ${dayInfo.tietKhi}, trực ${dayInfo.truc}, nhị thập bát tú, tuổi xung khắc, sao tốt xấu và luận giải đánh giá tổng quan.`;
 
   return {
     title,
     description,
     keywords: [
       `xem ngày ${day} tháng ${month} năm ${year}`,
+      `lịch vạn sự ngày ${day}-${month}-${year}`,
       `âm lịch ngày ${day}-${month}-${year}`,
       `ngày ${canChiDay}`,
-      `giờ hoàng đạo ngày ${day}/${month}`,
+      `ngày hoàng đạo ${day}/${month}`,
       'lịch âm hôm nay',
+      'lịch vạn sự',
       'lịch an',
     ],
     openGraph: {
@@ -187,15 +199,38 @@ export default async function XemNgayDetailPage({ params }: Props) {
               </p>
             </div>
 
-            {dayInfo.ngayLe && dayInfo.ngayLe.length > 0 && (
-              <div className="flex flex-wrap gap-1.5">
-                {dayInfo.ngayLe.map((le, idx) => (
+            <div className="flex flex-wrap items-center gap-2">
+              {dayInfo.ngayHoangDao && (
+                <Badge 
+                  className={`text-xs font-bold py-1 px-3 gap-1 shadow-xs ${
+                    dayInfo.ngayHoangDao.isHoangDao 
+                      ? 'bg-amber-600 hover:bg-amber-700 text-white' 
+                      : 'bg-stone-200 text-stone-800 border border-stone-300'
+                  }`}
+                >
+                  {dayInfo.ngayHoangDao.isHoangDao ? '✨' : '⚠️'} {dayInfo.ngayHoangDao.name}
+                </Badge>
+              )}
+              {dayInfo.lucDieu && (
+                <Badge 
+                  variant="outline"
+                  className={`text-xs font-semibold py-1 px-3 bg-white ${
+                    dayInfo.lucDieu.isGood 
+                      ? 'border-emerald-300 text-emerald-800' 
+                      : 'border-amber-300 text-amber-900'
+                  }`}
+                >
+                  ☯️ Lục Diệu: {dayInfo.lucDieu.name}
+                </Badge>
+              )}
+              {dayInfo.ngayLe && dayInfo.ngayLe.length > 0 && (
+                dayInfo.ngayLe.map((le, idx) => (
                   <Badge key={idx} variant="destructive" className="font-semibold text-xs py-1">
                     🎉 {le}
                   </Badge>
-                ))}
-              </div>
-            )}
+                ))
+              )}
+            </div>
           </div>
         </CardHeader>
 
@@ -236,13 +271,65 @@ export default async function XemNgayDetailPage({ params }: Props) {
               <div className="text-xs text-stone-600 mt-1 font-medium">
                 Tháng {dayInfo.canChiMonth.fullName} • Năm {dayInfo.canChiYear.fullName}
               </div>
-              {dayInfo.nguHanhDay && (
+              {dayInfo.napAm ? (
+                <div className="mt-2.5 text-xs inline-block px-3 py-1 rounded-full bg-amber-100/90 text-amber-950 border border-amber-300 font-bold">
+                  Nạp âm: {dayInfo.napAm}
+                </div>
+              ) : dayInfo.nguHanhDay && (
                 <div className="mt-2.5 text-xs inline-block px-3 py-1 rounded-full bg-amber-100/80 text-amber-900 border border-amber-200/60 font-semibold">
                   Ngũ hành: {dayInfo.nguHanhDay}
                 </div>
               )}
             </div>
           </div>
+
+          {/* Cảnh báo Ngày Kỵ Dân Gian nếu có */}
+          {dayInfo.ngayKy && dayInfo.ngayKy.length > 0 && (
+            <div className="rounded-2xl p-4 sm:p-5 bg-rose-50/90 border border-rose-200 text-rose-950 space-y-2 shadow-xs">
+              <div className="flex items-center gap-2 font-bold text-rose-800 text-sm sm:text-base">
+                <ShieldAlert className="w-5 h-5 text-rose-600 shrink-0" />
+                Cảnh Báo Ngày Kiêng Kỵ Dân Gian (Đại Hung Bách Sự Kỵ)
+              </div>
+              <ul className="text-xs sm:text-sm space-y-1 pl-6 list-disc font-medium text-rose-900">
+                {dayInfo.ngayKy.map((ky, idx) => (
+                  <li key={idx}>{ky}</li>
+                ))}
+              </ul>
+              <p className="text-xs text-rose-700 italic pt-1">
+                * Dân gian kiêng kỵ khởi sự các việc đại sự (cưới hỏi, khởi công, khai trương, xuất hành xa) vào những ngày này để phòng ngừa trắc trở.
+              </p>
+            </div>
+          )}
+
+          {/* Tuổi Xung Khắc Trong Ngày */}
+          {dayInfo.tuoiXung && (
+            <div className="rounded-2xl p-4 sm:p-5 bg-amber-50/50 border border-amber-200/70 space-y-3 shadow-xs">
+              <div className="flex items-center justify-between flex-wrap gap-2 border-b border-amber-200/40 pb-2">
+                <div className="flex items-center gap-2 font-bold text-amber-950 text-sm sm:text-base">
+                  <Flame className="w-5 h-5 text-amber-700" />
+                  Tuổi Xung Khắc Cần Lưu Ý
+                </div>
+                <span className="text-xs text-stone-500">Tra cứu theo Lục Xung & Thiên Khắc</span>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm">
+                <div className="p-3 rounded-xl bg-white/90 border border-amber-200/50 space-y-1">
+                  <span className="text-stone-500 font-semibold block">Tuổi xung khắc với ngày:</span>
+                  <div className="font-bold text-rose-700">
+                    {dayInfo.tuoiXung.ngay.length > 0 ? dayInfo.tuoiXung.ngay.join(', ') : 'Không có tuổi đại kỵ'}
+                  </div>
+                </div>
+                <div className="p-3 rounded-xl bg-white/90 border border-amber-200/50 space-y-1">
+                  <span className="text-stone-500 font-semibold block">Tuổi xung khắc với tháng:</span>
+                  <div className="font-bold text-amber-900">
+                    {dayInfo.tuoiXung.thang.length > 0 ? dayInfo.tuoiXung.thang.join(', ') : 'Không có tuổi đại kỵ'}
+                  </div>
+                </div>
+              </div>
+              <p className="text-xs text-stone-600 italic">
+                💡 Người có tuổi xung khắc với ngày nên thận trọng trong lời ăn tiếng nói, hạn chế đứng tên chủ sự việc lớn hoặc ký kết giao dịch mạo hiểm.
+              </p>
+            </div>
+          )}
 
           {/* Giờ Hoàng Đạo */}
           <div className="space-y-3">
@@ -296,10 +383,16 @@ export default async function XemNgayDetailPage({ params }: Props) {
                 <span className="text-stone-600">Hỷ Thần (Hỷ sự, may mắn)</span>
                 <strong className="text-blue-900 font-bold">{xuatHanhInfo.hyThan}</strong>
               </div>
-              <div className="flex justify-between py-1">
+              <div className="flex justify-between py-1 border-b border-blue-200/30">
                 <span className="text-stone-600">Tài Thần (Tài lộc, làm ăn)</span>
                 <strong className="text-emerald-800 font-bold">{xuatHanhInfo.taiThan}</strong>
               </div>
+              {dayInfo.hacThan && (
+                <div className="flex justify-between py-1">
+                  <span className="text-stone-600">Hạc Thần (Hướng hung cần tránh)</span>
+                  <strong className="text-rose-700 font-bold">{dayInfo.hacThan}</strong>
+                </div>
+              )}
             </div>
           </div>
 
@@ -453,6 +546,151 @@ export default async function XemNgayDetailPage({ params }: Props) {
               </div>
             </div>
           </div>
+
+          {/* KHỐI LUẬN GIẢI CHI TIẾT NGÀY THEO LỊCH VẠN SỰ */}
+          {dayInfo.luanGiai && (
+            <div className="rounded-2xl border border-amber-900/15 bg-white p-5 sm:p-6 space-y-4 shadow-xs">
+              <div className="flex items-center gap-2.5 pb-3 border-b border-amber-900/10">
+                <div className="p-2 rounded-lg bg-amber-50 text-primary border border-amber-200">
+                  <BookOpen className="w-5 h-5" />
+                </div>
+                <div>
+                  <h3 className="text-lg sm:text-xl font-bold text-primary">
+                    Luận Giải Chi Tiết Ngày Theo Lịch Vạn Sự
+                  </h3>
+                  <p className="text-xs text-stone-500">
+                    Bình giải theo thuật toán Khâm Thiên Giám và cổ bản Ngọc Hạp Thông Thư
+                  </p>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs sm:text-sm leading-relaxed">
+                {/* 1. Can Chi & Nạp Âm */}
+                <div className="p-4 rounded-xl bg-stone-50/80 border border-stone-200/70 space-y-1.5">
+                  <h4 className="font-bold text-amber-950 flex items-center gap-1.5 text-xs sm:text-sm">
+                    <span className="w-2 h-2 rounded-full bg-amber-600"></span>
+                    1. Khí Vận Can Chi & Ngũ Hành Nạp Âm
+                  </h4>
+                  <p className="text-stone-700">
+                    {dayInfo.luanGiai.canChiNguHanh}
+                  </p>
+                </div>
+
+                {/* 2. Thần Sát Hoàng Đạo & Lục Diệu */}
+                <div className="p-4 rounded-xl bg-stone-50/80 border border-stone-200/70 space-y-1.5">
+                  <h4 className="font-bold text-amber-950 flex items-center gap-1.5 text-xs sm:text-sm">
+                    <span className="w-2 h-2 rounded-full bg-amber-600"></span>
+                    2. Thần Sát Hoàng Đạo & Khổng Minh Lục Diệu
+                  </h4>
+                  <p className="text-stone-700">
+                    {dayInfo.luanGiai.hoangDaoLucDieu}
+                  </p>
+                </div>
+
+                {/* 3. Trực Nhật & Nhị Thập Bát Tú */}
+                <div className="p-4 rounded-xl bg-stone-50/80 border border-stone-200/70 space-y-1.5">
+                  <h4 className="font-bold text-amber-950 flex items-center gap-1.5 text-xs sm:text-sm">
+                    <span className="w-2 h-2 rounded-full bg-amber-600"></span>
+                    3. Trực Nhật & Nhị Thập Bát Tú
+                  </h4>
+                  <p className="text-stone-700">
+                    {dayInfo.luanGiai.trucVaTinhTu}
+                  </p>
+                </div>
+
+                {/* 4. Cát Tinh, Hung Tinh & Thần Sát */}
+                <div className="p-4 rounded-xl bg-stone-50/80 border border-stone-200/70 space-y-1.5">
+                  <h4 className="font-bold text-amber-950 flex items-center gap-1.5 text-xs sm:text-sm">
+                    <span className="w-2 h-2 rounded-full bg-amber-600"></span>
+                    4. Cát Tinh, Hung Tinh & Thần Sát Khác
+                  </h4>
+                  <p className="text-stone-700">
+                    {dayInfo.luanGiai.thanSat}
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* KHỐI TỔNG KẾT & ĐÁNH GIÁ TỔNG QUAN */}
+          {dayInfo.luanGiai?.tongKet && (
+            <div className="rounded-2xl border-2 border-amber-600/35 bg-gradient-to-br from-amber-50/90 via-orange-50/40 to-amber-50/80 p-5 sm:p-7 space-y-5 shadow-sm">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-amber-900/15 pb-4">
+                <div className="space-y-1">
+                  <div className="flex items-center gap-2">
+                    <Award className="w-6 h-6 text-primary" />
+                    <h3 className="text-xl sm:text-2xl font-black text-primary">
+                      Tổng Kết & Đánh Giá Tổng Quan
+                    </h3>
+                  </div>
+                  <p className="text-xs sm:text-sm text-stone-600">
+                    Đánh giá toàn diện cát hung ngày {day}/{month}/{year} ({dayInfo.canChiDay.fullName})
+                  </p>
+                </div>
+
+                <div className="flex items-center gap-2.5">
+                  <div className="text-right hidden sm:block">
+                    <div className="text-xs text-stone-500 font-medium">Chỉ số cát khí</div>
+                    <div className="text-lg font-black text-primary">{dayInfo.luanGiai.tongKet.score} / 100</div>
+                  </div>
+                  <Badge 
+                    className={`text-sm sm:text-base font-extrabold px-3.5 py-1.5 gap-1.5 shadow-xs ${
+                      dayInfo.luanGiai.tongKet.danhGia === 'Đại Cát'
+                        ? 'bg-emerald-600 hover:bg-emerald-700 text-white'
+                        : dayInfo.luanGiai.tongKet.danhGia === 'Cát Lành'
+                        ? 'bg-green-600 hover:bg-green-700 text-white'
+                        : dayInfo.luanGiai.tongKet.danhGia === 'Bình Hòa'
+                        ? 'bg-amber-600 hover:bg-amber-700 text-white'
+                        : dayInfo.luanGiai.tongKet.danhGia === 'Hung'
+                        ? 'bg-orange-600 hover:bg-orange-700 text-white'
+                        : 'bg-rose-700 hover:bg-rose-800 text-white'
+                    }`}
+                  >
+                    {dayInfo.luanGiai.tongKet.danhGia === 'Đại Cát' && <Sparkles className="w-4 h-4" />}
+                    {dayInfo.luanGiai.tongKet.danhGia === 'Cát Lành' && <CheckCircle2 className="w-4 h-4" />}
+                    {dayInfo.luanGiai.tongKet.danhGia === 'Bình Hòa' && <Scale className="w-4 h-4" />}
+                    {(dayInfo.luanGiai.tongKet.danhGia === 'Hung' || dayInfo.luanGiai.tongKet.danhGia === 'Đại Hung') && (
+                      <AlertTriangle className="w-4 h-4" />
+                    )}
+                    {dayInfo.luanGiai.tongKet.danhGia}
+                  </Badge>
+                </div>
+              </div>
+
+              {/* Lời khuyên tổng quan */}
+              <div className="p-4 rounded-xl bg-white/90 border border-amber-200/70 text-xs sm:text-sm text-stone-800 leading-relaxed font-medium">
+                <span className="font-bold text-amber-950 block mb-1">📌 Lời Khuyên Hành Sự:</span>
+                {dayInfo.luanGiai.tongKet.loiKhuyen}
+              </div>
+
+              {/* 2 Cột: Việc Hợp Nhất Nên Làm & Việc Đại Kỵ Tránh */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs sm:text-sm">
+                <div className="p-4 rounded-xl bg-emerald-50/80 border border-emerald-200/80 space-y-2">
+                  <div className="font-bold text-emerald-900 flex items-center gap-1.5">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                    Việc Hợp Nhất Nên Làm:
+                  </div>
+                  <ul className="space-y-1.5 text-emerald-950 pl-5 list-disc">
+                    {dayInfo.luanGiai.tongKet.hopViec.map((v, i) => (
+                      <li key={i}>{v}</li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="p-4 rounded-xl bg-rose-50/80 border border-rose-200/80 space-y-2">
+                  <div className="font-bold text-rose-900 flex items-center gap-1.5">
+                    <XCircle className="w-4 h-4 text-rose-600" />
+                    Việc Đại Kỵ Nên Tránh:
+                  </div>
+                  <ul className="space-y-1.5 text-rose-950 pl-5 list-disc">
+                    {dayInfo.luanGiai.tongKet.kyViec.map((v, i) => (
+                      <li key={i}>{v}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          )}
 
           {/* Tiện ích liên quan */}
           <div className="pt-6 border-t border-stone-100 bg-amber-50/40 -mx-6 -mb-6 p-6 rounded-b-xl space-y-3">

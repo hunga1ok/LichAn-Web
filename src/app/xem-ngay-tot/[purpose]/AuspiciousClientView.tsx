@@ -264,6 +264,22 @@ export default function AuspiciousClientView({
                           <span>Ngày: <strong>{day.canChiDay}</strong></span>
                           <span>•</span>
                           <span>Trực: <strong>{day.truc}</strong></span>
+                          {day.ngayHoangDao && (
+                            <>
+                              <span>•</span>
+                              <span className={day.isHoangDao ? 'text-amber-800 font-bold' : 'text-stone-700'}>
+                                {day.isHoangDao ? '✨' : '⚠️'} {day.ngayHoangDao}
+                              </span>
+                            </>
+                          )}
+                          {day.lucDieu && (
+                            <>
+                              <span>•</span>
+                              <span className="text-stone-700">
+                                ☯️ <strong>{day.lucDieu}</strong>
+                              </span>
+                            </>
+                          )}
                           {day.sao28 && (
                             <>
                               <span>•</span>

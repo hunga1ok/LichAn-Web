@@ -224,9 +224,19 @@ export default function LichVanNienClient() {
 
                   {/* Ngày âm & tháng âm */}
                   <div className="mt-auto flex items-baseline justify-between text-right">
-                    <span className="text-[10px] text-stone-500 hidden sm:inline truncate">
-                      {day.canChiDay.split(' ')[1]}
-                    </span>
+                    <div className="flex items-center gap-1">
+                      <span className="text-[10px] text-stone-500 hidden sm:inline truncate">
+                        {day.canChiDay.split(' ')[1]}
+                      </span>
+                      {day.isHoangDao && (
+                        <span 
+                          className="inline-block text-[9px] px-1 py-0.5 rounded bg-amber-100 text-amber-900 border border-amber-300 font-bold leading-none"
+                          title={`Ngày Hoàng Đạo: ${day.ngayHoangDaoName || 'Hoàng Đạo'}`}
+                        >
+                          HĐ
+                        </span>
+                      )}
+                    </div>
                     <span
                       className={`text-xs sm:text-sm font-bold ${
                         isRamOrSoc ? 'text-primary font-black' : 'text-stone-600'
@@ -254,6 +264,9 @@ export default function LichVanNienClient() {
             </span>
             <span className="flex items-center gap-1.5">
               <strong className="text-primary">Số vàng đậm:</strong> Mùng 1 & Ngày Rằm (15 âm)
+            </span>
+            <span className="flex items-center gap-1.5">
+              <span className="px-1 py-0.5 rounded bg-amber-100 text-amber-900 border border-amber-300 font-bold text-[10px]">HĐ</span> Ngày Hoàng Đạo
             </span>
           </div>
         </CardContent>

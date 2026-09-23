@@ -39,4 +39,5 @@ export const getNhiThapBatTu = (jd: number) =>
   lunarService.getNhiThapBatTu(jd);
 
 export * from './nhi-thap-bat-tu';
+export * from './van-su';
 

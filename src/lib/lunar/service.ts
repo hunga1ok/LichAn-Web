@@ -57,6 +57,15 @@ import {
   getPhuongViXuatHanh,
   getGioLyThuanPhong,
 } from './core/trach-nhat';
+import {
+  getNgayHoangDao,
+  getLucDieu,
+  getNapAmFull,
+  getTuoiXung,
+  getNgayKyDanGian,
+  getHacThan,
+  generateLuanGiaiNgay,
+} from './van-su';
 import { THU_TRONG_TUAN } from '../constants';
 
 export class LunarService implements ILunarService {
@@ -101,6 +110,29 @@ export class LunarService implements ILunarService {
     const dateObj = new Date(year, month - 1, day);
     const dayOfWeek = THU_TRONG_TUAN[dateObj.getDay()];
 
+    const ngayHoangDao = getNgayHoangDao(lunarDate.month, canChiDay.chi);
+    const lucDieu = getLucDieu(lunarDate.month, lunarDate.day);
+    const napAm = getNapAmFull(canChiDay.fullName);
+    const tuoiXung = getTuoiXung(canChiDay.can, canChiDay.chi, canChiMonth.can, canChiMonth.chi);
+    const ngayKy = getNgayKyDanGian(lunarDate.day, lunarDate.month, canChiDay.chi);
+    const hacThan = getHacThan(canChiDay.chi);
+
+    const luanGiai = generateLuanGiaiNgay({
+      canChiDay: canChiDay.fullName,
+      canChiMonth: canChiMonth.fullName,
+      canChiYear: canChiYear.fullName,
+      dayCan: canChiDay.can,
+      dayChi: canChiDay.chi,
+      napAm,
+      ngayHoangDao,
+      lucDieu,
+      truc,
+      sao28: nhiThapBatTu,
+      saoTot,
+      saoXau,
+      ngayKy,
+    });
+
     return {
       solarDate,
       lunarDate,
@@ -118,6 +150,13 @@ export class LunarService implements ILunarService {
       viecKhongNenLam,
       ngayLe,
       nguHanhDay,
+      ngayHoangDao,
+      lucDieu,
+      napAm,
+      tuoiXung,
+      ngayKy,
+      hacThan,
+      luanGiai,
     };
   }
 
@@ -161,6 +200,7 @@ export class LunarService implements ILunarService {
       const canChi = getCanChiDay(lunar.jd);
       const isSun = new Date(year, month - 1, d).getDay() === 0;
       const holidays = getNgayLe(d, month, lunar.day, lunar.month);
+      const hd = getNgayHoangDao(lunar.month, canChi.chi);
 
       days.push({
         solarDay: d,
@@ -174,6 +214,8 @@ export class LunarService implements ILunarService {
         isSunday: isSun,
         holiday: holidays.length > 0 ? holidays[0] : undefined,
         canChiDay: canChi.fullName,
+        isHoangDao: hd.isHoangDao,
+        ngayHoangDaoName: hd.starName,
       });
     }
 
@@ -455,6 +497,9 @@ export class LunarService implements ILunarService {
         reasons,
         warnings,
         hoangDaoHours,
+        ngayHoangDao: dayInfo.ngayHoangDao?.name,
+        isHoangDao: dayInfo.ngayHoangDao?.isHoangDao,
+        lucDieu: dayInfo.lucDieu?.name,
       });
     }
 
@@ -468,11 +513,13 @@ export class LunarService implements ILunarService {
     const lunarDate = coreSolarToLunar(day, month, year);
     const canChiDay = getCanChiDay(lunarDate.jd);
     const { hyThan, taiThan } = getPhuongViXuatHanh(canChiDay.can);
+    const hacThan = getHacThan(canChiDay.chi);
     const gioLyThuanPhong = getGioLyThuanPhong(lunarDate.day, lunarDate.month);
 
     return {
       hyThan,
       taiThan,
+      hacThan,
       gioLyThuanPhong,
     };
   }

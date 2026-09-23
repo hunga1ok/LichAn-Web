@@ -128,10 +128,24 @@ export default function XuatHanhClient() {
       {/* Thông tin ngày */}
       <Card className="border-amber-900/15">
         <CardHeader className="bg-gradient-to-r from-amber-50 to-orange-50/50 border-b border-amber-900/10 pb-3">
-          <CardTitle className="text-base flex items-center gap-2 text-primary">
-            <CalendarDays className="w-4 h-4" />
-            Thông Tin Ngày {dayInfo.dayOfWeek} — {selectedDay}/{selectedMonth}/{selectedYear}
-          </CardTitle>
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <CardTitle className="text-base flex items-center gap-2 text-primary">
+              <CalendarDays className="w-4 h-4" />
+              Thông Tin Ngày {dayInfo.dayOfWeek} — {selectedDay}/{selectedMonth}/{selectedYear}
+            </CardTitle>
+            <div className="flex flex-wrap items-center gap-1.5">
+              {dayInfo.ngayHoangDao && (
+                <Badge className={`text-xs font-bold py-0.5 px-2.5 ${dayInfo.ngayHoangDao.isHoangDao ? 'bg-amber-600 text-white' : 'bg-stone-200 text-stone-800'}`}>
+                  {dayInfo.ngayHoangDao.isHoangDao ? '✨' : '⚠️'} {dayInfo.ngayHoangDao.name}
+                </Badge>
+              )}
+              {dayInfo.lucDieu && (
+                <Badge variant="outline" className="text-xs font-semibold py-0.5 px-2 bg-white border-amber-300 text-amber-900">
+                  ☯️ Lục Diệu: {dayInfo.lucDieu.name}
+                </Badge>
+              )}
+            </div>
+          </div>
         </CardHeader>
         <CardContent className="pt-4">
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-sm">
@@ -151,47 +165,67 @@ export default function XuatHanhClient() {
               <div className="font-bold text-stone-800">Trực {dayInfo.truc}</div>
             </div>
             <div className="text-center p-3 rounded-lg bg-stone-50 border border-stone-200/60">
-              <div className="text-xs text-stone-500 mb-1">Ngũ hành</div>
-              <div className="font-bold text-stone-800">{dayInfo.nguHanhDay}</div>
+              <div className="text-xs text-stone-500 mb-1">Ngũ hành nạp âm</div>
+              <div className="font-bold text-stone-800 text-xs sm:text-sm truncate" title={dayInfo.napAm || dayInfo.nguHanhDay}>
+                {dayInfo.napAm || dayInfo.nguHanhDay}
+              </div>
             </div>
           </div>
         </CardContent>
       </Card>
 
-      {/* Hỷ Thần & Tài Thần */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {/* Bộ Tam Phương Vị: Hỷ Thần, Tài Thần & Hạc Thần */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
         <Card className="border-2 border-rose-200 bg-gradient-to-br from-rose-50 to-pink-50/30 shadow-sm">
           <CardContent className="pt-6 text-center space-y-3">
-            <div className="w-16 h-16 rounded-full bg-rose-100 border-2 border-rose-300 flex items-center justify-center mx-auto">
-              <Sparkles className="w-8 h-8 text-rose-600" />
+            <div className="w-14 h-14 rounded-full bg-rose-100 border-2 border-rose-300 flex items-center justify-center mx-auto">
+              <Sparkles className="w-7 h-7 text-rose-600" />
             </div>
             <div>
               <div className="text-xs font-bold uppercase tracking-wider text-rose-500 mb-1">
-                Hỷ Thần
+                Hỷ Thần (Đón Tin Vui)
               </div>
-              <div className="text-3xl font-black text-rose-700">{xuatHanhInfo.hyThan}</div>
+              <div className="text-2xl sm:text-3xl font-black text-rose-700">{xuatHanhInfo.hyThan}</div>
             </div>
             <p className="text-xs text-rose-600/80 leading-relaxed">
-              Hướng đón Hỷ Thần mang lại may mắn, nhân duyên tốt đẹp.
-              Nên hướng về phương này khi bước ra khỏi nhà.
+              Hướng mang lại may mắn, nhân duyên và hỷ khí tốt đẹp.
+              Khởi hành đón dâu, đính hôn, cầu an nên đi về hướng này.
             </p>
           </CardContent>
         </Card>
 
         <Card className="border-2 border-amber-200 bg-gradient-to-br from-amber-50 to-yellow-50/30 shadow-sm">
           <CardContent className="pt-6 text-center space-y-3">
-            <div className="w-16 h-16 rounded-full bg-amber-100 border-2 border-amber-300 flex items-center justify-center mx-auto">
-              <MapPin className="w-8 h-8 text-amber-600" />
+            <div className="w-14 h-14 rounded-full bg-amber-100 border-2 border-amber-300 flex items-center justify-center mx-auto">
+              <MapPin className="w-7 h-7 text-amber-600" />
             </div>
             <div>
-              <div className="text-xs font-bold uppercase tracking-wider text-amber-500 mb-1">
-                Tài Thần
+              <div className="text-xs font-bold uppercase tracking-wider text-amber-600 mb-1">
+                Tài Thần (Cầu Tài Lộc)
               </div>
-              <div className="text-3xl font-black text-amber-700">{xuatHanhInfo.taiThan}</div>
+              <div className="text-2xl sm:text-3xl font-black text-amber-700">{xuatHanhInfo.taiThan}</div>
             </div>
-            <p className="text-xs text-amber-600/80 leading-relaxed">
-              Hướng đón Tài Thần mang lại tiền tài, phúc lộc dồi dào.
-              Đi làm ăn, buôn bán nên hướng về phương này.
+            <p className="text-xs text-amber-700/80 leading-relaxed">
+              Hướng mang lại tiền tài, phúc lộc dồi dào, phát đạt.
+              Đi làm ăn, buôn bán, ký kết hợp đồng nên chọn phương này.
+            </p>
+          </CardContent>
+        </Card>
+
+        <Card className="border-2 border-stone-200 bg-gradient-to-br from-stone-50 to-rose-50/30 shadow-sm">
+          <CardContent className="pt-6 text-center space-y-3">
+            <div className="w-14 h-14 rounded-full bg-stone-100 border-2 border-stone-300 flex items-center justify-center mx-auto">
+              <Compass className="w-7 h-7 text-stone-600" />
+            </div>
+            <div>
+              <div className="text-xs font-bold uppercase tracking-wider text-rose-600 mb-1">
+                Hạc Thần (Hướng Hung Kỵ)
+              </div>
+              <div className="text-xl sm:text-2xl font-black text-rose-800">{xuatHanhInfo.hacThan || dayInfo.hacThan || 'Không kỵ'}</div>
+            </div>
+            <p className="text-xs text-stone-600 leading-relaxed">
+              Phương vị Hạc Thần ngự trị là hướng hung sát bất lợi.
+              Nên tránh bước chân khởi hành đầu tiên hướng về phương này.
             </p>
           </CardContent>
         </Card>

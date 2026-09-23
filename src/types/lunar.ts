@@ -31,6 +31,39 @@ export interface TietKhi {
   solarDate: SolarDate;
 }
 
+export interface NgayHoangDaoInfo {
+  name: string; // ví dụ: "Thanh Long Hoàng Đạo" hoặc "Bạch Hổ Hắc Đạo"
+  starName: string; // ví dụ: "Thanh Long", "Bạch Hổ"
+  isHoangDao: boolean; // true nếu hoàng đạo, false nếu hắc đạo
+  yNghia: string;
+}
+
+export interface LucDieuInfo {
+  name: 'Đại An' | 'Lưu Niên' | 'Tốc Hỷ' | 'Xích Khẩu' | 'Tiểu Cát' | 'Không Vong';
+  isGood: boolean;
+  yNghia: string;
+  tho: string;
+}
+
+export interface TuoiXungInfo {
+  ngay: string[]; // Các tuổi xung khắc với ngày
+  thang: string[]; // Các tuổi xung khắc với tháng
+}
+
+export interface LuanGiaiNgayInfo {
+  canChiNguHanh: string;
+  hoangDaoLucDieu: string;
+  trucVaTinhTu: string;
+  thanSat: string;
+  tongKet: {
+    danhGia: 'Đại Cát' | 'Cát Lành' | 'Bình Hòa' | 'Hung' | 'Đại Hung';
+    score: number; // 0 - 100
+    loiKhuyen: string;
+    hopViec: string[];
+    kyViec: string[];
+  };
+}
+
 export interface DayInfo {
   solarDate: SolarDate;
   lunarDate: LunarDate;
@@ -48,6 +81,14 @@ export interface DayInfo {
   viecKhongNenLam: string[];
   ngayLe: string[];
   nguHanhDay: string;
+  // Các trường bổ sung theo chuẩn Lịch Vạn Sự
+  ngayHoangDao?: NgayHoangDaoInfo;
+  lucDieu?: LucDieuInfo;
+  napAm?: string;
+  tuoiXung?: TuoiXungInfo;
+  ngayKy?: string[];
+  hacThan?: string;
+  luanGiai?: LuanGiaiNgayInfo;
 }
 
 export interface CalendarDaySummary {
@@ -62,6 +103,8 @@ export interface CalendarDaySummary {
   isSunday: boolean;
   holiday?: string;
   canChiDay: string;
+  isHoangDao?: boolean; // true nếu là Ngày Hoàng Đạo
+  ngayHoangDaoName?: string; // ví dụ: Thanh Long, Minh Đường...
 }
 
 export interface CalendarMonthData {
@@ -91,11 +134,15 @@ export interface AuspiciousDayResult {
   reasons: string[]; // Các lý do tốt (Bất Tương, Trực Thành, Sao Thiên Hỷ, Sao 28 Tú cát...)
   warnings: string[]; // Các điểm kiêng kỵ (nếu có)
   hoangDaoHours: string[]; // Giờ hoàng đạo tốt nhất trong ngày
+  ngayHoangDao?: string; // Tên Ngày Hoàng Đạo / Hắc Đạo
+  isHoangDao?: boolean; // true nếu ngày hoàng đạo
+  lucDieu?: string; // Tên Khổng Minh Lục Diệu
 }
 
 export interface XuatHanhInfo {
   hyThan: string; // Hướng đón Hỷ Thần
   taiThan: string; // Hướng đón Tài Thần
+  hacThan?: string; // Hướng đón Hạc Thần (hướng hung nên tránh)
   gioLyThuanPhong: {
     canhGio: string;
     timeRange: string;

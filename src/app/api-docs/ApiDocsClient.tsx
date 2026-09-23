@@ -31,11 +31,11 @@ const API_ENDPOINTS: ApiEndpoint[] = [
     method: 'GET',
     path: '/api/v1/lunar/day',
     title: 'Tra cứu thông tin chi tiết một ngày',
-    description: 'Trả về dữ liệu âm dương, can chi ngày/tháng/năm, 12 giờ hoàng đạo, tiết khí, trực nhật, sao tốt/xấu, việc nên làm/kiêng cữ, và hướng xuất hành.',
+    description: 'Trả về dữ liệu Lịch Vạn Sự toàn diện: can chi, ngày hoàng đạo/hắc đạo, Lục Diệu, nạp âm 60 hoa giáp, 12 giờ hoàng đạo, tiết khí, trực nhật, sao tốt/xấu, tuổi xung khắc, cảnh báo ngày kỵ dân gian, luận giải chi tiết và khối tổng kết đánh giá cát hung.',
     defaultQuery: 'date=2026-09-19&xuatHanh=true',
     parameters: [
       { name: 'date', type: 'string', required: false, desc: 'Ngày cần xem (YYYY-MM-DD hoặc DD-MM-YYYY). Mặc định là ngày hôm nay.' },
-      { name: 'xuatHanh', type: 'boolean', required: false, desc: 'Nếu true, bổ sung hướng Hỷ Thần, Tài Thần và 6 giờ Lý Thuần Phong.' },
+      { name: 'xuatHanh', type: 'boolean', required: false, desc: 'Nếu true, bổ sung hướng Hỷ Thần, Tài Thần, Hạc Thần và 6 giờ Lý Thuần Phong.' },
     ],
   },
   {
@@ -67,7 +67,7 @@ const API_ENDPOINTS: ApiEndpoint[] = [
     method: 'GET',
     path: '/api/v1/lunar/auspicious',
     title: 'Lọc danh sách ngày hoàng đạo theo việc',
-    description: 'Lọc ngày tốt cho 4 mục đích: Cưới hỏi, Khai trương, Động thổ, Xuất hành theo chuẩn Hiệp Kỷ Biện Phương Thư.',
+    description: 'Lọc ngày tốt cho 6 mục đích: Cưới hỏi, Khai trương, Động thổ, Xuất hành, Cắt tóc, Cất nóc theo chuẩn Hiệp Kỷ Biện Phương Thư kèm Ngày Hoàng Đạo và Lục Diệu.',
     defaultQuery: 'purpose=cuoi-hoi&month=10&year=2026&onlyGood=true',
     parameters: [
       { name: 'purpose', type: 'string', required: true, desc: '"cuoi-hoi" | "khai-truong" | "dong-tho" | "xuat-hanh" | "cat-toc" | "cat-noc".' },
