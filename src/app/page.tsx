@@ -243,10 +243,15 @@ export default function HomePage() {
             {/* Việc Nên Làm / Kiêng Kỵ */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
               <div className="rounded-xl p-4 bg-emerald-50/50 border border-emerald-100">
-                <h3 className="text-base font-bold text-emerald-800 flex items-center gap-2 mb-3">
-                  <CheckCircle2 className="w-5 h-5 text-emerald-600" />
-                  Nên Làm
-                </h3>
+                <div className="mb-3">
+                  <h3 className="text-base font-bold text-emerald-800 flex items-center gap-2">
+                    <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
+                    <span>Nên Làm (Cát Sự)</span>
+                  </h3>
+                  <p className="text-xs font-medium text-emerald-700/90 mt-1 pl-7">
+                    Theo Thập Nhị Kiến Trừ (Trực {dayInfo.truc})
+                  </p>
+                </div>
                 <ul className="space-y-1.5 text-sm text-emerald-950">
                   {dayInfo.viecNenLam.map((viec, idx) => (
                     <li key={idx} className="flex items-start gap-1.5">
@@ -257,10 +262,15 @@ export default function HomePage() {
               </div>
 
               <div className="rounded-xl p-4 bg-red-50/50 border border-red-100">
-                <h3 className="text-base font-bold text-red-800 flex items-center gap-2 mb-3">
-                  <XCircle className="w-5 h-5 text-red-600" />
-                  Không Nên Làm
-                </h3>
+                <div className="mb-3">
+                  <h3 className="text-base font-bold text-red-800 flex items-center gap-2">
+                    <XCircle className="w-5 h-5 text-red-600 shrink-0" />
+                    <span>Không Nên Làm (Kiêng Kỵ)</span>
+                  </h3>
+                  <p className="text-xs font-medium text-red-700/90 mt-1 pl-7">
+                    Theo Thập Nhị Kiến Trừ (Trực {dayInfo.truc})
+                  </p>
+                </div>
                 <ul className="space-y-1.5 text-sm text-red-950">
                   {dayInfo.viecKhongNenLam.map((viec, idx) => (
                     <li key={idx} className="flex items-start gap-1.5">
