@@ -3,7 +3,8 @@ import Link from 'next/link';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Home, Compass, Heart, Sparkles, ArrowRight, ShieldCheck } from 'lucide-react';
+import { Home, Compass, Heart, Sparkles, ArrowRight, ShieldCheck, BookOpen, Clock, FileText } from 'lucide-react';
+import { getBlogPostsByCategory } from '@/lib/blog';
 
 export const metadata: Metadata = {
   title: 'Phong Thủy Cổ Truyền - Xem Tuổi Làm Nhà, Cung Mệnh Bát Trạch | Lịch An',
@@ -18,6 +19,7 @@ export const metadata: Metadata = {
 };
 
 export default function PhongThuyHubPage() {
+  const fengShuiPosts = getBlogPostsByCategory('Phong thủy');
   const tools = [
     {
       title: 'Xem Tuổi Làm Nhà & Mượn Tuổi',
@@ -129,6 +131,69 @@ export default function PhongThuyHubPage() {
           );
         })}
       </div>
+
+      {/* Chuyên Mục Cẩm Nang Giải Mã Phong Thủy & Trạch Cát */}
+      <section className="space-y-6 pt-8 border-t border-amber-900/10">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div className="space-y-1">
+            <Badge variant="outline" className="px-3 py-0.5 text-xs bg-amber-50 border-amber-300 text-primary">
+              <BookOpen className="w-3.5 h-3.5 mr-1 inline" /> TRI THỨC TRẠCH CÁT CHÍNH TÔNG
+            </Badge>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-stone-900">
+              Cẩm Nang Giải Mã Phong Thủy & Trạch Cát
+            </h2>
+            <p className="text-stone-600 text-sm">
+              Nguồn gốc thiên văn, lịch sử, bảng tính và lợi ích thực tiễn của Hoàng Đạo, 12 Trực, 28 Tú và Thần Sát cát hung.
+            </p>
+          </div>
+          <Link href="/blog?category=Phong+th%E1%BB%A7y">
+            <Button variant="outline" size="sm" className="gap-1 border-primary/30 text-primary hover:bg-amber-50">
+              Xem tất cả bài viết <ArrowRight className="w-3.5 h-3.5" />
+            </Button>
+          </Link>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {fengShuiPosts.map((post) => (
+            <Card
+              key={post.slug}
+              className="flex flex-col border-amber-900/15 hover:border-primary/50 hover:shadow-md transition-all bg-white overflow-hidden group"
+            >
+              <CardHeader className="pb-3 bg-gradient-to-r from-amber-50/60 to-white border-b border-amber-900/10">
+                <div className="flex justify-between items-center text-xs">
+                  <Badge className="bg-primary/90 text-white font-semibold">
+                    {post.category}
+                  </Badge>
+                  <span className="text-stone-500 flex items-center gap-1">
+                    <Clock className="w-3.5 h-3.5" /> {post.readTime}
+                  </span>
+                </div>
+                <CardTitle className="text-lg font-bold text-stone-900 group-hover:text-primary transition-colors line-clamp-2 mt-2 leading-snug">
+                  <Link href={`/blog/${post.slug}`}>
+                    {post.title}
+                  </Link>
+                </CardTitle>
+              </CardHeader>
+
+              <CardContent className="pt-4 flex-1 flex flex-col justify-between space-y-4">
+                <p className="text-stone-600 text-xs sm:text-sm line-clamp-3 leading-relaxed">
+                  {post.description}
+                </p>
+
+                <div className="pt-3 border-t border-stone-100 flex items-center justify-between text-xs">
+                  <span className="text-stone-400">{post.publishedAt}</span>
+                  <Link
+                    href={`/blog/${post.slug}`}
+                    className="text-primary font-semibold hover:underline flex items-center gap-1"
+                  >
+                    Đọc giải nghĩa chi tiết <ArrowRight className="w-3.5 h-3.5" />
+                  </Link>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </section>
     </div>
   );
 }

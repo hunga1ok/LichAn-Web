@@ -40,15 +40,94 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${post.title} - Lịch An`,
     description: post.description,
+    keywords: post.keywords || post.tags,
     openGraph: {
       title: post.title,
       description: post.description,
       type: 'article',
       publishedTime: post.publishedAt,
+      modifiedTime: post.updatedAt || post.publishedAt,
       authors: [post.author],
       tags: post.tags,
     },
   };
+}
+
+function renderMarkdown(content: string): string {
+  const lines = content.split('\n');
+  const processedLines: string[] = [];
+  let inTable = false;
+  let tableHeaders: string[] = [];
+  let tableRows: string[][] = [];
+
+  const flushTable = () => {
+    if (tableHeaders.length > 0 || tableRows.length > 0) {
+      let html = '<div class="overflow-x-auto my-6 rounded-xl border border-amber-900/20 shadow-xs"><table class="w-full text-left border-collapse text-sm bg-white">';
+      if (tableHeaders.length > 0) {
+        html += '<thead class="bg-amber-100/70 text-amber-950 font-bold border-b border-amber-900/20"><tr>';
+        tableHeaders.forEach((th) => {
+          html += `<th class="p-3 border-r border-amber-900/10 last:border-r-0">${th.trim()}</th>`;
+        });
+        html += '</tr></thead>';
+      }
+      if (tableRows.length > 0) {
+        html += '<tbody class="divide-y divide-amber-900/10">';
+        tableRows.forEach((row, idx) => {
+          html += `<tr class="${idx % 2 === 0 ? 'bg-white' : 'bg-amber-50/30'} hover:bg-amber-50/60 transition-colors">`;
+          row.forEach((td) => {
+            html += `<td class="p-3 border-r border-amber-900/10 last:border-r-0 text-stone-700">${td.trim()}</td>`;
+          });
+          html += '</tr>';
+        });
+        html += '</tbody>';
+      }
+      html += '</table></div>';
+      processedLines.push(html);
+      tableHeaders = [];
+      tableRows = [];
+    }
+    inTable = false;
+  };
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i].trim();
+    if (line.startsWith('|') && line.endsWith('|')) {
+      const cells = line.slice(1, -1).split('|');
+      if (cells.every((c) => c.trim().match(/^:?-+:?$/))) {
+        continue;
+      }
+      if (!inTable) {
+        inTable = true;
+        tableHeaders = cells;
+      } else {
+        tableRows.push(cells);
+      }
+    } else {
+      if (inTable) {
+        flushTable();
+      }
+      processedLines.push(lines[i]);
+    }
+  }
+  if (inTable) {
+    flushTable();
+  }
+
+  let text = processedLines.join('\n');
+
+  text = text
+    .replace(/---/g, '<hr class="my-6 border-stone-200" />')
+    .replace(/### (.*?)\n/g, '<h3 class="text-lg font-bold text-amber-950 mt-6 mb-2">$1</h3>')
+    .replace(/## (.*?)\n/g, '<h2 class="text-xl sm:text-2xl font-black text-amber-950 mt-8 mb-3 pb-2 border-b border-stone-200">$1</h2>')
+    .replace(/> (.*?)\n/g, '<blockquote class="border-l-4 border-primary bg-amber-50/70 p-4 my-4 rounded-r-xl text-stone-900 font-serif leading-relaxed">$1</blockquote>')
+    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.*?)\*/g, '<em>$1</em>')
+    .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" class="text-primary font-semibold hover:underline">$1</a>')
+    .replace(/^- (.*?)\n/gm, '<li class="ml-4 list-disc text-sm text-stone-700 my-1">$1</li>')
+    .replace(/^[0-9]\. (.*?)\n/gm, '<li class="ml-4 list-decimal text-sm text-stone-700 my-1">$1</li>')
+    .replace(/\n\n/g, '<br/>');
+
+  return text;
 }
 
 export default async function BlogPostDetailPage({ params }: Props) {
@@ -60,9 +139,36 @@ export default async function BlogPostDetailPage({ params }: Props) {
   }
 
   const relatedPosts = getRelatedPosts(post.slug, 3);
+  const formattedContent = renderMarkdown(post.content);
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: post.title,
+    description: post.description,
+    author: {
+      '@type': 'Person',
+      name: post.author,
+      jobTitle: post.authorRole || 'Chuyên Gia Lịch An',
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Lịch An',
+      url: 'https://lichan.com',
+    },
+    datePublished: post.publishedAt,
+    dateModified: post.updatedAt || post.publishedAt,
+    keywords: post.keywords ? post.keywords.join(', ') : post.tags.join(', '),
+  };
 
   return (
     <article className="max-w-4xl mx-auto space-y-8">
+      {/* Schema.org Article JSON-LD */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
       {/* Breadcrumbs */}
       <nav className="flex items-center gap-2 text-xs text-stone-500">
         <Link href="/" className="hover:text-primary">Trang chủ</Link>
@@ -83,6 +189,14 @@ export default async function BlogPostDetailPage({ params }: Props) {
           <span className="text-xs text-stone-500 flex items-center gap-1">
             <Calendar className="w-3.5 h-3.5" /> {post.publishedAt}
           </span>
+          {post.updatedAt && post.updatedAt !== post.publishedAt && (
+            <>
+              <span className="text-xs text-stone-400">•</span>
+              <span className="text-xs text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full font-medium">
+                Cập nhật: {post.updatedAt}
+              </span>
+            </>
+          )}
         </div>
 
         <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-stone-900 leading-tight">
@@ -94,11 +208,16 @@ export default async function BlogPostDetailPage({ params }: Props) {
         </p>
 
         <div className="flex items-center justify-between pt-2">
-          <div className="flex items-center gap-2 text-xs text-stone-600">
-            <div className="w-7 h-7 rounded-full bg-amber-100 text-primary flex items-center justify-center font-bold">
+          <div className="flex items-center gap-2.5 text-xs text-stone-600">
+            <div className="w-8 h-8 rounded-full bg-amber-100 text-primary flex items-center justify-center font-bold text-xs">
               LA
             </div>
-            <span className="font-semibold">{post.author}</span>
+            <div>
+              <span className="font-semibold block leading-tight text-stone-900">{post.author}</span>
+              {post.authorRole && (
+                <span className="text-[11px] text-stone-400 block">{post.authorRole}</span>
+              )}
+            </div>
           </div>
 
           <Link href="/blog">
@@ -113,17 +232,7 @@ export default async function BlogPostDetailPage({ params }: Props) {
       <div className="prose prose-stone max-w-none prose-headings:text-amber-950 prose-headings:font-bold prose-h2:text-2xl prose-h2:border-b prose-h2:border-stone-100 prose-h2:pb-2 prose-h3:text-xl prose-p:leading-relaxed prose-p:text-stone-700 prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:bg-amber-50/60 prose-blockquote:p-4 prose-blockquote:rounded-r-xl prose-blockquote:italic prose-blockquote:text-stone-800 prose-li:text-stone-700">
         <div 
           className="space-y-4 leading-relaxed"
-          dangerouslySetInnerHTML={{
-            __html: post.content
-              .replace(/### (.*?)\n/g, '<h3 class="text-lg font-bold text-amber-950 mt-6 mb-2">$1</h3>')
-              .replace(/## (.*?)\n/g, '<h2 class="text-xl sm:text-2xl font-black text-amber-950 mt-8 mb-3 pb-2 border-b border-stone-200">$1</h2>')
-              .replace(/> (.*?)\n/g, '<blockquote class="border-l-4 border-primary bg-amber-50/70 p-4 my-4 rounded-r-xl text-stone-900 font-serif leading-relaxed">$1</blockquote>')
-              .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-              .replace(/\*(.*?)\*/g, '<em>$1</em>')
-              .replace(/^- (.*?)\n/gm, '<li class="ml-4 list-disc text-sm text-stone-700 my-1">$1</li>')
-              .replace(/^[0-9]\. (.*?)\n/gm, '<li class="ml-4 list-decimal text-sm text-stone-700 my-1">$1</li>')
-              .replace(/\n\n/g, '<br/>')
-          }}
+          dangerouslySetInnerHTML={{ __html: formattedContent }}
         />
       </div>
 

@@ -201,15 +201,17 @@ export default async function XemNgayDetailPage({ params }: Props) {
 
             <div className="flex flex-wrap items-center gap-2">
               {dayInfo.ngayHoangDao && (
-                <Badge 
-                  className={`text-xs font-bold py-1 px-3 gap-1 shadow-xs ${
-                    dayInfo.ngayHoangDao.isHoangDao 
-                      ? 'bg-amber-600 hover:bg-amber-700 text-white' 
-                      : 'bg-stone-200 text-stone-800 border border-stone-300'
-                  }`}
-                >
-                  {dayInfo.ngayHoangDao.isHoangDao ? '✨' : '⚠️'} {dayInfo.ngayHoangDao.name}
-                </Badge>
+                <Link href="/blog/ngay-hoang-dao-hac-dao-la-gi-nguon-goc-cach-tinh" title="Giải mã ngày Hoàng Đạo & Hắc Đạo">
+                  <Badge 
+                    className={`text-xs font-bold py-1 px-3 gap-1 shadow-xs transition-opacity hover:opacity-90 cursor-pointer ${
+                      dayInfo.ngayHoangDao.isHoangDao 
+                        ? 'bg-amber-600 hover:bg-amber-700 text-white' 
+                        : 'bg-stone-200 text-stone-800 border border-stone-300'
+                    }`}
+                  >
+                    {dayInfo.ngayHoangDao.isHoangDao ? '✨' : '⚠️'} {dayInfo.ngayHoangDao.name}
+                  </Badge>
+                </Link>
               )}
               {dayInfo.lucDieu && (
                 <Badge 
@@ -369,9 +371,13 @@ export default async function XemNgayDetailPage({ params }: Props) {
                 <span className="text-stone-600">Tiết khí</span>
                 <Badge variant="secondary" className="font-semibold">{dayInfo.tietKhi}</Badge>
               </div>
-              <div className="flex justify-between py-1">
+              <div className="flex justify-between py-1 items-center">
                 <span className="text-stone-600">Trực nhật</span>
-                <Badge variant="outline" className="font-semibold bg-white">Trực {dayInfo.truc}</Badge>
+                <Link href="/blog/thap-nhi-truc-12-truc-trong-xem-ngay-tot-xau" title="Tìm hiểu về Thập Nhị Trực">
+                  <Badge variant="outline" className="font-semibold bg-white hover:bg-amber-100/80 text-primary cursor-pointer">
+                    Trực {dayInfo.truc} ↗
+                  </Badge>
+                </Link>
               </div>
             </div>
 
@@ -577,10 +583,15 @@ export default async function XemNgayDetailPage({ params }: Props) {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs sm:text-sm leading-relaxed">
                 {/* 1. Can Chi & Nạp Âm */}
                 <div className="p-4 rounded-xl bg-stone-50/80 border border-stone-200/70 space-y-1.5">
-                  <h4 className="font-bold text-amber-950 flex items-center gap-1.5 text-xs sm:text-sm">
-                    <span className="w-2 h-2 rounded-full bg-amber-600"></span>
-                    1. Khí Vận Can Chi & Ngũ Hành Nạp Âm
-                  </h4>
+                  <div className="flex items-center justify-between">
+                    <h4 className="font-bold text-amber-950 flex items-center gap-1.5 text-xs sm:text-sm">
+                      <span className="w-2 h-2 rounded-full bg-amber-600"></span>
+                      1. Khí Vận Can Chi & Ngũ Hành Nạp Âm
+                    </h4>
+                    <Link href="/blog/thuyet-am-duong-ngu-hanh-nguon-goc-va-ung-dung" className="text-[11px] text-primary hover:underline shrink-0">
+                      Tìm hiểu Ngũ Hành ↗
+                    </Link>
+                  </div>
                   <p className="text-stone-700">
                     {dayInfo.luanGiai.canChiNguHanh}
                   </p>
@@ -588,10 +599,15 @@ export default async function XemNgayDetailPage({ params }: Props) {
 
                 {/* 2. Thần Sát Hoàng Đạo & Lục Diệu */}
                 <div className="p-4 rounded-xl bg-stone-50/80 border border-stone-200/70 space-y-1.5">
-                  <h4 className="font-bold text-amber-950 flex items-center gap-1.5 text-xs sm:text-sm">
-                    <span className="w-2 h-2 rounded-full bg-amber-600"></span>
-                    2. Thần Sát Hoàng Đạo & Khổng Minh Lục Diệu
-                  </h4>
+                  <div className="flex items-center justify-between">
+                    <h4 className="font-bold text-amber-950 flex items-center gap-1.5 text-xs sm:text-sm">
+                      <span className="w-2 h-2 rounded-full bg-amber-600"></span>
+                      2. Thần Sát Hoàng Đạo & Khổng Minh Lục Diệu
+                    </h4>
+                    <Link href="/blog/ngay-hoang-dao-hac-dao-la-gi-nguon-goc-cach-tinh" className="text-[11px] text-primary hover:underline shrink-0">
+                      Tìm hiểu Hoàng Đạo ↗
+                    </Link>
+                  </div>
                   <p className="text-stone-700">
                     {dayInfo.luanGiai.hoangDaoLucDieu}
                   </p>
@@ -599,10 +615,15 @@ export default async function XemNgayDetailPage({ params }: Props) {
 
                 {/* 3. Trực Nhật & Nhị Thập Bát Tú */}
                 <div className="p-4 rounded-xl bg-stone-50/80 border border-stone-200/70 space-y-1.5">
-                  <h4 className="font-bold text-amber-950 flex items-center gap-1.5 text-xs sm:text-sm">
-                    <span className="w-2 h-2 rounded-full bg-amber-600"></span>
-                    3. Trực Nhật & Nhị Thập Bát Tú
-                  </h4>
+                  <div className="flex items-center justify-between">
+                    <h4 className="font-bold text-amber-950 flex items-center gap-1.5 text-xs sm:text-sm">
+                      <span className="w-2 h-2 rounded-full bg-amber-600"></span>
+                      3. Trực Nhật & Nhị Thập Bát Tú
+                    </h4>
+                    <Link href="/blog/nhi-thap-bat-tu-28-chom-sao-nguon-goc-va-cach-tinh" className="text-[11px] text-primary hover:underline shrink-0">
+                      Tìm hiểu 28 Tú ↗
+                    </Link>
+                  </div>
                   <p className="text-stone-700">
                     {dayInfo.luanGiai.trucVaTinhTu}
                   </p>
@@ -610,10 +631,15 @@ export default async function XemNgayDetailPage({ params }: Props) {
 
                 {/* 4. Cát Tinh, Hung Tinh & Thần Sát */}
                 <div className="p-4 rounded-xl bg-stone-50/80 border border-stone-200/70 space-y-1.5">
-                  <h4 className="font-bold text-amber-950 flex items-center gap-1.5 text-xs sm:text-sm">
-                    <span className="w-2 h-2 rounded-full bg-amber-600"></span>
-                    4. Cát Tinh, Hung Tinh & Thần Sát Khác
-                  </h4>
+                  <div className="flex items-center justify-between">
+                    <h4 className="font-bold text-amber-950 flex items-center gap-1.5 text-xs sm:text-sm">
+                      <span className="w-2 h-2 rounded-full bg-amber-600"></span>
+                      4. Cát Tinh, Hung Tinh & Thần Sát Khác
+                    </h4>
+                    <Link href="/blog/sao-tot-sao-xau-than-sat-trong-xem-ngay-trach-cat" className="text-[11px] text-primary hover:underline shrink-0">
+                      Tìm hiểu Thần Sát ↗
+                    </Link>
+                  </div>
                   <p className="text-stone-700">
                     {dayInfo.luanGiai.thanSat}
                   </p>

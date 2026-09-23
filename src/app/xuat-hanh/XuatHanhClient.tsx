@@ -307,6 +307,25 @@ export default function XuatHanhClient() {
         </CardContent>
       </Card>
 
+      {/* Cẩm nang phong thủy hướng dẫn */}
+      <Card className="border-amber-200 bg-amber-50/60">
+        <CardContent className="p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="space-y-1 text-center sm:text-left">
+            <h3 className="font-bold text-amber-950 text-sm sm:text-base flex items-center justify-center sm:justify-start gap-2">
+              📖 Cẩm Nang: Hướng Xuất Hành Là Gì? Cách Nghênh Tài Thần, Hỷ Thần
+            </h3>
+            <p className="text-xs text-stone-600">
+              Tìm hiểu nguồn gốc, ý nghĩa của Hỷ Thần, Tài Thần, Hạc Thần và bí quyết hoá giải khi điểm đến ngược hướng xuất hành.
+            </p>
+          </div>
+          <Link href="/blog/huong-xuat-hanh-la-gi-cach-chon-huong-tot-nghenh-tai-don-hy" className="shrink-0">
+            <Button variant="outline" size="sm" className="bg-white border-amber-300 text-amber-900 hover:bg-amber-100 text-xs">
+              Đọc cẩm nang <ArrowRight className="w-3.5 h-3.5 ml-1" />
+            </Button>
+          </Link>
+        </CardContent>
+      </Card>
+
       {/* CTA xem thêm */}
       <div className="text-center">
         <Link href="/xem-ngay-tot/xuat-hanh">
