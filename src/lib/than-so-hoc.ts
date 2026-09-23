@@ -14,6 +14,20 @@ export const NUMEROLOGY_DATA: Record<number, {
   challenges: string[];
   careers: string[];
 }> = {
+  1: {
+    title: 'Người Tiên Phong & Lãnh Đạo Độc Lập (Số 1 / Số Chủ Đạo 10)',
+    description: 'Số 1 (trong trường phái David A. Phillips gọi là Số Chủ Đạo 10) là hiện thân của tính độc lập, lòng quả cảm và khả năng thích ứng linh hoạt tuyệt vời. Bạn là người dám nghĩ dám làm, tự tin mở đường và có sức hút tự nhiên trong tập thể.',
+    strengths: ['Tính độc lập, quyết đoán và tinh thần tiên phong', 'Khả năng thích nghi nhanh nhạy trước mọi biến đổi', 'Tự tin, hòa nhã, cuốn hút và quảng giao rộng rãi'],
+    challenges: ['Cái tôi (Ego) lớn, dễ trở nên độc đoán hoặc nóng nảy', 'Dễ rơi vào trạng thái bấp bênh, sống mòn nếu thiếu mục tiêu rõ ràng', 'Có xu hướng né tránh đào sâu cảm xúc khi gặp trắc trở'],
+    careers: ['Nhà sáng lập, doanh nhân, giám đốc điều hành (CEO)', 'Quản lý dự án, trưởng phòng kinh doanh, khởi nghiệp', 'Chuyên gia quan hệ công chúng (PR), truyền thông, ngoại giao'],
+  },
+  10: {
+    title: 'Người Tiên Phong & Linh Hoạt Thích Nghi (Số Chủ Đạo 10 / Số 1 Quốc Tế)',
+    description: 'Số 10 (đại diện cho số 1 trong hệ thống Nhân số học Pythagoras tại Việt Nam) sở hữu biên độ dao động và tiềm năng thích ứng linh hoạt bậc nhất. Được hợp thành từ số 1 (tiên phong, độc lập) và số 0 (tiềm năng vô hạn), bạn dễ dàng gặt hái thành công rực rỡ khi kiên định với mục tiêu.',
+    strengths: ['Khả năng thích ứng phi thường với hoàn cảnh mới', 'Tự tin, quyết đoán, phong thái đĩnh đạc và đáng tin cậy', 'Quảng giao, lạc quan, được nhiều người yêu quý và kính trọng'],
+    challenges: ['Dễ tự mãn, chủ quan khi công việc đang thuận lợi', 'Thiếu kiên nhẫn khi phải làm các công việc tỉ mỉ, lặp lại', 'Đôi khi quá chú trọng bề nổi mà bỏ qua chiều sâu nội tâm'],
+    careers: ['Doanh nhân, nhà quản lý cấp cao, giám đốc đối ngoại', 'Nhà hoạt động xã hội, chính khách, cố vấn truyền thông', 'Lĩnh vực kinh doanh, bất động sản, nghệ thuật biểu diễn'],
+  },
   2: {
     title: 'Người Hòa Giải & Đồng Cảm',
     description: 'Số 2 đại diện cho sự nhạy cảm, trực giác tinh tế và khả năng kết nối con người. Bạn là người lắng nghe tuyệt vời và luôn mong muốn hòa bình, hài hòa trong cuộc sống.',
@@ -73,7 +87,7 @@ export const NUMEROLOGY_DATA: Record<number, {
   11: {
     title: 'Bậc Thầy Trực Giác & Khai Sáng (Master Number 11)',
     description: 'Số 11 là Master Number đại diện cho trực giác tâm linh siêu phàm, nhạy cảm tinh thần và sứ mệnh kết nối, truyền cảm hứng cho nhân loại.',
-    strengths: ['Trực giác tâm linh cực kỳ chuẩn xác', 'Tầm nhìn xa trông rộng, truyền cảm hứng mạnh mẽ', 'Chân thành, vị tha và sâu sắc'],
+    strengths: ['Trực giác tâm linh sâu sắc, nhạy bén', 'Tầm nhìn xa trông rộng, truyền cảm hứng mạnh mẽ', 'Chân thành, vị tha và sâu sắc'],
     challenges: ['Áp lực nội tâm rất lớn, dễ căng thẳng thần kinh', 'Dễ bị choáng ngợp trước năng lượng xung quanh', 'Đôi khi rơi vào hoang mang về hướng đi'],
     careers: ['Nhà trị liệu tâm lý, chuyên gia chữa lành', 'Tác giả, triết gia, nghệ sĩ truyền cảm hứng', 'Lãnh đạo tinh thần, cố vấn cấp cao'],
   },
@@ -84,29 +98,34 @@ export const NUMEROLOGY_DATA: Record<number, {
     challenges: ['Gánh nặng trách nhiệm quá lớn', 'Khó thỏa mãn với những kết quả trung bình', 'Căng thẳng tột độ khi mọi việc chậm tiến độ'],
     careers: ['Nhà sáng lập tập đoàn, kiến tạo đô thị', 'Lãnh đạo quốc gia, tổ chức quốc tế', 'Chuyên gia quy hoạch chiến lược toàn cầu'],
   },
+  33: {
+    title: 'Bậc Thầy Nâng Đỡ & Chữa Lành (Master Number 33/6)',
+    description: 'Số 33 là con số Master tối cao đại diện cho tình yêu thương vô điều kiện, sự hy sinh phụng sự và năng lượng chữa lành tâm hồn cho nhân loại. Bạn là ngọn hải đăng soi sáng và bảo bọc những người xung quanh (Lưu ý: trong một số tài liệu Nhân số học truyền thống tại Việt Nam theo TS. David A. Phillips, trường hợp tổng 33 cũng có thể được xem xét theo năng lượng phát triển nâng cao của Số 6).',
+    strengths: ['Trái tim nhân hậu, lòng vị tha và tình thương bao la', 'Trực giác thấu suốt, khả năng nâng đỡ tinh thần vượt bậc', 'Ý chí cống hiến phụng sự cộng đồng không vụ lợi'],
+    challenges: ['Dễ gánh vác quá nhiều nỗi đau và trách nhiệm của người khác', 'Nguy cơ kiệt sức vì quên chăm sóc chính bản thân mình', 'Kỳ vọng quá cao vào sự hoàn mỹ đạo đức của xã hội'],
+    careers: ['Bậc thầy tâm lý, chuyên gia trị liệu chữa lành, nhà giáo dục', 'Lãnh đạo tổ chức nhân đạo, thiện nguyện quốc tế, y tế cộng đồng', 'Nhà hoạt động văn hóa, triết gia, nghệ sĩ truyền cảm hứng'],
+  },
 };
 
 /**
- * Tính số chủ đạo (Life Path Number) theo trường phái Pythagoras
- * Rút gọn ngày, tháng, năm về số đơn lẻ, sau đó cộng lại:
- * Giữ nguyên 11 và 22
+ * Tính số chủ đạo (Life Path Number / Ruling Number) theo trường phái Pythagoras
+ * Chuẩn phổ biến tại Việt Nam (theo TS. David A. Phillips & Lê Đỗ Quỳnh Hương):
+ * - Cộng dồn tất cả các chữ số của ngày sinh, tháng sinh và năm sinh dương lịch.
+ * - Rút gọn về các con số đơn lẻ từ 2 đến 9, hoặc con số 10.
+ * - Giữ nguyên các con số Master: 11, 22, 33.
  */
 export function calculateLifePathNumber(day: number, month: number, year: number): number {
-  const reduce = (num: number): number => {
-    let sum = num;
-    while (sum > 9 && sum !== 11 && sum !== 22) {
-      sum = sum.toString().split('').reduce((acc, digit) => acc + parseInt(digit, 10), 0);
-    }
-    return sum;
-  };
+  const fullDateStr = `${day}${month}${year}`;
+  let total = fullDateStr
+    .split('')
+    .reduce((sum, digit) => sum + parseInt(digit, 10), 0);
 
-  const daySum = reduce(day);
-  const monthSum = reduce(month);
-  const yearSum = reduce(year);
-
-  let total = daySum + monthSum + yearSum;
-  while (total > 9 && total !== 11 && total !== 22) {
-    total = total.toString().split('').reduce((acc, digit) => acc + parseInt(digit, 10), 0);
+  // Rút gọn liên tục: dừng lại khi tổng <= 10 hoặc là Master Number (11, 22, 33)
+  while (total > 10 && total !== 11 && total !== 22 && total !== 33) {
+    total = total
+      .toString()
+      .split('')
+      .reduce((acc, digit) => acc + parseInt(digit, 10), 0);
   }
 
   return total;

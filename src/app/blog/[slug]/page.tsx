@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getBlogPostBySlug, getRelatedPosts, getAllBlogPosts } from '@/lib/blog';
+import { lunarService } from '@/lib/lunar';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -9,6 +10,7 @@ import {
   User, 
   Calendar, 
   ArrowLeft, 
+  ArrowRight,
   ChevronRight, 
   Share2, 
   BookOpen, 
@@ -161,6 +163,22 @@ export default async function BlogPostDetailPage({ params }: Props) {
     keywords: post.keywords ? post.keywords.join(', ') : post.tags.join(', '),
   };
 
+  let solarEventDate: { day: number; month: number; year: number; url: string } | null = null;
+  if (post.lunarEvent) {
+    try {
+      const currentYear = new Date().getFullYear();
+      const solar = lunarService.lunarToSolar(post.lunarEvent.day, post.lunarEvent.month, currentYear, 0);
+      solarEventDate = {
+        day: solar.day,
+        month: solar.month,
+        year: solar.year,
+        url: `/xem-ngay/${solar.day}-${solar.month}-${solar.year}`,
+      };
+    } catch {
+      // ignore
+    }
+  }
+
   return (
     <article className="max-w-4xl mx-auto space-y-8">
       {/* Schema.org Article JSON-LD */}
@@ -228,12 +246,48 @@ export default async function BlogPostDetailPage({ params }: Props) {
         </div>
       </div>
 
+      {/* Banner Tra Cứu Ngày Lễ Năm Nay (Tính toán tự động theo năm hiện tại) */}
+      {solarEventDate && post.lunarEvent && (
+        <div className="bg-gradient-to-r from-amber-500/10 via-orange-500/10 to-amber-500/10 border-2 border-amber-400/50 rounded-2xl p-5 sm:p-6 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xs">
+          <div className="space-y-1.5 text-center sm:text-left">
+            <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-amber-800 bg-amber-100/90 px-3 py-0.5 rounded-full">
+              <Calendar className="w-3.5 h-3.5" /> Tra Cứu Lịch Ngày Lễ Năm Nay
+            </div>
+            <h3 className="font-extrabold text-amber-950 text-base sm:text-lg">
+              {post.lunarEvent.name} năm nay rơi vào ngày nào?
+            </h3>
+            <p className="text-xs sm:text-sm text-stone-600 leading-relaxed">
+              Ngày <strong>{post.lunarEvent.day}/{post.lunarEvent.month} Âm lịch</strong> năm nay rơi vào ngày{' '}
+              <span className="font-bold text-rose-700 bg-rose-50 px-2 py-0.5 rounded border border-rose-200">
+                {solarEventDate.day}/{solarEventDate.month}/{solarEventDate.year} Dương lịch
+              </span>
+              . Xem ngay giờ hoàng đạo, hướng xuất hành và việc nên kiêng kỵ trong ngày này.
+            </p>
+          </div>
+          <Link href={solarEventDate.url} className="shrink-0 w-full sm:w-auto">
+            <Button className="w-full sm:w-auto bg-primary hover:bg-primary-dark text-white font-semibold shadow-sm gap-2">
+              Xem chi tiết ngày này <ArrowRight className="w-4 h-4" />
+            </Button>
+          </Link>
+        </div>
+      )}
+
       {/* Article Body Content */}
       <div className="prose prose-stone max-w-none prose-headings:text-amber-950 prose-headings:font-bold prose-h2:text-2xl prose-h2:border-b prose-h2:border-stone-100 prose-h2:pb-2 prose-h3:text-xl prose-p:leading-relaxed prose-p:text-stone-700 prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:bg-amber-50/60 prose-blockquote:p-4 prose-blockquote:rounded-r-xl prose-blockquote:italic prose-blockquote:text-stone-800 prose-li:text-stone-700">
         <div 
           className="space-y-4 leading-relaxed"
           dangerouslySetInnerHTML={{ __html: formattedContent }}
         />
+      </div>
+
+      {/* Thông điệp văn hóa & Lưu ý trách nhiệm */}
+      <div className="bg-stone-50 border border-stone-200/80 rounded-xl p-4 text-xs text-stone-500 leading-relaxed space-y-1">
+        <p className="font-semibold text-stone-700 flex items-center gap-1.5">
+          <BookOpen className="w-3.5 h-3.5 text-stone-500" /> Lưu ý văn hóa & phong tục:
+        </p>
+        <p>
+          Các bài viết cẩm nang, phong tục lễ tết và trạch cát trên Lịch An mang tính chất nghiên cứu văn hóa dân gian, lưu giữ truyền thống và chiêm nghiệm phong tục tốt đẹp của dân tộc. Chúng tôi khuyến khích quý độc giả tiếp nhận với tâm thế hướng thiện, khoa học, bài trừ các biểu hiện mê tín dị đoan và luôn chủ động nỗ lực trong cuộc sống.
+        </p>
       </div>
 
       {/* Tags */}

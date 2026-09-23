@@ -120,7 +120,7 @@ export default async function XemNgayDetailPage({ params }: Props) {
     '@context': 'https://schema.org',
     '@type': 'ItemPage',
     name: `Chi Tiết Ngày ${day}/${month}/${year} — Lịch An`,
-    description: `Tra cứu tử vi ngày ${day}/${month}/${year} dương lịch, ngày ${dayInfo.canChiDay.fullName} âm lịch.`,
+    description: `Tra cứu lịch vạn sự ngày ${day}/${month}/${year} dương lịch (ngày ${dayInfo.canChiDay.fullName} âm lịch), giờ hoàng đạo và việc nên làm, kiêng kỵ.`,
     url: `https://lichan.com/xem-ngay/${date}`,
     breadcrumb: {
       '@type': 'BreadcrumbList',
@@ -287,18 +287,18 @@ export default async function XemNgayDetailPage({ params }: Props) {
 
           {/* Cảnh báo Ngày Kỵ Dân Gian nếu có */}
           {dayInfo.ngayKy && dayInfo.ngayKy.length > 0 && (
-            <div className="rounded-2xl p-4 sm:p-5 bg-rose-50/90 border border-rose-200 text-rose-950 space-y-2 shadow-xs">
-              <div className="flex items-center gap-2 font-bold text-rose-800 text-sm sm:text-base">
-                <ShieldAlert className="w-5 h-5 text-rose-600 shrink-0" />
-                Cảnh Báo Ngày Kiêng Kỵ Dân Gian (Đại Hung Bách Sự Kỵ)
+            <div className="rounded-2xl p-4 sm:p-5 bg-amber-50/90 border border-amber-300 text-amber-950 space-y-2 shadow-xs">
+              <div className="flex items-center gap-2 font-bold text-amber-900 text-sm sm:text-base">
+                <ShieldAlert className="w-5 h-5 text-amber-700 shrink-0" />
+                Lưu Ý Ngày Kiêng Kỵ Theo Quan Niệm Dân Gian
               </div>
-              <ul className="text-xs sm:text-sm space-y-1 pl-6 list-disc font-medium text-rose-900">
+              <ul className="text-xs sm:text-sm space-y-1 pl-6 list-disc font-medium text-amber-950">
                 {dayInfo.ngayKy.map((ky, idx) => (
                   <li key={idx}>{ky}</li>
                 ))}
               </ul>
-              <p className="text-xs text-rose-700 italic pt-1">
-                * Dân gian kiêng kỵ khởi sự các việc đại sự (cưới hỏi, khởi công, khai trương, xuất hành xa) vào những ngày này để phòng ngừa trắc trở.
+              <p className="text-xs text-stone-600 italic pt-1">
+                * Theo quan niệm văn hóa dân gian truyền thống, vào những ngày này người xưa thường thận trọng, hạn chế khởi sự các việc đại sự (như động thổ xây dựng, cưới hỏi, khai trương lớn) để mưu cầu tâm lý an yên, vạn sự thuận hòa.
               </p>
             </div>
           )}
@@ -316,14 +316,14 @@ export default async function XemNgayDetailPage({ params }: Props) {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm">
                 <div className="p-3 rounded-xl bg-white/90 border border-amber-200/50 space-y-1">
                   <span className="text-stone-500 font-semibold block">Tuổi xung khắc với ngày:</span>
-                  <div className="font-bold text-rose-700">
-                    {dayInfo.tuoiXung.ngay.length > 0 ? dayInfo.tuoiXung.ngay.join(', ') : 'Không có tuổi đại kỵ'}
+                  <div className="font-bold text-amber-800">
+                    {dayInfo.tuoiXung.ngay.length > 0 ? dayInfo.tuoiXung.ngay.join(', ') : 'Không có tuổi xung khắc trực tiếp'}
                   </div>
                 </div>
                 <div className="p-3 rounded-xl bg-white/90 border border-amber-200/50 space-y-1">
                   <span className="text-stone-500 font-semibold block">Tuổi xung khắc với tháng:</span>
                   <div className="font-bold text-amber-900">
-                    {dayInfo.tuoiXung.thang.length > 0 ? dayInfo.tuoiXung.thang.join(', ') : 'Không có tuổi đại kỵ'}
+                    {dayInfo.tuoiXung.thang.length > 0 ? dayInfo.tuoiXung.thang.join(', ') : 'Không có tuổi xung khắc trực tiếp'}
                   </div>
                 </div>
               </div>
@@ -395,8 +395,8 @@ export default async function XemNgayDetailPage({ params }: Props) {
               </div>
               {dayInfo.hacThan && (
                 <div className="flex justify-between py-1">
-                  <span className="text-stone-600">Hạc Thần (Hướng hung cần tránh)</span>
-                  <strong className="text-rose-700 font-bold">{dayInfo.hacThan}</strong>
+                  <span className="text-stone-600">Hạc Thần (Hướng cần lưu ý khi xuất hành)</span>
+                  <strong className="text-amber-900 font-bold">{dayInfo.hacThan}</strong>
                 </div>
               )}
             </div>
@@ -415,11 +415,11 @@ export default async function XemNgayDetailPage({ params }: Props) {
                 <div>
                   {dayInfo.nhiThapBatTu.nature === 'Cát' ? (
                     <Badge variant="success" className="font-bold text-xs py-1">
-                      ✨ Cát Tinh (Đại Kiết)
+                      ✨ Cát Tinh (Tốt Lành)
                     </Badge>
                   ) : dayInfo.nhiThapBatTu.nature === 'Hung' ? (
                     <Badge variant="destructive" className="font-bold text-xs py-1">
-                      ⚠️ Hung Tinh (Cần Kiêng Kỵ)
+                      ⚠️ Hung Tinh (Cần Lưu Ý)
                     </Badge>
                   ) : (
                     <Badge variant="secondary" className="font-bold text-xs py-1">
@@ -492,7 +492,7 @@ export default async function XemNgayDetailPage({ params }: Props) {
                   dayInfo.viecNenLam.map((viec, idx) => (
                     <li key={idx} className="flex items-start gap-2">
                       <span className="text-emerald-500 font-bold">•</span>
-                      <span>{viec}</span>
+                      <span>{viec === 'Dâng sao giải hạn' ? 'Cầu an, làm việc thiện' : viec}</span>
                     </li>
                   ))
                 ) : (
@@ -530,7 +530,7 @@ export default async function XemNgayDetailPage({ params }: Props) {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 border-t border-stone-100">
             <div>
               <h4 className="text-xs font-bold uppercase tracking-wider text-stone-500 mb-3 flex items-center gap-1.5">
-                <Sparkles className="w-4 h-4 text-emerald-600" /> Sao Tốt Chiếu Mệnh
+                <Sparkles className="w-4 h-4 text-emerald-600" /> Sao Tốt (Cát Tinh Hội Tụ)
               </h4>
               <div className="flex flex-wrap gap-1.5">
                 {dayInfo.saoTot && dayInfo.saoTot.length > 0 ? (
@@ -547,7 +547,7 @@ export default async function XemNgayDetailPage({ params }: Props) {
 
             <div>
               <h4 className="text-xs font-bold uppercase tracking-wider text-stone-500 mb-3 flex items-center gap-1.5">
-                <Sparkles className="w-4 h-4 text-red-500" /> Sao Xấu Cần Tránh
+                <Sparkles className="w-4 h-4 text-red-500" /> Sao Xấu (Hung Tinh Cần Lưu Ý)
               </h4>
               <div className="flex flex-wrap gap-1.5">
                 {dayInfo.saoXau && dayInfo.saoXau.length > 0 ? (
@@ -575,7 +575,7 @@ export default async function XemNgayDetailPage({ params }: Props) {
                     Luận Giải Chi Tiết Ngày Theo Lịch Vạn Sự
                   </h3>
                   <p className="text-xs text-stone-500">
-                    Bình giải theo thuật toán Khâm Thiên Giám và cổ bản Ngọc Hạp Thông Thư
+                    Bình giải dựa trên phương pháp đối chiếu cổ bản Ngọc Hạp Thông Thư và tư liệu Khâm Thiên Giám
                   </p>
                 </div>
               </div>
@@ -716,7 +716,7 @@ export default async function XemNgayDetailPage({ params }: Props) {
                 <div className="p-4 rounded-xl bg-rose-50/80 border border-rose-200/80 space-y-2">
                   <div className="font-bold text-rose-900 flex items-center gap-1.5">
                     <XCircle className="w-4 h-4 text-rose-600" />
-                    Việc Đại Kỵ Nên Tránh:
+                    Việc Cần Hạn Chế / Kiêng Kỵ:
                   </div>
                   <ul className="space-y-1.5 text-rose-950 pl-5 list-disc">
                     {dayInfo.luanGiai.tongKet.kyViec.map((v, i) => (
@@ -727,6 +727,17 @@ export default async function XemNgayDetailPage({ params }: Props) {
               </div>
             </div>
           )}
+
+          {/* Khuyến cáo văn hóa & pháp lý */}
+          <div className="rounded-xl p-4 bg-stone-50 border border-stone-200/80 text-xs text-stone-600 space-y-1.5">
+            <div className="font-semibold text-stone-800 flex items-center gap-1.5">
+              <Info className="w-4 h-4 text-primary shrink-0" />
+              <span>Lưu ý tham khảo văn hóa & nếp sống văn minh:</span>
+            </div>
+            <p className="leading-relaxed">
+              Các thông tin bình giải lịch vạn sự, ngày hoàng đạo, việc nên làm và kiêng kỵ trên Lịch An được biên soạn dựa trên các tư liệu phong tục cổ truyền dân gian (Hiệp Kỷ Biện Phương Thư, Ngọc Hạp Thông Thư, Khổng Minh Lục Diệu...). Nội dung mang tính chất tham khảo, chiêm nghiệm văn hóa truyền thống lành mạnh; không mang tính khẳng định tuyệt đối hay định hướng mê tín dị đoan. Trong thực tế, sự thành công và hanh thông của mỗi công việc luôn bắt đầu từ sự chuẩn bị chu đáo, năng lực chuyên môn và đạo đức của mỗi người.
+            </p>
+          </div>
 
           {/* Tiện ích liên quan */}
           <div className="pt-6 border-t border-stone-100 bg-amber-50/40 -mx-6 -mb-6 p-6 rounded-b-xl space-y-3">

@@ -41,8 +41,29 @@ export default function ThanSoHocClient() {
     }
   }, [day, month, year]);
 
-  const lifePath = calculateLifePathNumber(day, month, year);
-  const data = NUMEROLOGY_DATA[lifePath] || NUMEROLOGY_DATA[lifePath === 4 ? 4 : 2];
+  const maxDays = new Date(year, month, 0).getDate();
+  const effectiveDay = Math.min(day, maxDays);
+
+  const lifePath = calculateLifePathNumber(effectiveDay, month, year);
+  const data = NUMEROLOGY_DATA[lifePath] || NUMEROLOGY_DATA[10] || NUMEROLOGY_DATA[2];
+
+  const displayTitle = lifePath === 10 || lifePath === 1
+    ? 'Số Chủ Đạo 10 (hoặc Số 1 theo chuẩn Quốc tế)'
+    : lifePath === 22
+    ? 'Số Chủ Đạo 22/4 (Master Number)'
+    : lifePath === 33
+    ? 'Số Chủ Đạo 33/6 (Master Number)'
+    : lifePath === 11
+    ? 'Số Chủ Đạo 11 (Master Number)'
+    : `Số Chủ Đạo ${lifePath}`;
+
+  const displayBadgeNumber = lifePath === 22 
+    ? '22/4' 
+    : lifePath === 33 
+    ? '33/6' 
+    : lifePath === 10 
+    ? '10' 
+    : lifePath;
 
   const handleCalculate = (e: React.FormEvent) => {
     e.preventDefault();
@@ -79,7 +100,7 @@ export default function ThanSoHocClient() {
             <Compass className="w-5 h-5 text-primary" /> Nhập Ngày Sinh Dương Lịch
           </CardTitle>
           <CardDescription>
-            Định dạng theo giấy khai sinh chuẩn để tính toán chính xác nhất
+            Định dạng theo ngày sinh dương lịch trên giấy tờ để tính toán chuẩn Pythagoras
           </CardDescription>
         </CardHeader>
         <CardContent className="pt-6">
@@ -87,10 +108,10 @@ export default function ThanSoHocClient() {
             <div>
               <label className="block text-xs font-semibold text-stone-600 mb-1.5">Ngày sinh</label>
               <Select
-                value={day}
+                value={effectiveDay}
                 onChange={(e) => setDay(Number(e.target.value))}
               >
-                {Array.from({ length: 31 }, (_, i) => i + 1).map((d) => (
+                {Array.from({ length: maxDays }, (_, i) => i + 1).map((d) => (
                   <option key={d} value={d}>Ngày {d}</option>
                 ))}
               </Select>
@@ -156,12 +177,12 @@ export default function ThanSoHocClient() {
                   </button>
                 </div>
                 <CardTitle className="text-2xl sm:text-3xl text-amber-950 font-black">
-                  Số Chủ Đạo {lifePath}
+                  {displayTitle}
                 </CardTitle>
                 <p className="text-base font-semibold text-primary mt-1">{data.title}</p>
               </div>
-              <div className="w-20 h-20 rounded-2xl bg-primary text-white flex items-center justify-center text-4xl font-black shadow-inner self-center sm:self-auto shrink-0">
-                {lifePath}
+              <div className="w-20 h-20 rounded-2xl bg-primary text-white flex items-center justify-center text-3xl font-black shadow-inner self-center sm:self-auto shrink-0">
+                {displayBadgeNumber}
               </div>
             </div>
             <p className="text-sm text-stone-700 leading-relaxed mt-4 pt-3 border-t border-amber-900/10">
@@ -215,6 +236,17 @@ export default function ThanSoHocClient() {
                   </Badge>
                 ))}
               </div>
+            </div>
+
+            {/* Lưu ý tham khảo văn hóa & nếp sống văn minh */}
+            <div className="p-4 rounded-xl bg-stone-50 border border-stone-200/80 text-xs text-stone-600 space-y-1.5">
+              <div className="font-semibold text-stone-800 flex items-center gap-1.5">
+                <Sparkles className="w-3.5 h-3.5 text-primary shrink-0" />
+                <span>Quy tắc tính toán theo trường phái Pythagoras:</span>
+              </div>
+              <p className="leading-relaxed">
+                Hệ thống áp dụng phương pháp cộng dồn rút gọn ngày sinh theo trường phái Pythagoras (được phổ biến rộng rãi tại Việt Nam bởi TS. David A. Phillips và Lê Đỗ Quỳnh Hương, kết hợp chuẩn Quốc tế hiện đại). Các con số đặc biệt như 10 (tương đương Số 1 quốc tế) và các con số Master 11, 22/4, 33/6 được giữ nguyên nhằm bảo toàn trọn vẹn trường năng lượng. Nội dung mang tính chất tham khảo, giúp bạn thấu hiểu thêm tiềm năng nội tại để tự tin định hướng học tập, công việc và hoàn thiện bản thân.
+              </p>
             </div>
           </CardContent>
         </Card>

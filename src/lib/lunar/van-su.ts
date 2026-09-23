@@ -58,7 +58,7 @@ const THAN_SAT_12: ThanSatConfig[] = [
     name: 'Chu Tước Hắc Đạo',
     starName: 'Chu Tước',
     isHoangDao: false,
-    yNghia: 'Hung tinh chủ khẩu thiệt tai tiếng, dễ sinh hiểu lầm, hao tán tiềnของ, kỵ làm lễ lớn.',
+    yNghia: 'Hung tinh chủ khẩu thiệt tai tiếng, dễ sinh hiểu lầm, hao tán tiền của, kỵ tranh cãi lớn.',
   },
   {
     name: 'Kim Quỹ Hoàng Đạo',
@@ -76,7 +76,7 @@ const THAN_SAT_12: ThanSatConfig[] = [
     name: 'Bạch Hổ Hắc Đạo',
     starName: 'Bạch Hổ',
     isHoangDao: false,
-    yNghia: 'Hung sát chủ về thương tích, sự cố bất trắc, đại kỵ động thổ đào móng và mai táng.',
+    yNghia: 'Chủ về sự cẩn trọng an toàn, theo quan niệm xưa kiêng kỵ việc động thổ đào móng và việc tang ma.',
   },
   {
     name: 'Ngọc Đường Hoàng Đạo',
@@ -94,7 +94,7 @@ const THAN_SAT_12: ThanSatConfig[] = [
     name: 'Huyền Vũ Hắc Đạo',
     starName: 'Huyền Vũ',
     isHoangDao: false,
-    yNghia: 'Hung tinh chủ âm mưu tiểu nhân quấy phá, cẩn thận mất trộm, kỵ việc giao dịch tiền bạc lớn.',
+    yNghia: 'Chủ về sự cẩn trọng trong tài chính, phòng ngừa thất thoát tài sản, nên thận trọng khi giao dịch tiền bạc lớn.',
   },
   {
     name: 'Tư Mệnh Hoàng Đạo',
@@ -106,7 +106,7 @@ const THAN_SAT_12: ThanSatConfig[] = [
     name: 'Câu Trận Hắc Đạo',
     starName: 'Câu Trận',
     isHoangDao: false,
-    yNghia: 'Hung tinh chủ trắc trở dọc đường, ngáng trở mưu sự, kỵ di dời nhà cửa và xuất hành xa.',
+    yNghia: 'Chủ về việc đi lại cần chậm rãi, thận trọng, dân gian khuyên nên cân nhắc kỹ trước khi chuyển dọn nhà cửa hoặc xuất hành xa.',
   },
 ];
 
@@ -175,7 +175,7 @@ const LUC_DIEU_LIST: Array<{
   {
     name: 'Xích Khẩu',
     isGood: false,
-    yNghia: 'Dễ xảy ra tranh luận khẩu thiệt, tai bay vạ gió, bất đồng quan điểm. Cần giữ mồm giữ miệng.',
+    yNghia: 'Dễ phát sinh tranh luận, bất đồng quan điểm. Cần giữ gìn lời ăn tiếng nói hòa nhã, tránh tranh cãi không đáng có.',
     tho: 'Xích Khẩu đề phòng chuyện thị phi, Lời ăn tiếng nói giữ từ quy. Tranh giành kiện cáo nên dừng lại, Nhẫn nhịn cho qua khỏi họa suy.',
   },
   {
@@ -187,7 +187,7 @@ const LUC_DIEU_LIST: Array<{
   {
     name: 'Không Vong',
     isGood: false,
-    yNghia: 'Vạn sự khó thành, dễ rơi vào cảnh dã tràng xe cát, hao tài tốn của. Nên nghỉ ngơi an dưỡng.',
+    yNghia: 'Mưu sự cần kiên trì và cân nhắc kỹ lưỡng, tránh đầu tư vội vã. Thích hợp cho nghỉ ngơi, an dưỡng tinh thần và hoàn thiện công việc cũ.',
     tho: 'Không Vong mưu sự hóa thành không, Tiền của ra đi tựa gió lồng. Tránh việc khai trương hay khởi tạo, Giữ mình thanh tịnh thoát long đong.',
   },
 ];
@@ -375,24 +375,24 @@ export function getNgayKyDanGian(lunarDay: number, lunarMonth: number, dayChi: s
   const warnings: string[] = [];
 
   if (isTamNuong(lunarDay)) {
-    warnings.push(`Phạm ngày Tam Nương (Mùng ${lunarDay} ÂL - trăm sự đều kiêng)`);
+    warnings.push(`Ngày Tam Nương (Mùng ${lunarDay} ÂL - dân gian khuyên thận trọng các việc trọng đại)`);
   }
   if (isNguyetKy(lunarDay)) {
-    warnings.push(`Phạm ngày Nguyệt Kỵ (Mùng ${lunarDay} ÂL - nửa đời nửa đoạn, đi xa về muộn)`);
+    warnings.push(`Ngày Nguyệt Kỵ (Mùng ${lunarDay} ÂL - dân gian kiêng kỵ xuất hành xa hay khai trương)`);
   }
   if (isSatChu(lunarMonth, dayChi)) {
-    warnings.push(`Phạm ngày Sát Chủ tháng ${lunarMonth} (Chi ${dayChi} - đại kỵ xây dựng, cưới hỏi)`);
+    warnings.push(`Ngày Sát Chủ tháng ${lunarMonth} (Chi ${dayChi} - dân gian kiêng kỵ động thổ, cưới hỏi)`);
   }
   if (isThuTu(lunarMonth, dayChi)) {
-    warnings.push(`Phạm ngày Thụ Tử tháng ${lunarMonth} (Chi ${dayChi} - trăm sự bất lợi)`);
+    warnings.push(`Ngày Thụ Tử tháng ${lunarMonth} (Chi ${dayChi} - quan niệm xưa khuyên hạn chế khởi sự việc lớn)`);
   }
   if (isNguyetPha(lunarMonth, dayChi)) {
-    warnings.push(`Phạm ngày Nguyệt Phá (Chi ngày ${dayChi} xung trực tiếp với Chi tháng)`);
+    warnings.push(`Ngày Nguyệt Phá (Chi ngày ${dayChi} tương xung trực tiếp với Chi tháng)`);
   }
 
   const duongCongDays = DUONG_CONG_KY[lunarMonth] || [];
   if (duongCongDays.includes(lunarDay)) {
-    warnings.push(`Phạm ngày Dương Công Kỵ Nhật (Mùng ${lunarDay} ÂL - vạn sự khởi đầu nan)`);
+    warnings.push(`Ngày Dương Công Kỵ Nhật (Mùng ${lunarDay} ÂL - quan niệm xưa khuyên chuẩn bị kỹ lưỡng khi khởi sự)`);
   }
 
   return warnings;
@@ -487,8 +487,8 @@ export function generateLuanGiaiNgay(params: GenerateLuanGiaiParams): LuanGiaiNg
     ? `Tuy nhiên có sự xuất hiện của hung tinh: ${saoXau.slice(0, 3).join(', ')}.` 
     : 'Ít hung tinh xâm phạm.';
   const kyText = ngayKy.length > 0 
-    ? `Đặc biệt lưu ý: ${ngayKy.join('; ')}.` 
-    : 'Ngày trong lành, không vướng các đại kỵ dân gian nguy hiểm.';
+    ? `Lưu ý theo dân gian: ${ngayKy.join('; ')}.` 
+    : 'Ngày thanh bình, không vướng các ngày kiêng kỵ dân gian phổ biến.';
   const thanSat = `${saoTotText} ${saoXauText} ${kyText}`;
 
   // 5. TỔNG KẾT & ĐÁNH GIÁ TỔNG QUAN
@@ -516,13 +516,13 @@ export function generateLuanGiaiNgay(params: GenerateLuanGiaiParams): LuanGiaiNg
 
   if (ngayKy.length > 0 || finalScore < 35) {
     danhGia = finalScore < 25 ? 'Đại Hung' : 'Hung';
-    loiKhuyen = 'Ngày có khí trường xung phá, phạm đại kỵ dân gian hoặc nhiều hung tinh hội tụ. Tuyệt đối không nên khởi sự các đại sự như cưới hỏi, động thổ, khai trương hay xuất hành xa. Nên an phận thủ thường, hoàn tất công việc thường nhật và tu thân tích đức.';
+    loiKhuyen = 'Theo quan niệm phong tục cổ truyền, ngày này có một số yếu tố xung kỵ hoặc trùng ngày kiêng kỵ dân gian. Với các công việc hệ trọng như khởi công xây dựng, cưới hỏi hay xuất hành đường xa, gia chủ nên cân nhắc sắp xếp kế hoạch cẩn trọng hoặc chọn thời điểm phù hợp hơn để tinh thần thêm an tâm. Các công việc sinh hoạt và lao động thường nhật vẫn diễn ra bình thường.';
   } else if (finalScore >= 75) {
     danhGia = finalScore >= 85 ? 'Đại Cát' : 'Cát Lành';
     loiKhuyen = 'Ngày tràn đầy sinh khí cát lợi, Hoàng Đạo quang minh và tinh tú phù trợ. Rất thích hợp tiến hành các việc trọng đại nhằm thu hút tài lộc, xây đắp hạnh phúc và mở rộng sự nghiệp. Nên chọn đúng khung giờ hoàng đạo để vạn sự hanh thông viên mãn.';
   } else {
     danhGia = 'Bình Hòa';
-    loiKhuyen = 'Ngày có cát hung đan xen, khí trường ở mức trung bình. Thích hợp cho các công việc thường nhật, giao dịch nhỏ hoặc tu bổ dọn dẹp. Nếu cần làm việc quan trọng, bắt buộc phải chọn giờ đại cát và hướng xuất hành tương sinh để hóa giải.';
+    loiKhuyen = 'Ngày có cát hung đan xen, trường khí ở mức bình hòa. Thích hợp cho các công việc sinh hoạt thường nhật, giao dịch nhỏ hoặc tu bổ dọn dẹp nhà cửa. Nếu cần tiến hành việc quan trọng, gia chủ có thể ưu tiên chọn các khung giờ hoàng đạo và hướng xuất hành thuận lợi trong ngày để công việc thêm phần hanh thông.';
   }
 
   // Danh sách việc tốt nhất & việc đại kỵ
@@ -534,7 +534,7 @@ export function generateLuanGiaiNgay(params: GenerateLuanGiaiParams): LuanGiaiNg
     hopViec.push('Hội họp bạn bè, ký kết hợp đồng');
     hopViec.push('Xuất hành, cầu an, lễ bái');
   } else {
-    hopViec.push('Làm việc thiện, cúng tế giải hạn');
+    hopViec.push('Làm việc thiện, cầu an hướng thiện');
     hopViec.push('Dọn dẹp nhà cửa, an dưỡng tinh thần');
   }
 

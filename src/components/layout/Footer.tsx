@@ -6,7 +6,7 @@ export default function Footer() {
       <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
         <div>
           <h3 className="text-xl font-bold text-primary-light mb-4">Lịch An</h3>
-          <p className="text-gray-400">Tra cứu Lịch Âm Dương Việt Nam chính xác, xem ngày tốt xấu, đổi ngày âm dương dễ dàng.</p>
+          <p className="text-gray-400">Tra cứu Lịch Âm Dương Việt Nam, xem ngày tốt xấu, đổi ngày âm dương dễ dàng.</p>
         </div>
         <div>
           <h4 className="text-lg font-bold mb-4">Liên kết</h4>

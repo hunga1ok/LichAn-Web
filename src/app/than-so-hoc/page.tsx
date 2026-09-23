@@ -3,8 +3,8 @@ import type { Metadata } from 'next';
 import ThanSoHocClient from './ThanSoHocClient';
 
 export const metadata: Metadata = {
-  title: 'Tra Cứu Thần Số Học Pythagoras - Khám Phá Số Chủ Đạo & Vận Mệnh',
-  description: 'Tra cứu thần số học Pythagoras online miễn phí theo ngày tháng năm sinh. Khám phá con số chủ đạo, điểm mạnh, thách thức cuộc đời và định hướng nghề nghiệp chuẩn xác.',
+  title: 'Tra Cứu Thần Số Học Pythagoras - Khám Phá Số Chủ Đạo & Vận Mệnh | Lịch An',
+  description: 'Tra cứu thần số học Pythagoras online theo ngày tháng năm sinh. Khám phá con số chủ đạo, điểm mạnh, thách thức cuộc đời và định hướng nghề nghiệp.',
   keywords: [
     'thần số học',
     'thần số học pythagoras',
@@ -15,8 +15,8 @@ export const metadata: Metadata = {
     'lịch an',
   ],
   openGraph: {
-    title: 'Tra Cứu Thần Số Học Pythagoras Chính Xác | Lịch An',
-    description: 'Khám phá con số chủ đạo, bài học thử thách và định hướng nghề nghiệp chuẩn xác theo ngày sinh.',
+    title: 'Tra Cứu Thần Số Học Pythagoras | Lịch An',
+    description: 'Khám phá con số chủ đạo, bài học thử thách và định hướng nghề nghiệp theo trường phái Pythagoras.',
     type: 'website',
     url: 'https://lichan.com/than-so-hoc',
   },

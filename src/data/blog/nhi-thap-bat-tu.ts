@@ -110,8 +110,8 @@ Người xưa đã đúc kết 28 sao thành những câu thơ lục bát khẩu
 
 ## 6. Lợi ích khi ứng dụng Nhị Thập Bát Tú trên Lịch An
 
-1. **Chọn thời khắc hoàn hảo cho sự nghiệp**: Biết ngày nào có sao *Vĩ, Cơ, Đẩu, Bích* chiếu mệnh để ký kết những hợp đồng triệu đô hoặc khai trương mở chi nhánh mới.
+1. **Chọn thời khắc hoàn hảo cho sự nghiệp**: Biết ngày nào có sao *Vĩ, Cơ, Đẩu, Bích* chiếu mệnh để ký kết những hợp đồng quan trọng hoặc khai trương mở chi nhánh mới.
 2. **An tâm trọn vẹn khi dựng vợ gả chồng**: Tránh xa các hung tú như *Tâm Nguyệt Hồ* hay *Cang Kim Long* để đời sống vợ chồng luôn hòa thuận, trăm năm hạnh phúc.
-3. **Tích hợp tự động trên Lịch An**: Thay vì phải lật giở những cuốn sách tử vi dày cộp, hệ thống thuật toán của Lịch An sẽ tự động tính toán chính xác sao quản ngày cho bạn trong chớp mắt.
+3. **Tích hợp tự động trên Lịch An**: Thay vì phải lật giở những cuốn sách tử vi dày cộp, hệ thống của Lịch An dựa trên các bảng thiên văn cổ truyền sẽ tự động đối chiếu sao quản ngày cho bạn trong chớp mắt.
   `,
 };

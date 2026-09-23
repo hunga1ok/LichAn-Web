@@ -3,8 +3,8 @@ import type { Metadata } from 'next';
 import DoiNgayClient from './DoiNgayClient';
 
 export const metadata: Metadata = {
-  title: 'Đổi Ngày Âm Dương - Chuyển Lịch Dương Sang Âm & Âm Sang Dương Chuẩn Xác',
-  description: 'Công cụ chuyển đổi ngày Âm sang Dương và Dương sang Âm chuẩn xác 100% theo thuật toán thiên văn Hồ Ngọc Đức. Tra cứu can chi, trực, tiết khí và ngũ hành ngày.',
+  title: 'Đổi Ngày Âm Dương - Chuyển Lịch Dương Sang Âm & Âm Sang Dương',
+  description: 'Công cụ chuyển đổi ngày Âm sang Dương và Dương sang Âm dựa trên thuật toán thiên văn học Hồ Ngọc Đức. Tra cứu can chi, trực, tiết khí và ngũ hành ngày.',
   keywords: [
     'đổi ngày âm dương',
     'chuyển ngày âm sang dương',
@@ -15,8 +15,8 @@ export const metadata: Metadata = {
     'lịch an',
   ],
   openGraph: {
-    title: 'Đổi Ngày Âm Dương Chuẩn Xác Tuyệt Đối | Lịch An',
-    description: 'Chuyển đổi qua lại giữa lịch Dương và lịch Âm chính xác tuyệt đối theo thuật toán thiên văn Hồ Ngọc Đức.',
+    title: 'Đổi Ngày Âm Dương | Lịch An',
+    description: 'Chuyển đổi qua lại giữa lịch Dương và lịch Âm dựa trên thuật toán thiên văn học Hồ Ngọc Đức.',
     type: 'website',
     url: 'https://lichan.com/doi-ngay-am-duong',
   },
@@ -34,7 +34,7 @@ export default function DoiNgayPage() {
       price: '0',
       priceCurrency: 'VND',
     },
-    description: 'Tiện ích chuyển đổi lịch âm dương chính xác tuyệt đối theo thiên văn cổ truyền.',
+    description: 'Tiện ích chuyển đổi lịch âm dương dựa trên thuật toán thiên văn học Hồ Ngọc Đức.',
     url: 'https://lichan.com/doi-ngay-am-duong',
   };
 

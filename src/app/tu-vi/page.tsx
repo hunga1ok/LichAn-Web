@@ -5,18 +5,18 @@ import TuViClient from './TuViClient';
 
 export const metadata: Metadata = {
   title: 'Tử Vi Cá Nhân Hóa Theo Năm Sinh & 12 Con Giáp — Lịch An',
-  description: 'Tra cứu lá số tử vi, sao Cửu Diệu chiếu mệnh (La Hầu, Kế Đô, Thái Bạch...), Bát Hạn niên vận, Cung Phi Bát Trạch hướng nhà, hạn Tam Tai, Kim Lâu, Hoang Ốc chính xác 100%.',
+  description: 'Tra cứu tử vi, sao Cửu Diệu niên vận (La Hầu, Kế Đô, Thái Bạch...), Bát Hạn, Cung Phi Bát Trạch hướng nhà, hạn Tam Tai, Kim Lâu, Hoang Ốc dựa trên kinh điển cổ truyền.',
   keywords: [
     'tử vi cá nhân hóa',
     'sao chiếu mệnh 2026',
     'bát hạn niên vận',
     'cung phi bát trạch',
     'tra cứu tử vi theo năm sinh',
-    'cúng sao giải hạn',
+    'sao chiếu mệnh',
   ],
   openGraph: {
     title: 'Tử Vi Cá Nhân Hóa Theo Năm Sinh & Niên Hạn — Lịch An',
-    description: 'Tra cứu sao chiếu mệnh, niên hạn, cung mệnh Bát Trạch và vận may theo năm sinh chuẩn xác.',
+    description: 'Tra cứu sao chiếu mệnh, niên hạn, cung mệnh Bát Trạch và hướng nhà dựa trên kinh điển phong thủy cổ truyền.',
     type: 'website',
     url: 'https://lichan.com/tu-vi',
   },

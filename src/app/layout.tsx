@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     default: 'Lịch An - Lịch Âm Dương Việt Nam & Phong Thủy Cổ Truyền',
     template: '%s | Lịch An',
   },
-  description: 'Tra cứu Lịch Âm Dương Việt Nam chính xác nhất theo thuật toán Hồ Ngọc Đức. Xem ngày tốt xấu, giờ hoàng đạo, lịch vạn niên, đổi ngày âm dương và tử vi phong thủy.',
+  description: 'Tra cứu Lịch Âm Dương Việt Nam dựa trên thuật toán thiên văn học Hồ Ngọc Đức. Xem ngày tốt xấu, giờ hoàng đạo, lịch vạn niên, đổi ngày âm dương và tử vi phong thủy.',
   manifest: '/manifest.json',
   icons: {
     icon: [

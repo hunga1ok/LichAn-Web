@@ -24,7 +24,7 @@ export const postKetHopHoaGiapNguHanh: BlogPost = {
 
 Trong vũ trụ quan cổ đại, nếu [Lục Thập Hoa Giáp](/blog/luc-thap-hoa-giap-la-gi-bang-tra-cuu-60-hoa-giap) đóng vai trò là "bộ khung" đo lường chu kỳ thời gian và biến thiên của trời đất, thì [Thuyết Âm Dương Ngũ Hành](/blog/thuyet-am-duong-ngu-hanh-nguon-goc-va-ung-dung) chính là "linh hồn", là bản chất trường khí ẩn chứa bên trong.
 
-Hai học thuyết này không bao giờ tồn tại tách rời. Cổ nhân đã lồng ghép 5 hành (*Kim - Mộc - Thủy - Hỏa - Thổ*) và 2 cực (*Âm - Dương*) vào từng Thiên Can và Địa Chi để tạo nên một hệ thống luận giải vận mệnh, xem ngày giờ và phong thủy nhà ở chính xác tuyệt đối.
+Hai học thuyết này không bao giờ tồn tại tách rời. Cổ nhân đã lồng ghép 5 hành (*Kim - Mộc - Thủy - Hỏa - Thổ*) và 2 cực (*Âm - Dương*) vào từng Thiên Can và Địa Chi để tạo nên một hệ thống luận giải vận mệnh, xem ngày giờ và phong thủy nhà ở bài bản, phong phú theo triết lý phương Đông.
 
 ---
 

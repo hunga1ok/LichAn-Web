@@ -61,7 +61,7 @@ export default function Header() {
   ];
 
   const utilityLinks = [
-    { name: 'Đổi Ngày Âm ↔ Dương', href: '/doi-ngay-am-duong', desc: 'Chuyển đổi lịch âm dương chính xác', icon: ArrowLeftRight },
+    { name: 'Đổi Ngày Âm ↔ Dương', href: '/doi-ngay-am-duong', desc: 'Chuyển đổi lịch âm dương dễ dàng', icon: ArrowLeftRight },
     { name: 'Đồng Bộ Lịch Điện Thoại', href: '/dong-bo-lich', desc: 'Nhắc ngày Rằm & Mùng 1 trên iPhone/Android', icon: CalendarCheck },
     { name: 'Đếm Ngược Tết', href: '/dem-nguoc-tet', desc: 'Đồng hồ đếm ngược đến Giao Thừa', icon: PartyPopper },
     { name: 'Thần Số Học Pythagoras', href: '/than-so-hoc', desc: 'Khám phá số chủ đạo & vận mệnh', icon: Sparkles },

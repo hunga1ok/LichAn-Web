@@ -57,7 +57,7 @@ Khi tra cứu phương vị xuất hành, cổ nhân căn cứ vào ba vị th�
 
 ### 2.3. Hạc Thần (Phương vị hung sát cần tuyệt đối tránh)
 - **Bản chất**: Hạc Thần (còn gọi là Hung Thần du hành) là luồng khí xung sát, mang năng lượng tiêu cực, chủ về cản trở, khẩu thiệt thị phi và hao tổn sức khỏe.
-- **Lưu ý tối thượng**: Cổ nhân khuyên rằng **tuyệt đối không nên xuất hành đâm thẳng mặt về hướng Hạc Thần ngự trị** trong bước chân đầu tiên rời nhà.
+- **Lưu ý tối thượng**: Cổ nhân khuyên rằng **nên tránh bước chân khởi hành đầu tiên hướng thẳng về phương vị Hạc Thần ngự trị** khi vừa bước ra khỏi cửa nhà.
 
 ---
 
@@ -137,13 +137,13 @@ Kỹ thuật này trong phong thủy gọi là *"Mượn Khí Đổi Phương"*,
 
 ---
 
-## 7. Tra cứu hướng xuất hành chính xác mỗi ngày cùng Lịch An
+## 7. Tra cứu hướng xuất hành thuận tiện mỗi ngày cùng Lịch An
 
-Để thuận tiện cho quý độc giả không cần phải tính toán thủ công phức tạp mỗi ngày, hệ thống **Lịch An** đã tích hợp sẵn công cụ tính toán tự động dựa trên thuật số chuẩn xác:
+Để thuận tiện cho quý độc giả không cần phải tính toán thủ công phức tạp mỗi ngày, hệ thống **Lịch An** đã tích hợp sẵn công cụ tính toán tự động dựa trên thuật số cổ truyền:
 
 👉 **[Bấm vào đây để tra cứu Hướng Xuất Hành Hôm Nay](/xuat-hanh)**:
 - Xem ngay tọa độ phương vị **Hỷ Thần** và **Tài Thần** trong ngày.
 - Cảnh báo phương vị **Hạc Thần** cần tránh.
-- Chi tiết bảng phân bổ **12 Giờ Lý Thuần Phong** chuẩn xác theo từng canh giờ.
+- Chi tiết bảng phân bổ **12 Giờ Lý Thuần Phong** tương ứng theo từng canh giờ.
   `,
 };

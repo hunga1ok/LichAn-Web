@@ -43,7 +43,7 @@ Trước khi chạm vào ban thờ, gia chủ thắp 3 nén hương, khấn xin 
 ### Bước 3: Tỉa chân nhang bát hương (Cực kỳ quan trọng)
 - **Tuyệt đối KHÔNG xê dịch bát hương**: Bát hương là nơi tụ khí linh thiêng. Dùng một tay giữ chặt mép bát hương, tay kia nhẹ nhàng rút từng chân hương.
 - Để lại số chân nhang lẻ: Thường giữ lại **3, 5, hoặc 7 chân nhang đẹp nhất**.
-- Phần chân nhang tỉa ra đem hóa (đốt) thành tro sạch, thả xuống sông hoặc bón vào gốc cây xanh, tuyệt đối không vứt vào thùng rác.
+- Phần chân nhang tỉa ra đem hóa (đốt) thành tro sạch ở nơi an toàn phòng chống cháy nổ, sau đó đem vùi vào gốc cây cảnh thanh tịnh quanh nhà, vừa sạch sẽ vừa tôn trọng môi trường.
 
 ### Bước 4: An vị và thắp hương tạ lễ
 Sau khi lau dọn sạch sẽ, đặt lại các đồ thờ cúng về vị trí nguyên vẹn ban đầu. Gia chủ thắp nén hương mới dâng hoa quả tươi, kính cáo chư vị an vị ban thờ, cầu mong gia đạo năm mới thái hòa, vạn sự bình an.

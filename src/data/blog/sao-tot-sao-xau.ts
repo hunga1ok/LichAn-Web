@@ -44,11 +44,11 @@ Những ngày hội tụ các sao tốt này được xem là thời khắc vàn
 
 ## 3. Danh mục các Hung Tinh (Sao Xấu) & Ngày Đại Kỵ Cần Tránh
 
-Cổ nhân dạy: *"Tránh voi chẳng xấu mặt nào"*. Khi gặp phải các hung sát đại kỵ sau, gia chủ tuyệt đối không nên liều lĩnh tiến hành việc lớn:
+Theo kinh nghiệm trạch cát cổ nhân, khi gặp phải các ngày có hung sát dưới đây, gia chủ nên cẩn trọng, cân nhắc kỹ lưỡng trước khi tiến hành những công việc quan trọng:
 
 ### 1. Ngày Sát Chủ & Ngày Thụ Tử
-- **Sát Chủ**: Ngày có trường khí khắc chế hoàn toàn người chủ sự. Đại kỵ làm nhà, cưới hỏi, nhậm chức (dễ sinh trắc trở cho người đứng đầu).
-- **Thụ Tử (Trăm sự đều chết)**: Hung sát mang năng lượng tiêu cực, hủy diệt. Tuyệt đối không chọn ngày Thụ Tử cho bất kỳ khởi sự nào.
+- **Sát Chủ**: Ngày có trường khí xung khắc với người đứng đầu sự việc. Cổ nhân thường tránh chọn ngày này cho việc động thổ, cưới hỏi hoặc khai trương quy mô lớn.
+- **Thụ Tử**: Tên gọi dân gian chỉ trường khí bế tắc, bất lợi cho các việc khởi sự ban đầu. Người xưa khuyên nên hoãn các việc đại sự để chờ thời điểm cát lành hơn.
 
 ### 2. Ngày Tam Nương & Ngày Nguyệt Kỵ
 - **Ngày Tam Nương**: Rơi vào các ngày mùng **3, 7, 13, 18, 22, 27** âm lịch hàng tháng. Tương truyền gắn với ba giai nhân làm sụp đổ ba triều đại Hạ, Thương, Tây Chu. Trường khí những ngày này thường làm con người xao nhãng, dễ mắc sai lầm khi ký kết hoặc đi lại xa xôi.

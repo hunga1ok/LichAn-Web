@@ -119,7 +119,7 @@ export default function DoiNgayClient() {
           Đổi Ngày Âm Dương
         </h1>
         <p className="text-stone-600 text-sm">
-          Chuyển đổi qua lại giữa lịch Dương và lịch Âm chính xác tuyệt đối theo thuật toán thiên văn Hồ Ngọc Đức.
+          Chuyển đổi qua lại giữa lịch Dương và lịch Âm dựa trên thuật toán thiên văn học Hồ Ngọc Đức.
         </p>
       </div>
 

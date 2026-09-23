@@ -48,9 +48,9 @@ Khái niệm "Hoàng Đạo" thực chất bắt nguồn từ quan sát thiên v
 ### Nhóm 6 Vị Thần Hắc Đạo (Hung Sát)
 1. **Thiên Hình Hắc Đạo**: Hung thần chủ về tranh chấp, hình phạt, cãi vã, kiện tụng chốn công quyền.
 2. **Chu Tước Hắc Đạo**: Hung tinh chủ về khẩu thiệt thị phi, dèm pha, hiểu lầm và hao tổn ngân tiền.
-3. **Bạch Hổ Hắc Đạo**: Hung sát chủ về đổ máu, va quẹt, sự cố ngoài ý muốn. Đại kỵ đào móng động thổ và an táng.
-4. **Thiên Lao Hắc Đạo**: Biểu tượng của sự giam cầm, trì trệ bế tắc, dây dưa không thể dứt điểm.
-5. **Huyền Vũ Hắc Đạo**: Chủ về tiểu nhân quấy phá ngầm, cẩn thận trộm cắp, thất thoát tiền của.
+3. **Bạch Hổ Hắc Đạo**: Hung sát chủ về sự cố ngoài ý muốn, tranh chấp bất hòa. Người xưa thường tránh động thổ đào móng hoặc dọn nhà mới vào ngày này.
+4. **Thiên Lao Hắc Đạo**: Biểu tượng của sự trì trệ bế tắc, dây dưa không thể dứt điểm.
+5. **Huyền Vũ Hắc Đạo**: Chủ về trở ngại ngầm, cẩn thận thất thoát tài sản, tiền của.
 6. **Câu Trận Hắc Đạo**: Hung tinh chủ về ngáng trở đường sá, trắc trở mưu cầu, kiêng di chuyển nhà và đi xa.
 
 ---
@@ -68,7 +68,7 @@ Khởi điểm sao Thanh Long theo từng tháng âm lịch như sau:
 - **Tháng 6 & Tháng 12**: Khởi Thanh Long tại ngày **Tuất**.
 
 Từ vị trí Thanh Long của tháng, lần lượt đếm thuận theo chiều kim đồng hồ qua 12 Địa Chi theo thứ tự 12 Thần Sát:
-*Thanh Long (HĐ) ➔ Minh Đường (HĐ) ➔ Thiên Hình (HĐ) ➔ Chu Tước (HĐ) ➔ Kim Quỹ (HĐ) ➔ Thiên Đức (HĐ) ➔ Bạch Hổ (HĐ) ➔ Ngọc Đường (HĐ) ➔ Thiên Lao (HĐ) ➔ Huyền Vũ (HĐ) ➔ Tư Mệnh (HĐ) ➔ Câu Trận (HĐ).*
+*Thanh Long (Hoàng Đạo) ➔ Minh Đường (Hoàng Đạo) ➔ Thiên Hình (Hắc Đạo) ➔ Chu Tước (Hắc Đạo) ➔ Kim Quỹ (Hoàng Đạo) ➔ Thiên Đức (Hoàng Đạo) ➔ Bạch Hổ (Hắc Đạo) ➔ Ngọc Đường (Hoàng Đạo) ➔ Thiên Lao (Hắc Đạo) ➔ Huyền Vũ (Hắc Đạo) ➔ Tư Mệnh (Hoàng Đạo) ➔ Câu Trận (Hắc Đạo).*
 
 | Tháng Âm Lịch | Các Ngày Hoàng Đạo (Theo Chi Ngày) | Các Ngày Hắc Đạo (Theo Chi Ngày) |
 |---|---|---|

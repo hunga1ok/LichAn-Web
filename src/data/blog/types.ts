@@ -30,4 +30,10 @@ export interface BlogPost {
   keywords?: string[];
   /** Toàn văn nội dung bài viết theo định dạng Markdown */
   content: string;
+  /** Thông tin ngày lễ âm lịch tương ứng để tự động tính ngày chi tiết trong năm nay */
+  lunarEvent?: {
+    name: string;
+    day: number;
+    month: number;
+  };
 }

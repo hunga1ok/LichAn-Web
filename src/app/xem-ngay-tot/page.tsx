@@ -215,10 +215,10 @@ export default function XemNgayTotHubPage() {
           </div>
           <div>
             <h2 className="text-xl md:text-2xl font-bold text-primary">
-              Tại sao thuật toán Trạch Nhật của Lịch An chuẩn xác tuyệt đối?
+              Thuật toán Trạch Nhật của Lịch An được xây dựng dựa trên nguyên tắc nào?
             </h2>
             <p className="text-stone-500 text-xs md:text-sm">
-              Quy trình đối soát 3 tầng khắt khe, minh bạch căn cứ, nói không với phán đoán mê tín.
+              Quy trình đối soát 3 tầng bài bản, minh bạch căn cứ, nói không với phán đoán mê tín dị đoan.
             </p>
           </div>
         </div>
@@ -227,7 +227,7 @@ export default function XemNgayTotHubPage() {
           <div className="space-y-2 p-4 rounded-xl bg-stone-50 border border-stone-200/80">
             <div className="font-bold text-amber-900 flex items-center gap-1.5">
               <span className="w-5 h-5 rounded-full bg-amber-800 text-white text-xs flex items-center justify-center font-black">1</span>
-              Tầng 1: Loại Bỏ Tuyệt Đối Đại Hung
+              Tầng 1: Sàng Lọc Các Ngày Kiêng Kỵ Dân Gian
             </div>
             <p className="text-stone-600 text-xs leading-relaxed">
               Tất cả các ngày phạm <strong>Tam Nương</strong> (mùng 3, 7, 13, 18, 22, 27 âm), <strong>Nguyệt Kỵ</strong> (mùng 5, 14, 23 âm), 
