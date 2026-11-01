@@ -76,20 +76,19 @@ export default function Header() {
   };
 
   return (
-    <header className={`sticky top-0 z-50 bg-white/95 backdrop-blur-md transition-shadow duration-200 border-b border-amber-900/10 ${isScrolled ? 'shadow-sm' : ''}`}>
+    <header className={`sticky top-0 z-50 bg-background/95 backdrop-blur-md transition-shadow duration-200 border-b border-outline ${isScrolled ? 'shadow-sm' : ''}`}>
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2.5 group">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary to-primary-dark text-white flex items-center justify-center font-serif font-black text-xl shadow-xs group-hover:scale-105 transition-transform">
-              An
-            </div>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/icon.svg" alt="" width={36} height={36} className="w-9 h-9 rounded-xl group-hover:scale-105 transition-transform" />
             <div className="flex flex-col">
               <span className="text-xl font-extrabold tracking-tight text-primary leading-none">
                 Lịch An
               </span>
-              <span className="text-[10px] text-stone-400 font-medium tracking-wider uppercase mt-0.5">
-                Lịch Âm Chuẩn Xác
+              <span className="text-[11px] text-muted font-medium mt-0.5">
+                Lịch âm cho cả gia đình
               </span>
             </div>
           </Link>
@@ -104,8 +103,8 @@ export default function Header() {
                   href={link.href}
                   className={`px-3 py-1.5 rounded-lg transition-colors duration-150 ${
                     active
-                      ? 'text-primary bg-amber-50/80 font-bold'
-                      : 'text-stone-600 hover:text-primary hover:bg-stone-50'
+                      ? 'text-primary bg-primary-container font-semibold'
+                      : 'text-muted hover:text-primary hover:bg-surface-variant'
                   }`}
                 >
                   {link.name}
@@ -123,8 +122,8 @@ export default function Header() {
                 aria-label="Mở menu tiện ích tra cứu"
                 className={`flex items-center gap-1 px-3 py-1.5 rounded-lg transition-colors duration-150 cursor-pointer ${
                   isUtilityActive || isDropdownOpen
-                    ? 'text-primary bg-amber-50/80 font-bold'
-                    : 'text-stone-600 hover:text-primary hover:bg-stone-50'
+                    ? 'text-primary bg-primary-container font-semibold'
+                    : 'text-muted hover:text-primary hover:bg-surface-variant'
                 }`}
               >
                 <span>Tiện Ích</span>
@@ -133,9 +132,9 @@ export default function Header() {
 
               {/* Dropdown Menu Box */}
               {isDropdownOpen && (
-                <div className="absolute right-0 mt-2 w-72 bg-white rounded-2xl shadow-xl border border-amber-900/10 p-2 z-50 animate-in fade-in-50 slide-in-from-top-2 duration-150">
-                  <div className="text-xs font-bold uppercase tracking-wider text-stone-500 px-3 py-1.5">
-                    Công Cụ Tra Cứu
+                <div className="absolute right-0 mt-2 w-72 bg-surface rounded-2xl shadow-xl border border-outline p-2 z-50 animate-in fade-in-50 slide-in-from-top-2 duration-150">
+                  <div className="text-xs font-semibold text-muted px-3 py-1.5">
+                    Công cụ tra cứu
                   </div>
                   <div className="space-y-1">
                     {utilityLinks.map((item) => {
@@ -148,16 +147,16 @@ export default function Header() {
                           onClick={() => setIsDropdownOpen(false)}
                           className={`flex items-start gap-2.5 p-2.5 rounded-xl transition-colors ${
                             active
-                              ? 'bg-amber-50 text-primary'
-                              : 'hover:bg-stone-50 text-stone-700'
+                              ? 'bg-primary-container text-primary'
+                              : 'hover:bg-surface-variant text-on-surface'
                           }`}
                         >
-                          <div className="p-1.5 rounded-lg bg-amber-100/60 text-primary shrink-0 mt-0.5">
+                          <div className="p-1.5 rounded-lg bg-primary-container text-primary shrink-0 mt-0.5">
                             <Icon className="w-4 h-4" />
                           </div>
                           <div>
                             <div className="text-xs font-bold leading-tight">{item.name}</div>
-                            <div className="text-xs text-stone-500 leading-normal mt-0.5">{item.desc}</div>
+                            <div className="text-xs text-muted leading-normal mt-0.5">{item.desc}</div>
                           </div>
                         </Link>
                       );
@@ -171,7 +170,7 @@ export default function Header() {
           {/* Mobile Menu Toggle Button */}
           <button
             type="button"
-            className="lg:hidden p-2 text-stone-700 hover:text-primary rounded-lg transition-colors cursor-pointer"
+            className="lg:hidden p-2 text-on-surface hover:text-primary rounded-lg transition-colors cursor-pointer"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-expanded={isMobileMenuOpen}
             aria-label={isMobileMenuOpen ? 'Đóng menu điều hướng' : 'Mở menu điều hướng'}
@@ -195,17 +194,17 @@ export default function Header() {
           <nav
             role="dialog"
             aria-label="Menu điều hướng di động"
-            className="fixed inset-x-0 top-16 max-h-[calc(100vh-4rem)] overflow-y-auto bg-white border-b border-stone-200 shadow-2xl p-5 z-50 lg:hidden space-y-6 animate-in slide-in-from-top duration-200"
+            className="fixed inset-x-0 top-16 max-h-[calc(100vh-4rem)] overflow-y-auto bg-surface border-b border-outline shadow-2xl p-5 z-50 lg:hidden space-y-6 animate-in slide-in-from-top duration-200"
           >
             {/* Nhóm mục chính */}
             <div className="space-y-1">
-              <div className="text-xs font-bold uppercase tracking-wider text-stone-600 px-3 pb-1">
-                Chuyên Mục Chính
+              <div className="text-xs font-semibold text-muted px-3 pb-1">
+                Chuyên mục chính
               </div>
               <Link
                 href="/"
                 className={`flex items-center gap-3 px-3 py-2.5 rounded-xl font-semibold text-sm ${
-                  pathname === '/' ? 'bg-amber-50 text-primary font-bold' : 'text-stone-700 hover:bg-stone-50'
+                  pathname === '/' ? 'bg-primary-container text-primary font-semibold' : 'text-on-surface hover:bg-surface-variant'
                 }`}
                 onClick={() => setIsMobileMenuOpen(false)}
               >
@@ -219,8 +218,8 @@ export default function Header() {
                     href={link.href}
                     className={`block px-3 py-2.5 rounded-xl text-sm font-semibold transition-colors ${
                       active
-                        ? 'bg-amber-50 text-primary font-bold'
-                        : 'text-stone-700 hover:bg-stone-50'
+                        ? 'bg-primary-container text-primary font-semibold'
+                        : 'text-on-surface hover:bg-surface-variant'
                     }`}
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
@@ -231,9 +230,9 @@ export default function Header() {
             </div>
 
             {/* Nhóm tiện ích mở rộng */}
-            <div className="space-y-1 pt-4 border-t border-stone-100">
-              <div className="text-xs font-bold uppercase tracking-wider text-stone-600 px-3 pb-1">
-                Tiện Ích & Tra Cứu
+            <div className="space-y-1 pt-4 border-t border-outline">
+              <div className="text-xs font-semibold text-muted px-3 pb-1">
+                Tiện ích & tra cứu
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
                 {utilityLinks.map((item) => {
@@ -245,8 +244,8 @@ export default function Header() {
                       href={item.href}
                       className={`flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-semibold ${
                         active
-                          ? 'bg-amber-50 text-primary font-bold'
-                          : 'text-stone-700 hover:bg-stone-50'
+                          ? 'bg-primary-container text-primary font-semibold'
+                          : 'text-on-surface hover:bg-surface-variant'
                       }`}
                       onClick={() => setIsMobileMenuOpen(false)}
                     >

@@ -1,27 +1,104 @@
 @import "tailwindcss";
 
-@theme {
-  --color-primary: #8B6914;
-  --color-primary-dark: #6e5310;
-  --color-primary-light: #d4a017;
-  --color-accent: #D4A017;
-  --color-background-alt: #FEF7E6;
-  --color-danger: #DC240E;
-  --color-surface: #FFFFFF;
-  --color-muted: #78716c;
-  --color-muted-foreground: #57534e;
-  --radius-sm: 6px;
-  --radius-md: 8px;
-  --radius-lg: 12px;
-  --radius-xl: 16px;
+/*
+ * Bảng màu "trăng & mực chàm" — đồng bộ với Lịch An App (presentation/theme/Color.kt, Theme.kt).
+ * Tên biến bám theo vai trò màu Material của app để dễ đối chiếu.
+ */
+:root {
+  --la-background: #F6F2EA;          /* Paper */
+  --la-surface: #FBF9F4;             /* PaperSurface — thẻ */
+  --la-surface-variant: #ECE6DA;
+  --la-on-surface: #1E2638;          /* InkText */
+  --la-on-surface-variant: #5B6274;  /* InkMuted */
+  --la-outline-variant: #E2DCCF;
+  --la-primary: #2E4A8A;             /* Indigo */
+  --la-primary-hover: #233A70;
+  --la-on-primary: #FFFFFF;
+  --la-primary-container: #DCE3F3;
+  --la-on-primary-container: #142451;
+  --la-secondary: #7A5A0A;           /* MoonGoldText */
+  --la-secondary-container: #F3E3B5;
+  --la-on-secondary-container: #3D2E05;
+  --la-hero: #1F2A44;                /* NightInk — thẻ trăng */
+  --la-on-hero: #F6F2EA;
+  --la-gold: #E8C872;                /* MoonGold — giờ hoàng đạo */
+  --la-on-gold: #3D2E05;
+  --la-danger: #B3261E;              /* Cinnabar */
+  --la-on-danger: #FFFFFF;
+  --la-danger-container: #F6E1DE;
+  --la-on-danger-container: #8A2A20;
 }
 
-:root {
-  --background: #FEF7E6;
-  --foreground: #333333;
+/*
+ * Giao diện tối theo hệ thống. Tạm thời chỉ bật trên các trang đã chuyển sang giao diện mới
+ * (gốc trang có thuộc tính data-la-page); các trang cũ còn màu cố định nên vẫn giữ giao diện sáng.
+ */
+@media (prefers-color-scheme: dark) {
+  html:has([data-la-page]) {
+    color-scheme: dark;
+    --la-background: #121726;
+    --la-surface: #1A2033;
+    --la-surface-variant: #262D42;
+    --la-on-surface: #ECEEF4;
+    --la-on-surface-variant: #B8BFCF;
+    --la-outline-variant: #323A52;
+    --la-primary: #AFC3F0;
+    --la-primary-hover: #C7D5F5;
+    --la-on-primary: #142451;
+    --la-primary-container: #2C3E6E;
+    --la-on-primary-container: #DCE3F3;
+    --la-secondary: #E8C872;
+    --la-secondary-container: #4A3A10;
+    --la-on-secondary-container: #F3E3B5;
+    --la-hero: #26304D;
+    --la-on-hero: #F6F2EA;
+    --la-danger: #F2A49B;
+    --la-on-danger: #5C1510;
+    --la-danger-container: #5C1F1A;
+    --la-on-danger-container: #F6E1DE;
+  }
+}
+
+@theme inline {
+  --color-background: var(--la-background);
+  --color-surface: var(--la-surface);
+  --color-surface-variant: var(--la-surface-variant);
+  --color-on-surface: var(--la-on-surface);
+  --color-muted: var(--la-on-surface-variant);
+  --color-outline: var(--la-outline-variant);
+  --color-primary: var(--la-primary);
+  --color-primary-dark: var(--la-primary-hover);
+  --color-on-primary: var(--la-on-primary);
+  --color-primary-container: var(--la-primary-container);
+  --color-on-primary-container: var(--la-on-primary-container);
+  --color-secondary: var(--la-secondary);
+  --color-secondary-container: var(--la-secondary-container);
+  --color-on-secondary-container: var(--la-on-secondary-container);
+  --color-hero: var(--la-hero);
+  --color-on-hero: var(--la-on-hero);
+  --color-gold: var(--la-gold);
+  --color-on-gold: var(--la-on-gold);
+  --color-danger: var(--la-danger);
+  --color-on-danger: var(--la-on-danger);
+  --color-danger-container: var(--la-danger-container);
+  --color-on-danger-container: var(--la-on-danger-container);
+
+  /* Tên cũ vẫn được các trang chưa chuyển sử dụng */
+  --color-primary-light: #AFC3F0;
+  --color-accent: #E8C872;
+  --color-background-alt: var(--la-background);
+  --color-muted-foreground: var(--la-on-surface-variant);
+}
+
+@theme {
+  /* Bo góc theo LAShapes của app */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
+  color: var(--la-on-surface);
+  background: var(--la-background);
 }

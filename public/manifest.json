@@ -4,8 +4,8 @@
   "description": "Lịch Âm Dương Việt Nam",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#FEF7E6",
-  "theme_color": "#8B6914",
+  "background_color": "#F6F2EA",
+  "theme_color": "#1F2A44",
   "icons": [
     {
       "src": "/icon-192x192.png",

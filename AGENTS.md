@@ -87,7 +87,8 @@ Strong success criteria let you loop independently. Weak criteria ("make it work
 - **Server Components by default.** Only use `'use client'` when client interactivity is needed (forms, state, event handlers).
 - **All UI text must be in Vietnamese.**
 - **Comments in code should be in Vietnamese.**
-- **Color theme**: Primary `#8B6914` (vàng nâu), Background `#FEF7E6`, Accent `#D4A017`, Danger `#DC240E`.
+- **Color theme**: Đồng bộ với Lịch An App — bảng màu "trăng & mực chàm": Primary `#2E4A8A` (chàm), Hero `#1F2A44`, Background `#F6F2EA` (kem), Accent `#E8C872` (vàng trăng), Danger `#B3261E`. Dùng token trong `globals.css` (`bg-primary`, `bg-surface`, `text-muted`, `bg-hero`, `bg-gold`...), không hardcode màu. Có dark mode theo hệ thống (đang bật cho các trang có `data-la-page`).
+- **Văn phong UI theo app**: icon vector (lucide), không dùng emoji; nhãn viết hoa kiểu câu ("Giờ hoàng đạo", không phải "Giờ Hoàng Đạo Trong Ngày").
 - **Responsive mobile-first design.** Always test on mobile viewport.
 - **SEO matters.** Every page needs proper metadata, Schema.org JSON-LD when relevant.
 

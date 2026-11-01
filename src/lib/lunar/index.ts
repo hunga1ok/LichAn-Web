@@ -41,3 +41,5 @@ export const getNhiThapBatTu = (jd: number) =>
 export * from './nhi-thap-bat-tu';
 export * from './van-su';
 
+export * from './moon-phase';
+export * from './day-verdict';
